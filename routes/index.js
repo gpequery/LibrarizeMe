@@ -7,7 +7,7 @@ var router = express.Router();
 });*/
 
 router.get('/', function(req, res, next) {
-    res.render('index.html.twig', {title: 'Express'});
+    res.render('login.html.twig', {title: 'Express'});
 });
 
 
