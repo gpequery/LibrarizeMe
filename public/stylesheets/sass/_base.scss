@@ -1,3 +1,38 @@
-$background-body: #000000;
 
-$color-corporate-one: blue
+// HEADER
+$logo-brand-header: '\e900';
+$ico-libraryLeft-header: '\e902';
+$ico-libraryRight-header: '\e901';
+
+//GENERAL
+$color-corporate-one: #092D3D;
+$color-corporate-two: #FF6664;
+$color-corporate-three: #FFFFFF;
+
+
+//FORM
+
+input[type='submit'],
+input[type='reset'] {
+    color: #fff;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+input[type='submit'] {
+    background-color: #337ab7;
+}
+
+input[type='reset'] {
+    background-color: #d9534f;
+}
+

@@ -1,3 +1,44 @@
-body {
-  color: red;
+@import 'base';
+
+#content {
+    #contentLogin {
+        background-color: #CCCCCC;
+        width: 33%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 30px;
+        border-radius: 15px;
+        margin-top: 150px;
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+
+            #spaceLogin {
+                margin-right: 25px;
+            }
+        }
+
+        input[type='text'],
+        input[type='password'] {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 10px;
+            width: 32%;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            height: 30px;
+            padding-left: 10px;
+        }
+
+        input[type='password'] {
+            margin-bottom: 30px;
+        }
+    }
+
 }
