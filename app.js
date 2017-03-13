@@ -9,6 +9,9 @@ var compass = require('compass');
 var index = require('./routes/index');
 var user = require('./routes/user');
 
+var models = require('./models');
+models.sequelize.sync();
+
 var app = express();
 
 // view engine setup

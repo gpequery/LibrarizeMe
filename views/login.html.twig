@@ -5,12 +5,16 @@
 {%  block content %}
 
     <div id='contentLogin'>
-        <h1>Login</h1>
+        <h1 id='titleForm'>Login</h1>
         <form method='GET' action='login'>
-            <input type='text' name='pseudo' placeholder='Pseudo' />
-            <input type='password' name='pwd' placeholder='Password' />
+            <input type='text' name='pseudo' id='pseudo' placeholder='Pseudo' />
+            <input type='password' name='pwd' id='pwd' placeholder='Password' />
+
+            <a href='#' id='loginRegister'>S'enregistrer</a>
+
+            <input type='hidden' name='actionForm' value='login' id='actionForm'/>
             <input type='reset' value='Annuler' id='spaceLogin'/>
-            <input type='submit' value='Valider' />
+            <input type='submit' value="S'enregistrer" id='submitFormLogin' />
         </form>
     </div>
 
