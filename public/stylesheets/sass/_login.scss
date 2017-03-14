@@ -1,0 +1,74 @@
+@import 'base';
+
+#content {
+    #contentLogin {
+        background-color: #CCCCCC;
+        width: 33%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 20px;
+        border-radius: 15px;
+        margin-top: 10%;
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+
+            #spaceLogin {
+                margin-right: 25px;
+            }
+
+            #loginRegister {
+                display: block;
+                margin-bottom: 20px;
+                margin-top: -7px
+            }
+
+            #pwd2 {
+                display: none;
+            }
+        }
+
+        input[type='text'],
+        input[type='password'] {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+            margin-bottom: 10px;
+            width: 32%;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            height: 30px;
+            padding-left: 10px;
+        }
+    }
+
+    #divEtatLoginOk,
+    #divEtatLoginNok {
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 33%;
+        text-align: center;
+        font-size: 20px;
+        padding: 3px;
+        border-radius: 5px;
+        margin-bottom: -6.85%;
+    }
+
+    #divEtatLoginOk {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+    }
+
+    #divEtatLoginNok {
+        color: #a94442;
+        background-color: #f2dede;
+        border-color: #ebccd1;
+    }
+}

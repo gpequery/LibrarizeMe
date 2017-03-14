@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> LibrarizeMe : {% block title %}{% endblock %}</title>
+        <meta charset='UTF-8' />
+        <link rel='icon' href='images/favicon.ico' />
+        <link rel='stylesheet' type='text/css' href='../stylesheets/style.css' />
+        <script src="../javascripts/jQuery.js"></script>
+        <script> $j = jQuery.noConflict() </script>
+        <script src="../javascripts/login.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <div id='logo'>
+                <div class='libraryLeftIcon'></div>
+                <div id='nameOrganization'></div>
+                <div class='libraryRightIcon'></div>
+            </div>
+        </header>
+
+
+        <div id='content'>
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer>
+            <div id='footer'>&#64;2017 LibrarizeMe</div>
+        </footer>
+    </body>
+
+</html>
