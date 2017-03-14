@@ -3,21 +3,31 @@
 {%  block title %} Login {% endblock %}
 
 {%  block content %}
+    {#Div d'alert d'etat de login ou registre #}
+    {% if result.etat is defined %}
+        {% if result.etat == 0 %}
+            <div id='divEtatLoginNok'>
+        {% elseif result.etat == 1%}
+            <div id='divEtatLoginOk'>
+        {% endif %}
+            {{ result.msg }}
+        </div>
+    {% endif %}
 
     <div id='contentLogin'>
-        <h1 id='titleForm'>Login</h1>
-        <form method='GET' action='login'>
-            <input type='text' name='pseudo' id='pseudo' placeholder='Pseudo' />
-            <input type='password' name='pwd' id='pwd' placeholder='Password' />
+        <h1 id='titleForm'></h1>
 
-            <a href='#' id='loginRegister'>S'enregistrer</a>
+        <form method='GET' id="formLogin">
+            <input type='text' name='pseudo' id='pseudo' required />
+            <input type='password' name='pwd' id='pwd' required />
+            <input type='password' name='pwd2' id='pwd2' />
 
-            <input type='hidden' name='actionForm' value='login' id='actionForm'/>
-            <input type='reset' value='Annuler' id='spaceLogin'/>
+            <a href='#' id='loginRegister'></a>
+
+            <input type='hidden' name='actionForm' id='actionForm' />
+            <input type='reset' value='Annuler' id='spaceLogin' />
             <input type='submit' value="S'enregistrer" id='submitFormLogin' />
         </form>
     </div>
-
-
 
 {% endblock %}
