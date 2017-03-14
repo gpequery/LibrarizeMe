@@ -1,0 +1,9 @@
+README
+
+Créer base "librarizeme"
+
+Schema de la bdd :
+user
+    id
+    pseudo
+    password
