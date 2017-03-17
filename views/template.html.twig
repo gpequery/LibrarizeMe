@@ -8,6 +8,7 @@
         <link rel='stylesheet' type='text/css' href='../stylesheets/style.css' />
         <script src="../javascripts/jQuery.js"></script>
         <script> $j = jQuery.noConflict() </script>
+        <script src="../javascripts/template.js"></script>
         <script src="../javascripts/login.js"></script>
     </head>
 
@@ -15,13 +16,37 @@
         <header>
             <div id='logo'>
                 <div class='libraryLeftIcon'></div>
-                <div id='nameOrganization'></div>
+                <div class='nameOrganization'></div>
                 <div class='libraryRightIcon'></div>
             </div>
         </header>
 
+        <div class='menuDiv'>
+            <ul>
+                <li class='titleMenu'>Accueil</li>
+                <li class='titleMenu'>
+                    Services
+                    <ul>
+                        <li>Services 1</li>
+                        <li>Services 2</li>
+                    </ul>
+                </li>
+                <li class='titleMenu'>
+                    Projets
+                    <ul>
+                        <li>Projets 1</li>
+                        <li>Projets 2</li>
+                        <li>Projets 3</li>
+                        <li>Projets 4</li>
+                    </ul>
+                </li>
+                <li class='titleMenu'>
+                    <a href='/user/logout'>Déconnexion</a>
+                </li>
+            </ul>
+        </div>
 
-        <div id='content'>
+        <div class='content'>
             {% block content %}{% endblock %}
         </div>
 
@@ -29,5 +54,16 @@
             <div id='footer'>&#64;2017 LibrarizeMe</div>
         </footer>
     </body>
+
+
+{% if etatMenu == 'show' %}
+    <script>
+        $j('.menuDiv').css('display', 'block');
+    </script>
+{% elseif etatMenu == 'hide' %}
+    <script>
+        $j('.menuDiv').css('display', 'none');
+    </script>
+{% endif %}
 
 </html>

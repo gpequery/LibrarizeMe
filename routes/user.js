@@ -4,6 +4,7 @@ const express = require('express');
 const models = require('../models');
 const User = models.User;
 const router = express.Router();
+var cookieParser = require('cookie-parser');
 
 
 /* GET users listing. */
@@ -28,10 +29,11 @@ router.get('/login', function(req, res, next) {
 
         User.find(options).then(function(usr) {
             if (usr != null) {
-                console.log('OK');
-                res.render('home.html.twig');
+
+                res.cookie('idUser', usr.getId());
+
+                res.render('home.html.twig', {etatMenu: 'show'});
             } else {
-                console.log('Nok');
                 send = {msg:'Utilisateur non enregistré', etat:'0' };
                 res.render('login.html.twig', {result: send});
             }
@@ -74,6 +76,12 @@ router.get('/login', function(req, res, next) {
     } else {
         res.render('login.html.twig', {result: send});
     }
+});
+
+router.get('/logout', function(req, res, next) {
+    res.cookie('idUser', '');
+
+    res.redirect('login');
 });
 
 module.exports = router;

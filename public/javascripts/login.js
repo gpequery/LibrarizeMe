@@ -1,13 +1,11 @@
 $j(function() {
-
-
-    var actionForm = $j('#actionForm');
-    var loginRegister = $j('#loginRegister');
-    var titleForm = $j('#titleForm');
-    var pseudo = $j('#pseudo');
-    var pwd = $j('#pwd');
-    var pwd2 = $j('#pwd2');
-    var submitFormLogin = $j('#submitFormLogin');
+    var actionForm = $j('.actionForm');
+    var loginRegister = $j('.loginRegister');
+    var titleForm = $j('.titleForm');
+    var pseudo = $j('.pseudo');
+    var pwd = $j('.pwd');
+    var pwd2 = $j('.pwd2');
+    var submitFormLogin = $j('.submitFormLogin');
 
     initForm();
 
@@ -48,6 +46,8 @@ $j(function() {
         pseudo.attr('placeholder', 'Pseudo');
         pwd.attr('placeholder', 'Password');
         pwd2.attr('placeholder', 'Confirm Password');
+
+        pwd2.css('display', 'none');
 
         submitFormLogin.val('Connexion');
     }

@@ -24,7 +24,16 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         instanceMethods: {
-
+            getId: function() {
+                return this.id;
+            },
+            toJson: function() {
+                return {
+                    id: this.id,
+                    pseudo: this.pseudo,
+                    password: this.password
+                }
+            }
         }
     });
     return User;

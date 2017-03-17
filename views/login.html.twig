@@ -6,27 +6,27 @@
     {#Div d'alert d'etat de login ou registre #}
     {% if result.etat is defined %}
         {% if result.etat == 0 %}
-            <div id='divEtatLoginNok'>
+            <div class='divEtatLoginNok'>
         {% elseif result.etat == 1%}
-            <div id='divEtatLoginOk'>
+            <div class='divEtatLoginOk'>
         {% endif %}
             {{ result.msg }}
         </div>
     {% endif %}
 
-    <div id='contentLogin'>
-        <h1 id='titleForm'></h1>
+    <div class='contentLogin'>
+        <h1 class='titleForm'></h1>
 
-        <form method='GET' id="formLogin">
-            <input type='text' name='pseudo' id='pseudo' required />
-            <input type='password' name='pwd' id='pwd' required />
-            <input type='password' name='pwd2' id='pwd2' />
+        <form method='GET' class="formLogin">
+            <input type='text' name='pseudo' class='pseudo' required />
+            <input type='password' name='pwd' class='pwd' required />
+            <input type='password' name='pwd2' class='pwd2' />
 
-            <a href='#' id='loginRegister'></a>
+            <a href='#' class='loginRegister'></a>
 
-            <input type='hidden' name='actionForm' id='actionForm' />
-            <input type='reset' value='Annuler' id='spaceLogin' />
-            <input type='submit' value="S'enregistrer" id='submitFormLogin' />
+            <input type='hidden' name='actionForm' class='actionForm' />
+            <input type='reset' value='Annuler' class='spaceLogin' />
+            <input type='submit' value="S'enregistrer" class='submitFormLogin' />
         </form>
     </div>
 

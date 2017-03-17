@@ -1,7 +1,7 @@
 @import 'base';
 
-#content {
-    #contentLogin {
+.content {
+    .contentLogin {
         background-color: #CCCCCC;
         width: 33%;
         margin-left: auto;
@@ -17,17 +17,17 @@
         form {
             text-align: center;
 
-            #spaceLogin {
+            .spaceLogin {
                 margin-right: 25px;
             }
 
-            #loginRegister {
+            .loginRegister {
                 display: block;
                 margin-bottom: 20px;
                 margin-top: -7px
             }
 
-            #pwd2 {
+            .pwd2 {
                 display: none;
             }
         }
@@ -47,8 +47,8 @@
         }
     }
 
-    #divEtatLoginOk,
-    #divEtatLoginNok {
+    .divEtatLoginOk,
+    .divEtatLoginNok {
         margin-top: 100px;
         margin-left: auto;
         margin-right: auto;
@@ -60,13 +60,13 @@
         margin-bottom: -6.85%;
     }
 
-    #divEtatLoginOk {
+    .divEtatLoginOk {
         color: #3c763d;
         background-color: #dff0d8;
         border-color: #d6e9c6;
     }
 
-    #divEtatLoginNok {
+    .divEtatLoginNok {
         color: #a94442;
         background-color: #f2dede;
         border-color: #ebccd1;

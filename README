@@ -7,3 +7,13 @@ user
     id
     pseudo
     password
+    function (  getId -> retourne l'id de l'user courent
+                toJSON -> retourne l'objet au format json sans les date de crea, update et remove
+            )
+
+
+
+A noter :
+    - Une fois loggé ont peux avoir l'id de l'utilisateur connecté à tout moment via le cookie idUser
+
+
