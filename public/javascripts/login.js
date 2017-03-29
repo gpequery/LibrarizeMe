@@ -5,7 +5,9 @@ $j(function() {
     var pseudo = $j('.pseudo');
     var pwd = $j('.pwd');
     var pwd2 = $j('.pwd2');
+    var mail = $j('.mail');
     var submitFormLogin = $j('.submitFormLogin');
+    var divRegisterOnly = $j('.onlyRegisterInput');
 
     initForm();
 
@@ -18,10 +20,11 @@ $j(function() {
             pseudo.attr('placeholder', 'New pseudo');
             pwd.attr('placeholder', 'New password');
             pwd2.attr('required', true);
+            mail.attr('required', true);
 
             submitFormLogin.val('S\'enregistrer');
 
-            pwd2.show('slow');
+            divRegisterOnly.show('slow');
 
         } else {
             titleForm.text('Login');
@@ -31,10 +34,11 @@ $j(function() {
             pseudo.attr('placeholder', 'Pseudo');
             pwd.attr('placeholder', 'Password');
             pwd2.attr('required', false);
+            mail.attr('required', false);
 
             submitFormLogin.val('Connexion');
 
-            pwd2.hide('slow');
+            divRegisterOnly.hide('slow');
         }
     });
 
@@ -45,9 +49,8 @@ $j(function() {
 
         pseudo.attr('placeholder', 'Pseudo');
         pwd.attr('placeholder', 'Password');
-        pwd2.attr('placeholder', 'Confirm Password');
 
-        pwd2.css('display', 'none');
+        divRegisterOnly.css('display', 'none');
 
         submitFormLogin.val('Connexion');
     }

@@ -16,6 +16,7 @@ router.post('/login', function(req, res, next) {
     let psd = req.body.pseudo;
     let pwd = req.body.pwd;
     let pwd2 = req.body.pwd2;
+    let mail = req.body.mail;
     let action = req.body.actionForm;
     let send = null;
 
@@ -29,7 +30,6 @@ router.post('/login', function(req, res, next) {
 
         User.find(options).then(function(usr) {
             if (usr != null) {
-
                 res.cookie('idUser', usr.getId());
 
                 res.render('home.html.twig', {etatMenu: 'show'});
@@ -49,7 +49,14 @@ router.post('/login', function(req, res, next) {
         //Vérifie l'existance du pseudo avant de créer le nouvel user
         let options = {
             where: {
-                pseudo: psd
+                $or: [
+                    {
+                        pseudo: psd
+                    },
+                    {
+                        mail: mail
+                    }
+                ]
             }
         };
 
@@ -57,7 +64,8 @@ router.post('/login', function(req, res, next) {
             if (usr == null) { //SI l'usr (pseudo) existe pas on créer l'user
                 User.create({
                     pseudo: psd,
-                    password: pwd
+                    password: pwd,
+                    mail: mail
                 }).then(function(usr) {
                     send = {msg:'Utilisateur créé. Vous pouvez vous identifier', etat:'1'};
                     res.render('login.html.twig', {result: send});
@@ -66,7 +74,13 @@ router.post('/login', function(req, res, next) {
                     res.render('login.html.twig', {result: send});
                 });
             } else {   // SInon, prévient que le psuedo est déjà utilisé
-                send = {msg:'Pseudo déjà utilisé', etat:'0'};
+                console.log("Ancien -->   pseudo : " + usr.pseudo + " Mail : " + usr.mail);
+                if (psd == usr.pseudo) {
+                    send = {msg:'Pseudo déjà utilisé', etat:'0'};
+                } else {
+                    send = {msg:'Email déjà utilisé', etat:'0'};
+                }
+
                 res.render('login.html.twig', {result: send});
             }
         }).catch(function(err) {

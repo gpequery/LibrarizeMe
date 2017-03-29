@@ -2,11 +2,17 @@ README
 
 Créer base "librarizeme"
 
+Pour pouvoir compiler le scss (Compass):
+       Installer Ruby
+       Executer la commande : gem install compass
+
+
 Schema de la bdd :
 user
     id
     pseudo
     password
+    mail
     function (  getId -> retourne l'id de l'user courent
                 toJSON -> retourne l'objet au format json sans les date de crea, update et remove
             )

@@ -9,9 +9,9 @@ input[type='reset'] { background-color: #d9534f; }
 .content .contentLogin h1 { text-align: center; }
 .content .contentLogin form { text-align: center; }
 .content .contentLogin form .spaceLogin { margin-right: 25px; }
-.content .contentLogin form .loginRegister { display: block; margin-bottom: 20px; margin-top: -7px; }
+.content .contentLogin form .loginRegister { display: block; margin-bottom: 20px; }
 .content .contentLogin form .pwd2 { display: none; }
-.content .contentLogin input[type='text'], .content .contentLogin input[type='password'] { display: block; margin-right: auto; margin-left: auto; margin-bottom: 10px; width: 32%; font-size: 16px; border: none; border-radius: 5px; height: 30px; padding-left: 10px; }
+.content .contentLogin input[type='text'], .content .contentLogin input[type='password'], .content .contentLogin input[type='email'] { display: block; margin-right: auto; margin-left: auto; margin-bottom: 10px; width: 32%; font-size: 16px; border: none; border-radius: 5px; height: 30px; padding-left: 10px; }
 .content .divEtatLoginOk, .content .divEtatLoginNok { margin-top: 100px; margin-left: auto; margin-right: auto; width: 33%; text-align: center; font-size: 20px; padding: 3px; border-radius: 5px; margin-bottom: -6.85%; }
 .content .divEtatLoginOk { color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; }
 .content .divEtatLoginNok { color: #a94442; background-color: #f2dede; border-color: #ebccd1; }
@@ -26,7 +26,7 @@ body header .libraryLeftIcon:before { content: ""; }
 body header .libraryRightIcon { display: inline-block; color: #FF6664; }
 body header .libraryRightIcon:before { content: ""; }
 body footer { position: absolute; bottom: 5px; width: 99%; text-align: center; color: #FF6664; margin-left: 10px; font-size: 14px; }
-body .menuDiv { background-color: #FFFFFF; width: 50%; margin: 0px auto; height: 30px; line-height: 28px; border-radius: 7px; padding-left: 20px; display: none; }
+body .menuDiv { background-color: #FFFFFF; width: 50%; margin: 0px auto; height: 30px; line-height: 28px; border-radius: 7px; padding-left: 20px; }
 body .menuDiv ul { padding: 0px; }
 body .menuDiv ul .titleMenu { display: inline-block; list-style-type: none; width: 22%; cursor: pointer; vertical-align: top; padding-left: 20px; }
 body .menuDiv ul .titleMenu ul { display: none; }

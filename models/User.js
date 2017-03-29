@@ -13,6 +13,9 @@ module.exports = function(sequelize, DataTypes) {
         },
         password: {
             type: DataTypes.STRING
+        },
+        mail: {
+            type: DataTypes.STRING
         }
     }, {
         paranoid: true,
@@ -31,7 +34,8 @@ module.exports = function(sequelize, DataTypes) {
                 return {
                     id: this.id,
                     pseudo: this.pseudo,
-                    password: this.password
+                    password: this.password,
+                    mail: this.mail
                 }
             }
         }
