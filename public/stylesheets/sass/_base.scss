@@ -8,13 +8,24 @@ $ico-libraryRight-header: '\e901';
 $color-corporate-one: #092D3D;
 $color-corporate-two: #FF6664;
 $color-corporate-three: #FFFFFF;
+$color-font-content: #CCCCCC;
+
+//ALERT
+$color-success: #3C763D;
+$color-background-success: #DFF0F8;
+$color-border-success: #D6D9C6;
+
+$color-danger: #A94442;
+$color-background-danger: #F2DDED;
+$color-border-danger: #EBCCD1;
+
+
 
 
 //FORM
-
 input[type='submit'],
 input[type='reset'] {
-    color: #fff;
+    color: #FFFFFF;
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;

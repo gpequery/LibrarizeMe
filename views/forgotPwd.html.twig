@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> LibrarizeMe : Mot de passe oublié </title>
+    <meta charset='UTF-8' />
+    <link rel='icon' href='../images/favicon.ico' />
+    <link rel='stylesheet' type='text/css' href='../stylesheets/style.css' />
+    <script src="../javascripts/jQuery.js"></script>
+    <script> $j = jQuery.noConflict() </script>
+    <script src="../javascripts/template.js"></script>
+    <script src="../javascripts/login.js"></script>
+</head>
+
+<body class='bgdForgotPwd'>
+    {#<header>#}
+        {#<div id='logo'>#}
+            {#<div class='libraryLeftIcon'></div>#}
+            {#<div class='nameOrganization'></div>#}
+            {#<div class='libraryRightIcon'></div>#}
+        {#</div>#}
+    {#</header>#}
+
+    <h1 class='titleForgotPwd'>Mot de passe oublié ?</h1>
+
+    <div class='infoForgotPwd'>Un mail sera envoyé à l'adresse renseigné si celle-ci correspond au pseudo</div>
+    <div class='contentForgotPwd'>
+        <form method='POST' class='formForgotPwd' action='forgotPassword/submit'>
+            <input type='text' name='pseudoForgotPwd' class='pseudoForgotPwd' placeholder='Pseudo' required />
+            <input type='email' name='mailForgotPwd' class='mailForgotPwd' placeholder='Mail' required />
+            <input type='reset' value='Annuler' class='spaceLogin' />
+            <input type='submit' value="Envoyer" class='submitFormLogin' />
+        </form>
+    </div>
+
+</body>

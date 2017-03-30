@@ -55,8 +55,7 @@ body {
         height: 30px;
         line-height: 28px;
         border-radius: 7px;
-        padding-left: 20px;
-        //display: none;
+        text-align: center;
 
         ul {
             padding: 0px;
@@ -66,10 +65,10 @@ body {
                 width: 22%;
                 cursor: pointer;
                 vertical-align: top;
-                padding-left: 20px;
                 
                 ul {
                     display: none;
+                    text-align: left;
                     li {
                         display: block;
                         width: 100%;

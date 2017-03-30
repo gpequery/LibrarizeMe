@@ -21,18 +21,22 @@
             <input type='text' name='pseudo' class='pseudo' required />
             <input type='password' name='pwd' class='pwd' required />
 
-            {# Si registrer #}
+            {# if registrer #}
             <div class='onlyRegisterInput'>
                 <input type='password' name='pwd2' class='pwd2' placeholder='Confirm Password' />
                 <input type='email' name='mail' class='mail' placeholder='Email' />
             </div>
+            {# endIf registrer #}
 
-            <a href='#' class='loginRegister'></a>
+            <div class='linkRegister'>
+                <a href='#' class='loginRegister'></a> / <a href='' class='forgotPwd' title='Mot de passe oublié ? Recevez le par mail !'>mdp oublié</a>
+            </div>
 
             <input type='hidden' name='actionForm' class='actionForm' />
             <input type='reset' value='Annuler' class='spaceLogin' />
             <input type='submit' value="S'enregistrer" class='submitFormLogin' />
         </form>
     </div>
+
 
 {% endblock %}

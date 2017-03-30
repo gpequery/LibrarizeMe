@@ -2,7 +2,7 @@
 
 .content {
     .contentLogin {
-        background-color: #CCCCCC;
+        background-color: $color-font-content;
         width: 33%;
         margin-left: auto;
         margin-right: auto;
@@ -28,6 +28,12 @@
 
             .pwd2 {
                 display: none;
+            }
+
+            .linkRegister {
+                a {
+                    display: inline-block;
+                }
             }
         }
 
@@ -61,14 +67,52 @@
     }
 
     .divEtatLoginOk {
-        color: #3c763d;
-        background-color: #dff0d8;
-        border-color: #d6e9c6;
+        color: $color-success;
+        background-color: $color-background-success;
+        border-color: $color-border-success;
     }
 
     .divEtatLoginNok {
-        color: #a94442;
-        background-color: #f2dede;
-        border-color: #ebccd1;
+        color: $color-danger;
+        background-color: $color-background-danger;
+        border-color: $color-border-danger;
     }
+}
+
+//Fenetre forgotPwd
+.bgdForgotPwd {
+    color: $color-corporate-three;
+    background-color: #B72F6B;
+    text-align: center;
+    .titleForgotPwd {
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+
+    .infoForgotPwd {
+        width: 50%;
+        margin: 0 auto 0 auto;
+        margin-bottom: 4px;
+    }
+
+    input[type='text'],
+    input[type='password'],
+    input[type='email']{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 10px;
+        width: 32%;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        height: 30px;
+        padding-left: 10px;
+    }
+
+    input[type='submit'],
+    input[type='reset'] {
+        margin-top: 10px;
+    }
+    //background-image: url("../../images/bgdPwd.png");
 }
