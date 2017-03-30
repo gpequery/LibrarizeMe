@@ -3,7 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.all('/', function(req, res, next) {
-  res.render('home.html.twig');
+  send = {etatMenu: 'hide'};
+  res.render('index.html.twig', {result: send});
 });
 
 

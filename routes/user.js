@@ -8,11 +8,6 @@ const nodemailer = require('nodemailer');
 var cookieParser = require('cookie-parser');
 
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.post('/login', function(req, res, next) {
     let psd = req.body.pseudo;
     let pwd = req.body.pwd;
@@ -33,31 +28,44 @@ router.post('/login', function(req, res, next) {
             if (usr != null) {
                 res.cookie('idUser', usr.getId());
 
-                res.render('home.html.twig', {etatMenu: 'show'});
+                send = {
+                    etatMenu: 'show',
+                    pseudoUser: usr.pseudo
+                };
+                res.render('home.html.twig', {result: send});
             } else {
-                send = {msg:'Utilisateur non enregistré', etat:'0' };
+                send = {
+                    msg:'Utilisateur non enregistré',
+                    etat:'0',
+                    etatMenu: 'hide'
+                };
                 res.render('login.html.twig', {result: send});
             }
         }).catch(function(err){
-            send = {msg:'ERROR SEQUELIZE 0', etat:'0'};
+            send = {
+                msg:'ERROR SEQUELIZE 0',
+                etat:'0',
+                etatMenu: 'hide'
+            };
             res.render('login.html.twig', {result: send});
         });
 
     } else if (action == 'register' && pwd != pwd2) {
-        send = {msg:'Les deux mots de passes sont différents', etat:'0' };
+        send = {
+            msg:'Les deux mots de passes sont différents',
+            etat:'0',
+            etatMenu: 'hide'
+        };
         res.render('login.html.twig', {result: send});
     } else if (action == 'register' && pwd == pwd2) {
         //Vérifie l'existance du pseudo et du mail avant de créer le nouvel user
         let options = {
             where: {
-                $or: [
-                    {
+                $or: [{
                         pseudo: psd
-                    },
-                    {
+                    },{
                         mail: mail
-                    }
-                ]
+                    }]
             }
         };
 
@@ -68,26 +76,46 @@ router.post('/login', function(req, res, next) {
                     password: pwd,
                     mail: mail
                 }).then(function(usr) {
-                    send = {msg:'Utilisateur créé. Vous pouvez vous identifier', etat:'1'};
+                    send = {
+                        msg:'Utilisateur créé. Vous pouvez vous identifier',
+                        etat:'1',
+                        etatMenu: 'hide'
+                    };
                     res.render('login.html.twig', {result: send});
                 }).catch(function(err) {
-                    send = {msg:'ERROR SEQUELIZE 1', etat:'0'};
+                    send = {
+                        msg:'ERROR SEQUELIZE 1',
+                        etat:'0',
+                        etatMenu: 'hide'
+                    };
                     res.render('login.html.twig', {result: send});
                 });
             } else {   // SInon, prévient que le pseudo ou mail est déjà utilisé
-                console.log("Ancien -->   pseudo : " + usr.pseudo + " Mail : " + usr.mail);
                 if (psd == usr.pseudo) {
-                    send = {msg:'Pseudo déjà utilisé', etat:'0'};
+                    send = {
+                        msg:'Pseudo déjà utilisé',
+                        etat:'0',
+                        etatMenu: 'hide'
+                    };
                 } else {
-                    send = {msg:'Email déjà utilisé', etat:'0'};
+                    send = {
+                        msg:'Email déjà utilisé',
+                        etat:'0',
+                        etatMenu: 'hide'
+                    };
                 }
                 res.render('login.html.twig', {result: send});
             }
         }).catch(function(err) {
-            send = {msg:'ERROR SEQUELIZE 2', etat:'0'};
+            send = {
+                msg:'ERROR SEQUELIZE 2',
+                etat:'0',
+                etatMenu: 'hide'
+            };
             res.render('login.html.twig', {result: send});
         });
     } else {
+        send = {etatMenu: 'hide'};
         res.render('login.html.twig', {result: send});
     }
 });
@@ -124,16 +152,15 @@ router.post('/forgotPassword/submit', function(req, res, next) {
     res.send('<script>close()</script>');
 });
 
-router.get('/logout', function(req, res, next) {
+router.post('/logout', function(req, res, next) {
     res.cookie('idUser', '');
-    res.redirect('login');
+    res.redirect('/');
 });
 
 module.exports = router;
 
 
 function sendMail(object, pseudo, mail, pwd) {
-    console.log('1 : ' + pwd);
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -144,8 +171,7 @@ function sendMail(object, pseudo, mail, pwd) {
 
     let mailOptions = {
         from: 'librarize@gmail.com',
-        to: 'g.pequery@gmail.com',
-        // to: mail,
+        to: mail,
         subject: 'LibrarizeMe : ' + object,
         html: getMailForgotPwd(pseudo, pwd)
     };
@@ -162,7 +188,6 @@ function sendMail(object, pseudo, mail, pwd) {
 }
 
 function getMailForgotPwd(pseudo, pwd) {
-    console.log('2 : ' + pwd);
     let html = '';
 
     html += '<body>';
