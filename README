@@ -5,6 +5,7 @@ Créer base "librarizeme"
 Pour pouvoir compiler le scss (Compass):
        Installer Ruby
        Executer la commande : gem install compass
+       Cmd à la racine pour compiler (la config s'occupe du reste "config.rb") : compass compile
 
 
 Schema de la bdd :
@@ -27,3 +28,5 @@ Gmail LibrarizeMe :
     Adr : librarize@gmail.com
     pwd : LibrarizeMe3
 
+
+Le logo du mail forgotPwd est sur un hébergeur public
