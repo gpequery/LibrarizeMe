@@ -6,8 +6,37 @@
 
 {%  block content %}
     <div class='generalContent'>
-        <h1>Voici vos informations </h1>
-        <div>{{ user.mail }}</div>
+        <h1>Informations du compte</h1>
+        <div class='userInformations'>
+            <div class='userInformationsLeft'>
+                {#{{ user.mail }}#}
+                <span>
+                    <label>Pseudo</label>
+                    <input type='text' value='{{ user.pseudo }}' placeholder='Pseudo' />
+                </span>
+
+                <span>
+                    <label>Nom</label>
+                    <input type='text' value='{{ user.lastname }}' placeholder='Nom' />
+                </span>
+
+                <span>
+                    <label>Prenom</label>
+                    <input type='text' value='{{ user.firstname }}' placeholder='Prénom' />
+                </span>
+            </div>
+            <div class='userInformationsRight'>
+                <span>
+                    <label>Mail</label>
+                    <input type='email' value='{{ user.mail }}' placeholder='Mail' />
+                </span>
+
+                <span>
+                   <label>Mobile</label>
+                    <input type='text'  value='{{ user.numberphone }}' placeholder='Mobile' />
+                </span>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

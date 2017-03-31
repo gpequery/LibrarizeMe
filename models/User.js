@@ -14,7 +14,16 @@ module.exports = function(sequelize, DataTypes) {
         password: {
             type: DataTypes.STRING
         },
+        lastname: {
+            type: DataTypes.STRING
+        },
+        firstname: {
+            type: DataTypes.STRING
+        },
         mail: {
+            type: DataTypes.STRING
+        },
+        numberphone: {
             type: DataTypes.STRING
         }
     }, {
@@ -35,10 +44,13 @@ module.exports = function(sequelize, DataTypes) {
                     id: this.id,
                     pseudo: this.pseudo,
                     password: this.password,
-                    mail: this.mail
+                    lastname: this.lastname,
+                    firstname: this.firstname,
+                    mail: this.mail,
+                    numberphone: this.numberphone
                 }
             }
         }
     });
     return User;
-}
+};

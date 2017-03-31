@@ -1,0 +1,41 @@
+@import 'base';
+
+.generalContent {
+
+    .userInformations {
+        margin-left: 10%;
+        padding-top: 4%;
+
+        .userInformationsLeft,
+        .userInformationsRight {
+            width: 35%;
+            display: inline-block;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        .userInformationsLeft {
+            margin-right: 10%;
+        }
+
+        span {
+            display: block;
+            margin-bottom: 30px;
+
+            label {
+                display: inline-block;
+                width: 60px;
+                font-weight:bold;
+                text-align: left;
+            }
+
+            input[type='text'],
+            input[type='email'] {
+                display: inline-block;
+                width: 50%;
+            }
+        }
+
+
+    }
+}

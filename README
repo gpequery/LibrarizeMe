@@ -13,15 +13,15 @@ user
     id
     pseudo
     password
+    lastfname
+    firstname
     mail
-    function (  getId -> retourne l'id de l'user courent
-                toJSON -> retourne l'objet au format json sans les date de crea, update et remove
-            )
+    numberphone
 
 
 
 A noter :
-    - Une fois loggé ont peux avoir l'id de l'utilisateur connecté à tout moment via le cookie idUser
+    - Une fois loggé ont peux avoir l'id de l'utilisateur connecté à tout moment via le cookie idUser qui set supprimé à la déconnexion
 
 
 Gmail LibrarizeMe :

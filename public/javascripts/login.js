@@ -12,15 +12,22 @@ $j(function() {
 
     initForm();
 
+    //modifie le formulaire pour ajouter/retirer les inputs si connexion ou enregistrement
     loginRegister.on('click', function() {
+        console.log('DEBUT');
+        pwd.css({'border': 'none'});
+        pwd2.css({'border': 'none'});
+        console.log('FIN');
+
+        pwd.val('');
+        pwd2.val('');
+
         if (actionForm.val() == 'login') {
             titleForm.text('S\'enregistrer');
             loginRegister.text('Login');
             loginRegister.attr('title', 'Déjà un compte ? Vous pouvez vous connecter :)');
             actionForm.val('register');
 
-            pseudo.attr('placeholder', 'New pseudo');
-            pwd.attr('placeholder', 'New password');
             pwd2.attr('required', true);
             mail.attr('required', true);
 
@@ -34,8 +41,6 @@ $j(function() {
             loginRegister.attr('title', 'Pas de compte ? Créer un nouveau compte :)');
             actionForm.val('login');
 
-            pseudo.attr('placeholder', 'Pseudo');
-            pwd.attr('placeholder', 'Password');
             pwd2.attr('required', false);
             mail.attr('required', false);
 
@@ -45,6 +50,7 @@ $j(function() {
         }
     });
 
+    //Affiche la 'popUp' qui demande les informations relatives au compte pour envoyer le mdp
     forgotPwd.on('click', function() {
         var w  = 600;
         var h = 265;
@@ -54,9 +60,33 @@ $j(function() {
         return false;
     });
 
+    //Affiche un message lorsque la demande d'envoyer le mdp est fini
     $j('.formForgotPwd').on('submit', function() {
         alert('Demande prise en compte !');
     });
+
+    pwd.on('keyup', function() {
+        verifyPwd();
+    });
+
+    pwd2.on('keyup', function() {
+        verifyPwd();
+    });
+
+    function verifyPwd() {
+        if (pwd.val().length >= parseInt(pwd.attr('minlength')) && pwd2.val().length >= parseInt(pwd.attr('minlength'))) {
+            if(pwd.val() == pwd2 .val()) {
+                pwd.attr('style', "border-radius: 5px; border:#00FF00 1px solid;");
+                pwd2.attr('style', "border-radius: 5px; border:#00FF00 1px solid;");
+
+                pwd.css({'border-radius': '5px', 'border':'#00FF00 1px solid'});
+                pwd2.css({'border-radius': '5px', 'border':'#00FF00 1px solid'});
+            } else {
+                pwd.css({'border-radius': '5px', 'border':'#FF0000 1px solid'});
+                pwd2.css({'border-radius': '5px', 'border':'#FF0000 1px solid'});
+            }
+        }
+    }
 
     function initForm() {
         titleForm.text('Login');
@@ -65,7 +95,10 @@ $j(function() {
         actionForm.val('login');
 
         pseudo.attr('placeholder', 'Pseudo');
-        pwd.attr('placeholder', 'Password');
+        pwd.attr('placeholder', 'Mot de passe');
+
+        pwd.css({'border': 'none'});
+        pwd2.attr('style', "border: none");
 
         divRegisterOnly.css('display', 'none');
 

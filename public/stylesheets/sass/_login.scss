@@ -2,7 +2,7 @@
 
 .content {
     .contentLogin {
-        background-color: $color-font-content;
+        background-color: $color-font-content-gray;
         width: 33%;
         margin-left: auto;
         margin-right: auto;
@@ -95,20 +95,20 @@
         margin-bottom: 4px;
     }
 
-    input[type='text'],
-    input[type='password'],
-    input[type='email']{
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-        margin-bottom: 10px;
-        width: 32%;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        height: 30px;
-        padding-left: 10px;
-    }
+    //input[type='text'],
+    //input[type='password'],
+    //input[type='email']{
+    //    display: block;
+    //    margin-right: auto;
+    //    margin-left: auto;
+    //    margin-bottom: 10px;
+    //    width: 32%;
+    //    font-size: 16px;
+    //    border: none;
+    //    border-radius: 5px;
+    //    height: 30px;
+    //    padding-left: 10px;
+    //}
 
     input[type='submit'],
     input[type='reset'] {

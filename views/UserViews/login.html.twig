@@ -19,12 +19,15 @@
 
         <form method='POST' class="formLogin">
             <input type='text' name='pseudo' class='pseudo' required />
-            <input type='password' name='pwd' class='pwd' required />
+            <input type='password' name='pwd' class='pwd' minlength='7' required />
 
             {# if registrer #}
             <div class='onlyRegisterInput'>
-                <input type='password' name='pwd2' class='pwd2' placeholder='Confirm Password' />
+                <input type='password' name='pwd2' class='pwd2' placeholder='Confirmer mot de passe' />
+                <input type='text' name='lastname' placeholder='Nom' />
+                <input type='text' name='firstname' placeholder='Prénom' />
                 <input type='email' name='mail' class='mail' placeholder='Email' />
+                <input type='text' name='numberphone' placeholder='Mobile' />
             </div>
             {# endIf registrer #}
 

@@ -8,7 +8,8 @@ $ico-libraryRight-header: '\e901';
 $color-corporate-one: #092D3D;
 $color-corporate-two: #FF6664;
 $color-corporate-three: #FFFFFF;
-$color-font-content: #CCCCCC;
+$color-font-content-gray: #CCCCCC;
+$color-font-content-white: #FFFFFF;
 
 //ALERT
 $color-success: #3C763D;
@@ -23,6 +24,21 @@ $color-border-danger: #EBCCD1;
 
 
 //FORM
+input[type='text'],
+input[type='password'],
+input[type='email']{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    width: 32%;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    padding-left: 10px;
+}
+
 input[type='submit'],
 input[type='reset'] {
     color: #FFFFFF;

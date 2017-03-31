@@ -12,7 +12,10 @@ router.post('/login', function(req, res, next) {
     let psd = req.body.pseudo;
     let pwd = req.body.pwd;
     let pwd2 = req.body.pwd2;
+    let lastname = req.body.lastname;
+    let firstname = req.body.firstname;
     let mail = req.body.mail;
+    let numberphone = req.body.numberphone;
     let action = req.body.actionForm;
     let send = null;
 
@@ -74,7 +77,10 @@ router.post('/login', function(req, res, next) {
                 User.create({
                     pseudo: psd,
                     password: pwd,
-                    mail: mail
+                    lastname: lastname,
+                    firstname: firstname,
+                    mail: mail,
+                    numberphone: numberphone
                 }).then(function(usr) {
                     send = {
                         msg:'Utilisateur créé. Vous pouvez vous identifier',
