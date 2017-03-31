@@ -1,11 +1,44 @@
-README
+                        _______________________________________________________________________________
+                       /                                                                               \
+  ____________________/                         !!!!!  SCRUM ORGANAZ  !!!!!                             \___________________
+ /                                                                                                                         /
+/_________________________________________________________________________________________________________________________/|
+|                                                                                                                        | |
+| README README        README README        README README README README README        README README        README README | |
+|         README README        README README        README README README        README README        README README       | |
+|                README README        README README        README        README README        README                     | |
+| README                  README README        README README        README               README                   README | |
+| README README                   README README        README README        README README                  README README | |
+|        README  README                   README README               README README                 README README        | |
+| README         README README                    README README README README                README README        README | |
+| README README         README README                     README README               README README        REAMDE README | |
+|        README  README        README README                    R              README README        README README        | |
+| README README         README README                     README README               README README        REAMDE README | |
+| README         README README                    README README README README                README README        README | |
+|        README  README                   README README               README README                 README README        | |
+| README README                   README README        README README        README README                  README README | |
+| README                  README README        README README        README               README                   README | |
+|                 README README        README README        README        README README        README                    | |
+|         README README        README README        README README README        README README        README README       | |
+| README README        README README        README README README README README        README README        README README | /
+|________________________________________________________________________________________________________________________|/
 
-Créer base "librarizeme"
+
+
+
+
+
+IMPORTANT !! : Créer base "librarizeme"
+
+----------------------------------------------------------------------------------------------------------------------
+
 
 Pour pouvoir compiler le scss (Compass):
        Installer Ruby
        Executer la commande : gem install compass
        Cmd à la racine pour compiler (la config s'occupe du reste "config.rb") : compass compile
+
+----------------------------------------------------------------------------------------------------------------------
 
 
 Schema de la bdd :
@@ -18,15 +51,51 @@ user
     mail
     numberphone
 
+----------------------------------------------------------------------------------------------------------------------
 
 
-A noter :
+A NOTER :
+
     - Une fois loggé ont peux avoir l'id de l'utilisateur connecté à tout moment via le cookie idUser qui set supprimé à la déconnexion
 
+----------------------------------------------------------------------------------------------------------------------
 
-Gmail LibrarizeMe :
-    Adr : librarize@gmail.com
-    pwd : LibrarizeMe3
+MAIL :
+
+    Gmail LibrarizeMe :
+        Adr : librarize@gmail.com
+        pwd : LibrarizeMe3
+
+    Envoye de mail quand :
+        Création de compte
+        Demande de vérification de mdp
+
+    Le logo header du mail est sur un hébergeur public
+
+----------------------------------------------------------------------------------------------------------------------
 
 
-Le logo du mail forgotPwd est sur un hébergeur public
+                        _______________________________________________________________________________
+                       /                                                                               \
+  ____________________/                         !!!!!  SCRUM ORGANAZ  !!!!!                             \___________________
+ /                                                                                                                         /
+/_________________________________________________________________________________________________________________________/|
+|                                                                                                                        | |
+| README README        README README        README README README README README        README README        README README | |
+|         README README        README README        README README README        README README        README README       | |
+|                README README        README README        README        README README        README                     | |
+| README                  README README        README README        README               README                   README | |
+| README README                   README README        README README        README README                  README README | |
+|        README  README                   README README               README README                 README README        | |
+| README         README README                    README README README README                README README        README | |
+| README README         README README                     README README               README README        REAMDE README | |
+|        README  README        README README                    R              README README        README README        | |
+| README README         README README                     README README               README README        REAMDE README | |
+| README         README README                    README README README README                README README        README | |
+|        README  README                   README README               README README                 README README        | |
+| README README                   README README        README README        README README                  README README | |
+| README                  README README        README README        README               README                   README | |
+|                 README README        README README        README        README README        README                    | |
+|         README README        README README        README README README        README README        README README       | |
+| README README        README README        README README README README README        README README        README README | /
+|________________________________________________________________________________________________________________________|/

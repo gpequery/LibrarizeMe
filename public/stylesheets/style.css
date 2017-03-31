@@ -34,7 +34,7 @@ body header .libraryLeftIcon { display: inline-block; color: #FF6664; }
 body header .libraryLeftIcon:before { content: ""; }
 body header .libraryRightIcon { display: inline-block; color: #FF6664; }
 body header .libraryRightIcon:before { content: ""; }
-body footer { position: absolute; bottom: 5px; width: 99%; text-align: center; color: #FF6664; margin-left: 10px; font-size: 14px; }
+body footer { position: absolute; bottom: 5px; width: 80%; text-align: center; color: #FF6664; margin-left: 10px; font-size: 14px; right: 10%; }
 body .menuDiv { background-color: #CCCCCC; width: 80%; margin: 0px auto; height: 35px; line-height: 35px; border-radius: 7px; text-align: center; font-weight: bold; }
 body .menuDiv ul { padding: 0px; }
 body .menuDiv ul .titleMenu { display: inline-block; list-style-type: none; width: 24%; cursor: pointer; vertical-align: top; position: relative; }

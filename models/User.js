@@ -51,6 +51,27 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         }
+
+        /*
+         instanceMethods: {
+         responsify: function() {
+         let result = {};
+         result.id = this.id;
+         result.lastname = this.lastname;
+         result.firstname = this.firstname;
+         result.birthdate = this.birthdate;
+
+         if (this.School) {
+         result.school_id = this.School.responsify();
+         }
+
+         if (this.Project) {
+         result.project = this.Project;
+         }
+         return result;
+         }
+         }
+         */
     });
     return User;
 };

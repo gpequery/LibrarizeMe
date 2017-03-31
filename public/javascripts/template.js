@@ -8,8 +8,15 @@ $j(function() {
 
     //Modifie le formulaire formNavigateMenu pour avoir une navigation en post.
     $j('.menuNav').on('click', function() {
-        $j('.formNavigateMenu').attr('action', $j(this).attr('data'));
-        $j('.formNavigateMenu').submit();
+        if ($j(this).attr('data') == '/user/logout') {
+            if(confirm('Etes-vous certain de vouloir vous déconnecter ?')) {
+                $j('.formNavigateMenu').attr('action', $j(this).attr('data'));
+                $j('.formNavigateMenu').submit();
+            }
+        } else {
+            $j('.formNavigateMenu').attr('action', $j(this).attr('data'));
+            $j('.formNavigateMenu').submit();
+        }
     });
 
 });

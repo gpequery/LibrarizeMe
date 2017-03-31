@@ -31,9 +31,12 @@ router.post('/login', function(req, res, next) {
             if (usr != null) {
                 res.cookie('idUser', usr.getId());
 
+                let fullPseudo = usr.lastname != '' && usr.firstname != '' ? usr.firstname + ' ' + usr.lastname : usr.pseudo;
+                // let fullPseudo = this.getFullName() ;
+
                 send = {
                     etatMenu: 'show',
-                    pseudoUser: usr.pseudo
+                    pseudoUser: fullPseudo
                 };
                 res.render('home.html.twig', {result: send});
             } else {
@@ -82,6 +85,16 @@ router.post('/login', function(req, res, next) {
                     mail: mail,
                     numberphone: numberphone
                 }).then(function(usr) {
+                    //Envoye un mail avec les infos de l'utilisateur
+                    let infosMail = {
+                        'subject' : 'Création de compte',
+                        'mail' : mail,
+                        'usr': usr,
+                        'reason' : 'newCompte'
+                    };
+                    sendMail(infosMail);
+
+                    //Renvye sur la page pour se connecter
                     send = {
                         msg:'Utilisateur créé. Vous pouvez vous identifier',
                         etat:'1',
@@ -146,7 +159,14 @@ router.post('/forgotPassword/submit', function(req, res, next) {
 
     User.find(options).then(function(usr) {
         if (usr) { //SI l'usr avec le mail existe on envoye le mail avec son mdp
-           sendMail('Demande de changement de mot de passe', usr.pseudo, usr.mail, usr.password);
+            let infosMail = {
+                'subject' : 'Demande de changement de mot de passe',
+                'pseudo' : usr.pseudo,
+                'mail' : usr.mail,
+                'pwd' : usr.password,
+                'reason' : 'sendPwd'
+            };
+           sendMail(infosMail);
         } else {
             console.log('USER INCONNUE');
         }
@@ -202,7 +222,7 @@ router.post('/logout', function(req, res, next) {
 module.exports = router;
 
 
-function sendMail(object, pseudo, mail, pwd) {
+function sendMail(infos) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -213,9 +233,9 @@ function sendMail(object, pseudo, mail, pwd) {
 
     let mailOptions = {
         from: 'librarize@gmail.com',
-        to: mail,
-        subject: 'LibrarizeMe : ' + object,
-        html: getMailForgotPwd(pseudo, pwd)
+        to: infos.mail,
+        subject: 'LibrarizeMe : ' + infos.subject,
+        html: getGoodMail(infos)
     };
 
     transporter.sendMail(mailOptions, function(error, info){
@@ -229,32 +249,90 @@ function sendMail(object, pseudo, mail, pwd) {
     transporter.close();
 }
 
-function getMailForgotPwd(pseudo, pwd) {
+function getGoodMail(infos) {
+    switch (infos.reason) {
+        case 'sendPwd':
+            return getBodyMailForgotPwd(infos.pseudo, infos.pwd);
+            break;
+
+        case 'newCompte':
+            return getBodyMailNewAcount(infos.usr);
+            break;
+    }
+}
+
+function getBodyMailForgotPwd(pseudo, pwd) {
+    let html = '';
+
+    html += getHeaderMail(pseudo);
+    html +=                 '<div>Merci de rester fidèle à LibrarizeMe ! </div>';
+    html +=                 '<div style="margin-bottom: 20px">Vous recevez ce mail car vous venez de nous demander votre mot de passe.</div>';
+    html +=                 '<div style="margin-bottom: 25px">Voici votre mot de passe : <b>' + pwd + '</b></div>';
+    html += getFooterMail();
+
+    return html;
+}
+
+function getBodyMailNewAcount(usr) {
+    let html = '';
+
+    html += getHeaderMail(usr.pseudo);
+    html +=                 '<div>Merci de faire confiance à LibrarizeMe ! </div>';
+    html +=                 '<div style="margin-bottom: 20px">Vous recevez ce mail car vous venez de vous créer un compte.</div>';
+
+    html +=                 '<div style="margin-bottom: 25px">';
+    html +=                     '<span>Voici vos informations personnel : </span>';
+
+    if (usr.pseudo != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Pseudo</b> : ' + usr.pseudo  + '</div>';
+    }
+
+    if (usr.lastname != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Nom</b> : ' +  usr.lastname + '</div>';
+    }
+
+    if (usr.firstname != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Prénom</b> : ' + usr.firstname  + '</div>';
+    }
+
+    if(usr.mail != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Mail</b> : ' + usr.mail  + '</div>';
+    }
+
+    if (usr.numberphone != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Mobile</b> : ' + usr.numberphone  + '</div>';
+    }
+
+    html +=                 '</div>';
+
+    html += getFooterMail();
+    return html;
+}
+
+function getHeaderMail(pseudo) {
     let html = '';
 
     html += '<body>';
-
     html +=     '<div style="width: 99%">';
-                    //HEADER -> LOGO
     html +=         '<div style=\'width: 99%; background-color: #092D3D; border: 4px solid #092D3D; border-radius: 10px 10px 0px 0px;\'>';
     html +=             '<div style=\'color: rgba(0,0,0,0); height: 57px; background: url("http://img4.hostingpics.net/pics/687511mailHeader.png") no-repeat top center; cursor: pointer;\' onclick=\'alert("Coucou")\'>';
     html +=             'a'  ;
     html +=             '</div>';
     html +=         '</div>';
-
-                    //BODY MSG + INFO
     html +=         '<div style=\'width: 99%; background-color: #CDCDCD; border: 4px solid #092D3D\'>';
     html +=             '<div style="padding-left: 30px;">';
     html +=                 '<h1>Bonjour ' + pseudo + ',</h1>';
-    html +=                 '<div>Merci de rester fidèle à LibrarizeMe ! </div>';
-    html +=                 '<div style="margin-bottom: 20px">Vous recevez ce mail car vous venez de nous demander votre mot de passe.</div>';
-    html +=                 '<div style="margin-bottom: 25px">Voici votre mot de passe : <b>' + pwd + '</b></div>';
+
+    return html;
+}
+
+function getFooterMail() {
+    let html = '';
+
     html +=                 '<div style="margin-bottom: 30px">Merci de nous donner votre avis afin de nous améliorer :)</div>';
     html +=                 '<div style=" text-align: right; margin-bottom: 10px; padding-right: 30px">Toute l\'équipe LibrarizeMe.</div>';
     html +=             '</div>';
     html +=         '</div>';
-
-                    //FOOTER
     html +=         '<div style=\'width: 99%; color: #FF6664; background-color: #092D3D; border: 4px solid #092D3D; text-align: center; border-radius: 0px 0px 5px 5px;\'>';
     html +=             '&#64;2017 LibrarizeMe';
     html +=         '</div>';
