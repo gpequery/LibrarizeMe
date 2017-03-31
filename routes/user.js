@@ -39,7 +39,7 @@ router.post('/login', function(req, res, next) {
                     etat:'0',
                     etatMenu: 'hide'
                 };
-                res.render('login.html.twig', {result: send});
+                res.render('UserViews/login.html.twig', {result: send});
             }
         }).catch(function(err){
             send = {
@@ -47,7 +47,7 @@ router.post('/login', function(req, res, next) {
                 etat:'0',
                 etatMenu: 'hide'
             };
-            res.render('login.html.twig', {result: send});
+            res.render('UserViews/login.html.twig', {result: send});
         });
 
     } else if (action == 'register' && pwd != pwd2) {
@@ -56,7 +56,7 @@ router.post('/login', function(req, res, next) {
             etat:'0',
             etatMenu: 'hide'
         };
-        res.render('login.html.twig', {result: send});
+        res.render('UserViews/login.html.twig', {result: send});
     } else if (action == 'register' && pwd == pwd2) {
         //Vérifie l'existance du pseudo et du mail avant de créer le nouvel user
         let options = {
@@ -81,14 +81,14 @@ router.post('/login', function(req, res, next) {
                         etat:'1',
                         etatMenu: 'hide'
                     };
-                    res.render('login.html.twig', {result: send});
+                    res.render('UserViews/login.html.twig', {result: send});
                 }).catch(function(err) {
                     send = {
                         msg:'ERROR SEQUELIZE 1',
                         etat:'0',
                         etatMenu: 'hide'
                     };
-                    res.render('login.html.twig', {result: send});
+                    res.render('UserViews/login.html.twig', {result: send});
                 });
             } else {   // SInon, prévient que le pseudo ou mail est déjà utilisé
                 if (psd == usr.pseudo) {
@@ -104,7 +104,7 @@ router.post('/login', function(req, res, next) {
                         etatMenu: 'hide'
                     };
                 }
-                res.render('login.html.twig', {result: send});
+                res.render('UserViews/login.html.twig', {result: send});
             }
         }).catch(function(err) {
             send = {
@@ -112,17 +112,17 @@ router.post('/login', function(req, res, next) {
                 etat:'0',
                 etatMenu: 'hide'
             };
-            res.render('login.html.twig', {result: send});
+            res.render('UserViews/login.html.twig', {result: send});
         });
     } else {
         send = {etatMenu: 'hide'};
-        res.render('login.html.twig', {result: send});
+        res.render('UserViews/login.html.twig', {result: send});
     }
 });
 
 //Print Popup
 router.get('/forgotPassword', function(req, res, next) {
-    res.render('forgotPwd.html.twig')
+    res.render('UserViews/forgotPwd.html.twig')
 });
 
 
@@ -150,6 +150,42 @@ router.post('/forgotPassword/submit', function(req, res, next) {
 
     //Ferme la popup
     res.send('<script>close()</script>');
+});
+
+router.post('/informations', function(req, res, next) {
+    let send;
+
+    let options = {
+        where: {
+            id: req.cookies.idUser
+        }
+    };
+
+    User.find(options).then(function(usr) {
+        if (usr) {
+            send = {
+                pseudoUser: req.body.userName,
+                userInfo: usr
+            };
+
+            res.render('UserViews/informations.html.twig', {result: send});
+        } else {
+            send = {
+                msg:'ERROR : Compte introuvable, recommencez.',
+                etat:'0',
+                etatMenu: 'hide'
+            };
+            res.render('UserViews/login.html.twig', {result: send});
+        }
+
+    }).catch(function(err) {
+        send = {
+            msg:'ERROR SEQUELIZE 4',
+            etat:'0',
+            etatMenu: 'hide'
+        };
+        res.render('UserViews/login.html.twig', {result: send});
+    });
 });
 
 router.post('/logout', function(req, res, next) {

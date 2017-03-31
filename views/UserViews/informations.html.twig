@@ -1,0 +1,13 @@
+{% extends 'template.html.twig' %}
+{% set user = result.userInfo %}
+{
+
+{%  block title %} Informations {% endblock %}
+
+{%  block content %}
+    <div class='generalContent'>
+        <h1>Voici vos informations </h1>
+        <div>{{ user.mail }}</div>
+    </div>
+
+{% endblock %}

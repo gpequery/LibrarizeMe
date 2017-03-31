@@ -49,14 +49,14 @@ body {
     }
 
     .menuDiv {
-        background-color: $color-corporate-three;
-        width: 50%;
+        background-color: $color-font-content;
+        width: 80%;
         margin: 0px auto;
-        height: 30px;
-        line-height: 28px;
+        height: 35px;
+        line-height: 35px;
         border-radius: 7px;
         text-align: center;
-
+        font-weight: bold;
         ul {
             padding: 0px;
             .titleMenu {
@@ -73,6 +73,11 @@ body {
                         display: block;
                         width: 100%;
                         background-color: $color-corporate-three;
+                        height: 40px;
+                        border-radius: 5px;
+                        margin-top: 5px;
+                        line-height: 35px;
+                        box-shadow: inset -6px -6px 5px 0px #656565;
                         div {
                             width: auto;
                             padding-left: 15px;

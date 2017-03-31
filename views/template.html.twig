@@ -27,23 +27,23 @@
                 <li class='titleMenu'>
                     Services
                     <ul>
-                        <li>Services 1</li>
-                        <li>Services 2</li>
+                        <li><div>Services 1</div></li>
+                        <li><div>Services 2</div></li>
                     </ul>
                 </li>
                 <li class='titleMenu'>
                     Projets
                     <ul>
-                        <li>Projets 1</li>
-                        <li>Projets 2</li>
-                        <li>Projets 3</li>
-                        <li>Projets 4</li>
+                        <li><div>Projets 1</div></li>
+                        <li><div>Projets 2</div></li>
+                        <li><div>Projets 3</div></li>
+                        <li><div>Projets 4</div></li>
                     </ul>
                 </li>
                 <li class='titleMenu'>
-                    <div class="test">{{ result.pseudoUser }}</div>
+                    {{ result.pseudoUser }}
                     <ul>
-                        <li><div>Mes informations</div></li>
+                        <li class='menuNav' data='/user/informations'><div>Mes informations</div></li>
                         <li class='menuNav' data='/user/logout'><div>Déconnexion</div></li>
                     </ul>
 
@@ -72,6 +72,8 @@
     </script>
 {% endif %}
 
-<form method='POST' class='formNavigateMenu' action='#'></form>
+<form method='POST' class='formNavigateMenu' action='#'>
+    <input type='hidden' name='userName' value='{{ result.pseudoUser }}'>
+</form>
 
 </html>
