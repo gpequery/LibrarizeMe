@@ -10,6 +10,7 @@
         <script> $j = jQuery.noConflict() </script>
         <script src="../javascripts/template.js"></script>
         <script src="../javascripts/login.js"></script>
+        <script src="../javascripts/userInformations.js"></script>
     </head>
 
     <body>
@@ -41,7 +42,7 @@
                     </ul>
                 </li>
                 <li class='titleMenu'>
-                    {{ result.pseudoUser }}
+                    <div class='pseudoUserMenu'>{{ result.pseudoUser }}</div>
                     <ul>
                         <li class='menuNav' data='/user/informations'><div>Mes informations</div></li>
                         <li class='menuNav' data='/user/logout'><div>Déconnexion</div></li>

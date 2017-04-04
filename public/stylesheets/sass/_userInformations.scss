@@ -1,41 +1,69 @@
 @import 'base';
 
 .generalContent {
+    text-align: center;
 
-    .userInformations {
-        margin-left: 10%;
-        padding-top: 4%;
+    .msgUpdateUser {
+        margin-left: auto;
+        margin-right: auto;
+        width: 33%;
+        text-align: center;
+        font-size: 20px;
+        padding: 3px;
+        border-radius: 5px;
+        //visibility: hidden;
+        height: 24px;
+    }
 
-        .userInformationsLeft,
-        .userInformationsRight {
-            width: 35%;
-            display: inline-block;
-            vertical-align: top;
-            text-align: center;
+    .msgOk {
+        color: $color-success;
+        background-color: $color-background-success;
+        border-color: $color-border-success;
+    }
+
+    .msgNok {
+        color: $color-danger;
+        background-color: $color-background-danger;
+        border-color: $color-border-danger;
+    }
+
+    .formUpdateUserInformations{
+        input[type='reset'] {
+            margin-right: 5%;
         }
 
-        .userInformationsLeft {
-            margin-right: 10%;
-        }
+        .userInformations {
+            padding-top: 4%;
 
-        span {
-            display: block;
-            margin-bottom: 30px;
-
-            label {
+            .userInformationsLeft,
+            .userInformationsRight {
+                width: 35%;
                 display: inline-block;
-                width: 60px;
-                font-weight:bold;
-                text-align: left;
+                vertical-align: top;
+                text-align: center;
             }
 
-            input[type='text'],
-            input[type='email'] {
-                display: inline-block;
-                width: 50%;
+            .userInformationsLeft {
+                margin-right: 10%;
+            }
+
+            span {
+                display: block;
+                margin-bottom: 30px;
+
+                label {
+                    display: inline-block;
+                    width: 60px;
+                    font-weight:bold;
+                    text-align: left;
+                }
+
+                input[type='text'],
+                input[type='email'] {
+                    display: inline-block;
+                    width: 50%;
+                }
             }
         }
-
-
     }
 }

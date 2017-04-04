@@ -7,36 +7,45 @@
 {%  block content %}
     <div class='generalContent'>
         <h1>Informations du compte</h1>
-        <div class='userInformations'>
-            <div class='userInformationsLeft'>
-                {#{{ user.mail }}#}
-                <span>
-                    <label>Pseudo</label>
-                    <input type='text' value='{{ user.pseudo }}' placeholder='Pseudo' />
-                </span>
+        <div class=msgUpdateUser></div>
+        {#<form method='POST' class='formUpdateUserInformations'>#}
+        <div class='formUpdateUserInformations'>
+            <div class='userInformations'>
 
-                <span>
-                    <label>Nom</label>
-                    <input type='text' value='{{ user.lastname }}' placeholder='Nom' />
-                </span>
+                <div class='userInformationsLeft'>
+                    <span>
+                        <label>Pseudo</label>
+                        <input type='text' name='pseudo' value='{{ user.pseudo }}' data='{{ user.pseudo }}' placeholder='Pseudo' required class='inputUpdateUserInformations updatePseudo'/>
+                    </span>
 
-                <span>
-                    <label>Prenom</label>
-                    <input type='text' value='{{ user.firstname }}' placeholder='Prénom' />
-                </span>
+                    <span>
+                        <label>Nom</label>
+                        <input type='text' name='lastname' value='{{ user.lastname }}' data='{{ user.lastname }}' placeholder='Nom' class='updateLastname updateInfos'/>
+                    </span>
+
+                    <span>
+                        <label>Prenom</label>
+                        <input type='text' name='firstname' value='{{ user.firstname }}' data='{{ user.firstname }}' placeholder='Prénom' class='updateFirstname updateInfos'/>
+                    </span>
+                </div>
+                <div class='userInformationsRight'>
+                    <span>
+                        <label>Mail</label>
+                        <input type='email' name='mail' value='{{ user.mail }}' data='{{ user.mail }}' placeholder='Mail' required class='inputUpdateUserInformations updateMail'/>
+                    </span>
+
+                    <span>
+                        <label>Mobile</label>
+                        <input type='text'  name='numberphone' maxlength='14' pattern='^[0-9]{10}|[0-9 ]{14}$' title='Format de téléphone à 10 chiffres'  value='{{ user.numberphone }}' data='{{ user.numberphone }}' placeholder='Mobile' class='updateMobile updateInfos' />
+                    </span>
+                </div>
             </div>
-            <div class='userInformationsRight'>
-                <span>
-                    <label>Mail</label>
-                    <input type='email' value='{{ user.mail }}' placeholder='Mail' />
-                </span>
+            <input type='reset' value='Annuler' />
+            <input type='submit' value='Enregistrer' disabled='true' class='submitUpdateUser'/>
 
-                <span>
-                   <label>Mobile</label>
-                    <input type='text'  value='{{ user.numberphone }}' placeholder='Mobile' />
-                </span>
-            </div>
         </div>
+
+        {#</form>#}
     </div>
 
 {% endblock %}

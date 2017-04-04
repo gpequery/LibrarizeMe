@@ -73,6 +73,32 @@ $j(function() {
         verifyPwd();
     });
 
+
+    //Formalise le format du numéro de téléphone avec des epsaces tous les deux chiffres
+    $j('.mailRegister').on('change', function() {
+        var result = '';
+        var number = $j(this).val().split(' ').join('');
+
+        for (var i in number) {
+            if (i != 0 && i % 2 == 0 && number.charAt(i) != ' ') {
+                result += ' ';
+            }
+            result += number.charAt(i);
+        }
+        $j(this).val(result);
+    });
+
+
+    //Formalise le nom de famille en majuscule
+    $j('.lastnameRegister').on('change', function() {
+        $j(this).val($j(this).val().toUpperCase());
+    });
+
+    //Formalise le prenom en ucfirst
+    $j('.firstnameRegister').on('change', function() {
+        $j(this).val($j(this).val()[0].toUpperCase() + $j(this).val().substr(1, $j(this).val().length).toLowerCase());
+    });
+
     function verifyPwd() {
         if (pwd.val().length >= parseInt(pwd.attr('minlength')) && pwd2.val().length >= parseInt(pwd.attr('minlength'))) {
             if(pwd.val() == pwd2 .val()) {

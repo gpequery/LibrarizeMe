@@ -7,7 +7,7 @@ const router = express.Router();
 const nodemailer = require('nodemailer');
 var cookieParser = require('cookie-parser');
 
-
+//Page de login
 router.post('/login', function(req, res, next) {
     let psd = req.body.pseudo;
     let pwd = req.body.pwd;
@@ -32,7 +32,6 @@ router.post('/login', function(req, res, next) {
                 res.cookie('idUser', usr.getId());
 
                 let fullPseudo = usr.lastname != '' && usr.firstname != '' ? usr.firstname + ' ' + usr.lastname : usr.pseudo;
-                // let fullPseudo = this.getFullName() ;
 
                 send = {
                     etatMenu: 'show',
@@ -144,7 +143,6 @@ router.get('/forgotPassword', function(req, res, next) {
     res.render('UserViews/forgotPwd.html.twig')
 });
 
-
 //On submit form Popup
 router.post('/forgotPassword/submit', function(req, res, next) {
     let psd = req.body.pseudoForgotPwd;
@@ -178,6 +176,7 @@ router.post('/forgotPassword/submit', function(req, res, next) {
     res.send('<script>close()</script>');
 });
 
+//Affiche la page d'information
 router.post('/informations', function(req, res, next) {
     let send;
 
@@ -214,6 +213,81 @@ router.post('/informations', function(req, res, next) {
     });
 });
 
+//retourne 'pseudoUsed' si le pseudo est déjà utilisé, 'mailUsed' pour le mail ou SEQUELIZE 5 pour une erreur BDD
+router.post('/exist', function(req, res, next) {
+    let options = {
+        where: {
+            id: {
+                ne: req.cookies.idUser
+            },
+            $or: [{
+                pseudo: req.body.pseudo
+            },{
+                mail: req.body.mail
+            }]
+        }
+    };
+
+    User.find(options).then(function(usr) {
+        if(usr) {
+            if (usr.pseudo == req.body.pseudo) {
+                res.send('pseudoUsed');
+            } else if (usr.mail == req.body.mail) {
+                res.send('mailUsed');
+            }
+        } else {
+            res.send('ok');
+        }
+    }).catch(function(err) {
+        res.send('SEQUELIZE 5');
+    });
+
+
+});
+
+
+//Met à jour les informations de l'utilisateurs
+router.post('/updateInformations', function(req, res, next) {
+    let options = {
+        where: {
+            id: req.cookies.idUser
+        }
+    };
+
+    User.find(options).then(function(usr) {
+       if(usr) {
+            let newInfos = {
+                'pseudo' : req.body.pseudo,
+                'firstname' :req.body.firstname ,
+                'lastname' : req.body.lastname,
+                'mail' : req.body.mail,
+                'numberphone' : req.body.numberphone
+            };
+
+           usr.updateAttributes(newInfos);
+
+           let infosMail = {
+               'subject' : 'Modification de compte',
+               'mail' : req.body.mail,
+               'usr': usr,
+               'reason' : 'updateCompte'
+           };
+           sendMail(infosMail);
+
+           res.send({'result' : 'update'});
+       } else {
+           let send = {
+               msg:'ERROR : Compte introuvable, recommencez.',
+               etat:'0',
+               etatMenu: 'hide'
+           };
+           res.render('UserViews/login.html.twig', {result: send});
+       }
+    }).catch(function(err) {
+        res.send({'result' : 'sequelize'});
+    });
+});
+
 router.post('/logout', function(req, res, next) {
     res.cookie('idUser', '');
     res.redirect('/');
@@ -222,6 +296,8 @@ router.post('/logout', function(req, res, next) {
 module.exports = router;
 
 
+
+//FONCTIONS RELATIVES AUX MAILS
 function sendMail(infos) {
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -258,7 +334,47 @@ function getGoodMail(infos) {
         case 'newCompte':
             return getBodyMailNewAcount(infos.usr);
             break;
+
+        case 'updateCompte':
+            return getBodyMailUpdateInfos(infos.usr);
+            break;
     }
+}
+
+function getBodyMailUpdateInfos(usr) {
+    let html = '';
+
+    html += getHeaderMail(usr.pseudo);
+    html +=                 '<div>Merci de rester fidèle à LibrarizeMe ! </div>';
+    html +=                 '<div style="margin-bottom: 20px">Vous recevez ce mail car vous venez de modifier vos informations personnelles.</div>';
+    html +=                 '<div style="margin-bottom: 25px">';
+    html +=                     '<span>Voici vos informations personnelles : </span>';
+
+    if (usr.pseudo != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Pseudo</b> : ' + usr.pseudo  + '</div>';
+    }
+
+    if (usr.lastname != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Nom</b> : ' +  usr.lastname + '</div>';
+    }
+
+    if (usr.firstname != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Prénom</b> : ' + usr.firstname  + '</div>';
+    }
+
+    if(usr.mail != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Mail</b> : ' + usr.mail  + '</div>';
+    }
+
+    if (usr.numberphone != '') {
+        html +=                     '<div style=\'margin-left: 30px;\'><b>Mobile</b> : ' + usr.numberphone  + '</div>';
+    }
+
+    html +=                 '</div>';
+    html += getFooterMail();
+
+    console.log('MAIL BODY !! ');
+    return html;
 }
 
 function getBodyMailForgotPwd(pseudo, pwd) {
@@ -281,7 +397,7 @@ function getBodyMailNewAcount(usr) {
     html +=                 '<div style="margin-bottom: 20px">Vous recevez ce mail car vous venez de vous créer un compte.</div>';
 
     html +=                 '<div style="margin-bottom: 25px">';
-    html +=                     '<span>Voici vos informations personnel : </span>';
+    html +=                     '<span>Voici vos informations personnelles : </span>';
 
     if (usr.pseudo != '') {
         html +=                     '<div style=\'margin-left: 30px;\'><b>Pseudo</b> : ' + usr.pseudo  + '</div>';

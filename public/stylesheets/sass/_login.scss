@@ -36,21 +36,6 @@
                 }
             }
         }
-
-        input[type='text'],
-        input[type='password'],
-        input[type='email']{
-            display: block;
-            margin-right: auto;
-            margin-left: auto;
-            margin-bottom: 10px;
-            width: 32%;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            height: 30px;
-            padding-left: 10px;
-        }
     }
 
     .divEtatLoginOk,
@@ -94,21 +79,6 @@
         margin: 0 auto 0 auto;
         margin-bottom: 4px;
     }
-
-    //input[type='text'],
-    //input[type='password'],
-    //input[type='email']{
-    //    display: block;
-    //    margin-right: auto;
-    //    margin-left: auto;
-    //    margin-bottom: 10px;
-    //    width: 32%;
-    //    font-size: 16px;
-    //    border: none;
-    //    border-radius: 5px;
-    //    height: 30px;
-    //    padding-left: 10px;
-    //}
 
     input[type='submit'],
     input[type='reset'] {
