@@ -16,8 +16,11 @@ router.post('/login', function(req, res, next) {
     let firstname = req.body.firstname;
     let mail = req.body.mail;
     let numberphone = req.body.numberphone;
+    let isMale = req.body.gender;
     let action = req.body.actionForm;
     let send = null;
+
+    console.log('GENDER : ' + isMale);
 
     if (action == 'login') {
         let options = {
@@ -81,6 +84,7 @@ router.post('/login', function(req, res, next) {
                     password: pwd,
                     lastname: lastname,
                     firstname: firstname,
+                    isMale: isMale,
                     mail: mail,
                     numberphone: numberphone
                 }).then(function(usr) {

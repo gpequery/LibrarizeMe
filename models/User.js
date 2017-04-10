@@ -25,6 +25,9 @@ module.exports = function(sequelize, DataTypes) {
         },
         numberphone: {
             type: DataTypes.STRING
+        },
+        isMale: {
+            type: DataTypes.BOOLEAN
         }
     }, {
         paranoid: true,
