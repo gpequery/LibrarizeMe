@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title> LibrarizeMe : Changement de mot de passe </title>
+    <meta charset='UTF-8' />
+    <link rel='icon' href='../images/favicon.ico' />
+    <link rel='stylesheet' type='text/css' href='../stylesheets/style.css' />
+    <script src="../javascripts/jQuery.js"></script>
+    <script> $j = jQuery.noConflict() </script>
+    <script src="../javascripts/template.js"></script>
+    <script src="../javascripts/userInformations.js"></script>
+</head>
+
+<body class='bgdForgotPwd'>
+
+    <h1 class='titleForgotPwd'>Changement du mot de passe</h1>
+
+    <div class='contentChangePwd'>
+        <form method='POST' class='formForgotPwd' action='changePwd/submit'>
+            <input type='password' class='changePwdAncienPwd' name='formCurrentPwd' placeholder='Ancien mot de passe' required/>
+
+            <div class='changePwdStep2'>
+                <input type='password' class='changePwdNewPwd1' placeholder='Nouveau mot de passe' minlength='7' name='newPwd' required/>
+                <input type='password' class='changePwdNewPwd2' placeholder='Confirmation du mot de passe' required />
+
+                <input type='reset' value='Annuler'/>
+                <input type='submit' class='formChangePwdSubmit' value='Changer' disabled/>
+            </div>
+        </form>
+    </div>
+
+</body>

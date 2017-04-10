@@ -67,3 +67,19 @@
         }
     }
 }
+
+.contentChangePwd {
+    .formForgotPwd {
+        input[type='password'] {
+            width: 230px;
+        }
+
+        //input[type='submit'] {
+        //    width: 230px;
+        //}
+
+        .changePwdStep2 {
+            display: none;
+        }
+    }
+}

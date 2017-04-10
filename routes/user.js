@@ -138,12 +138,12 @@ router.post('/login', function(req, res, next) {
     }
 });
 
-//Print Popup
+//Print Popup pour mot de passe perdu
 router.get('/forgotPassword', function(req, res, next) {
     res.render('UserViews/forgotPwd.html.twig')
 });
 
-//On submit form Popup
+//On submit form Popup pour mot de passe perdu
 router.post('/forgotPassword/submit', function(req, res, next) {
     let psd = req.body.pseudoForgotPwd;
     let mail = req.body.mailForgotPwd;
@@ -158,7 +158,7 @@ router.post('/forgotPassword/submit', function(req, res, next) {
     User.find(options).then(function(usr) {
         if (usr) { //SI l'usr avec le mail existe on envoye le mail avec son mdp
             let infosMail = {
-                'subject' : 'Demande de changement de mot de passe',
+                'subject' : 'Mot de passe oublié',
                 'pseudo' : usr.pseudo,
                 'mail' : usr.mail,
                 'pwd' : usr.password,
@@ -213,6 +213,24 @@ router.post('/informations', function(req, res, next) {
     });
 });
 
+router.post('/informations/getCurrentPwd', function(req, res, next) {
+    let options = {
+        where: {
+            id: req.cookies.idUser
+        }
+    };
+
+    User.find(options).then(function(usr) {
+        if (usr) {
+            res.send(usr.password);
+        } else {
+            res.send('ERROR : noUser');
+        }
+    }).catch(function(err) {
+        res.send('ERROR : sequelize');
+    });
+});
+
 //retourne 'pseudoUsed' si le pseudo est déjà utilisé, 'mailUsed' pour le mail ou SEQUELIZE 5 pour une erreur BDD
 router.post('/exist', function(req, res, next) {
     let options = {
@@ -245,6 +263,45 @@ router.post('/exist', function(req, res, next) {
 
 });
 
+//Print Popup pour changer le mdp
+router.get('/changePwd', function(req, res, next) {
+    res.render('UserViews/changePwd.html.twig')
+});
+
+//On submit form Popup pour changer le mdp
+router.post('/changePwd/submit', function(req, res, next) {
+    let options = {
+        where: {
+            id: req.cookies.idUser
+        }
+    };
+
+    User.find(options).then(function(usr) {
+        if (usr) {
+
+            let newInfos = {
+                'password' : req.body.newPwd
+            };
+            usr.updateAttributes(newInfos);
+
+            let infosMail = {
+                'subject' : 'Demande de changement de mot de passe',
+                'mail' : usr.mail,
+                'usr' : usr,
+                'reason' : 'newPwd'
+            };
+
+            sendMail(infosMail);
+        } else {
+            console.log('noUser');
+        }
+    }).catch(function(err) {
+        console.log('SEQUELIZE 8');
+    });
+
+    //Ferme la popup
+    res.send('<script>close()</script>');
+});
 
 //Met à jour les informations de l'utilisateurs
 router.post('/updateInformations', function(req, res, next) {
@@ -299,6 +356,7 @@ module.exports = router;
 
 //FONCTIONS RELATIVES AUX MAILS
 function sendMail(infos) {
+    console.log('SEND MAIL DEBUT');
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -337,6 +395,10 @@ function getGoodMail(infos) {
 
         case 'updateCompte':
             return getBodyMailUpdateInfos(infos.usr);
+            break;
+
+        case 'newPwd':
+            return getBodyMailNewPwd(infos.usr);
             break;
     }
 }
@@ -425,6 +487,17 @@ function getBodyMailNewAcount(usr) {
     return html;
 }
 
+function getBodyMailNewPwd(usr) {
+    let html = '';
+
+    html += getHeaderMail(usr.pseudo);
+    html +=                 '<div>Merci de rester fidèle à LibrarizeMe ! </div>';
+    html +=                 '<div style="margin-bottom: 20px">Vous recevez ce mail car vous venez de changer votre mot de passe.</div>';
+    html += getFooterMail(usr.pseudo);
+
+    return html;
+}
+
 function getHeaderMail(pseudo) {
     let html = '';
 
@@ -446,7 +519,7 @@ function getFooterMail() {
     let html = '';
 
     html +=                 '<div style="margin-bottom: 30px">Merci de nous donner votre avis afin de nous améliorer :)</div>';
-    html +=                 '<div style=" text-align: right; margin-bottom: 10px; padding-right: 30px">Toute l\'équipe LibrarizeMe.</div>';
+    html +=                 '<div style=" text-align: right; margin-bottom: 10px; padding-right: 30px">l\'équipe LibrarizeMe.</div>';
     html +=             '</div>';
     html +=         '</div>';
     html +=         '<div style=\'width: 99%; color: #FF6664; background-color: #092D3D; border: 4px solid #092D3D; text-align: center; border-radius: 0px 0px 5px 5px;\'>';

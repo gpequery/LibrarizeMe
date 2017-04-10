@@ -120,7 +120,70 @@ $j(function() {
                 }
             });
     });
+
+    //Affiche la 'popUp' qui demande les informations relatives au compte pour envoyer le mdp
+    $j('.changePwd').on('click', function() {
+        var w  = 600;
+        var h = 265;
+        var left = (screen.width/2)-(w/2);
+        var top = (screen.height/2)-(h/2);
+        open('changePwd', 'Popup', 'scrollbars=0,resizable=0, width='+w+', height='+h+', top='+top+', left='+left);
+        return false;
+    });
+
+    $j('.changePwdAncienPwd').on('keyup', function() {
+        var pwd = $j(this).val();
+        var currentPwd = '';
+
+        $j.post(
+            '/user/informations/getCurrentPwd', {
+                // 'pseudo': $j('.updatePseudo').val(),
+                // 'mail' : $j('.updateMail').val()
+            }, function (data) {
+                if (pwd == data) {
+                    $j('.changePwdStep2').show('slow');
+                    $j('.changePwdAncienPwd').css({'border-radius': '5px', 'border':'#00FF00 1px solid'});
+                } else {
+                    $j('.changePwdStep2').hide('slow');
+                    $j('.changePwdAncienPwd').css({'border': 'none'});
+                    $j('.changePwdNewPwd1').val('');
+                    $j('.changePwdNewPwd2').val('');
+                }
+            });
+    });
+
+    $j('.formForgotPwd').on('reset', function() {
+        $j('.changePwdStep2').hide('slow');
+        $j('.changePwdAncienPwd').css({'border': 'none'});
+        $j('.formChangePwdSubmit').prop('disabled', true);
+        $j('.changePwdNewPwd1').val('');
+        $j('.changePwdNewPwd2').val('');
+    });
+
+    $j('.changePwdNewPwd1').on('keyup', function() {
+        verifyPwd();
+    });
+
+    $j('.changePwdNewPwd2').on('keyup', function() {
+        verifyPwd();
+    });
+
+
+
 });
+
+function verifyPwd() {
+    if (($j('.changePwdNewPwd1').val().length >= parseInt($j('.changePwdNewPwd1').attr('minlength'))) && ($j('.changePwdNewPwd1').val() == $j('.changePwdNewPwd2').val()) )  {
+        $j('.changePwdNewPwd1').css({'border-radius': '5px', 'border':'#00FF00 1px solid'});
+        $j('.changePwdNewPwd2').css({'border-radius': '5px', 'border':'#00FF00 1px solid'});
+        $j('.formChangePwdSubmit').prop('disabled', false);
+    } else {
+        $j('.changePwdNewPwd1').css({'border-radius': '5px', 'border':'#FF0000 1px solid'});
+        $j('.changePwdNewPwd2').css({'border-radius': '5px', 'border':'#FF0000 1px solid'});
+
+        $j('.formChangePwdSubmit').prop('disabled', true);
+    }
+}
 
 function differentToInitUser() {
     return !($j('.updatePseudo').val() == $j('.updatePseudo').attr('data') && $j('.updateMail').val() == $j('.updateMail').attr('data') && $j('.updateFirstname').val() == $j('.updateFirstname').attr('data') && $j('.updateLastname').val() == $j('.updateLastname').attr('data') && $j('.updateMobile').val() == $j('.updateMobile').attr('data') );
