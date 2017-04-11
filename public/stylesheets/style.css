@@ -56,7 +56,9 @@ body .generalContent h1:first-child { text-align: center; }
 .generalContent .formUpdateUserInformations input[type='reset'] { margin-right: 5%; }
 .generalContent .formUpdateUserInformations .userInformations { padding-top: 4%; }
 .generalContent .formUpdateUserInformations .userInformations .userInformationsLeft, .generalContent .formUpdateUserInformations .userInformations .userInformationsRight { width: 35%; display: inline-block; vertical-align: top; text-align: center; }
+.generalContent .formUpdateUserInformations .userInformations .userInformationsLeft .radioF, .generalContent .formUpdateUserInformations .userInformations .userInformationsRight .radioF { margin-left: 20px; }
 .generalContent .formUpdateUserInformations .userInformations .userInformationsLeft { margin-right: 10%; }
+.generalContent .formUpdateUserInformations .userInformations .userInformationsLeft .userInformations { margin-top: -12%; }
 .generalContent .formUpdateUserInformations .userInformations span { display: block; margin-bottom: 30px; }
 .generalContent .formUpdateUserInformations .userInformations span label { display: inline-block; width: 60px; font-weight: bold; text-align: left; }
 .generalContent .formUpdateUserInformations .userInformations span input[type='text'], .generalContent .formUpdateUserInformations .userInformations span input[type='email'] { display: inline-block; width: 50%; }

@@ -81,7 +81,10 @@ $j(function() {
         var lastname = $j('.updateLastname');
         var firstname = $j('.updateFirstname');
         var mail = $j('.updateMail');
+        var isMale = $j('.genderRadio');
         var mobile = $j('.updateMobile');
+
+        console.log('GENDER : ' + isMale);
 
         $j.post(
             '/user/updateInformations', {
@@ -89,6 +92,7 @@ $j(function() {
                 'lastname' : lastname.val(),
                 'firstname' : firstname.val(),
                 'mail' : mail.val(),
+                'isMale' : isMale.attr('value-selected'),
                 'numberphone' : mobile.val()
             }, function(data) {
                 $j('.submitUpdateUser').prop('disabled', true);
@@ -107,6 +111,7 @@ $j(function() {
                     firstname.attr('data', firstname.val());
                     mail.attr('data', mail.val());
                     mobile.attr('data', mobile.val());
+                    isMale.attr('data', isMale.attr('value-selected'));
 
                     //Met le nom du menu à jour avec les nouvelles infos
                     var fullPseudo = lastname.val() != '' && firstname.val() != '' ? firstname.val() + ' ' + lastname.val() : pseudo.val();
@@ -168,8 +173,23 @@ $j(function() {
         verifyPwd();
     });
 
+    $j('.radioH').on('change', function() {
+        $j('.genderRadio').attr('value-selected', 'true');
+        if(differentToInitUser()) {
+            $j('.submitUpdateUser').prop('disabled', false);
+        } else {
+            $j('.submitUpdateUser').prop('disabled', true);
+        }
+    });
 
-
+    $j('.radioF').on('change', function() {
+        $j('.genderRadio').attr('value-selected', 'false');
+        if(differentToInitUser()) {
+            $j('.submitUpdateUser').prop('disabled', false);
+        } else {
+            $j('.submitUpdateUser').prop('disabled', true);
+        }
+    });
 });
 
 function verifyPwd() {
@@ -186,5 +206,5 @@ function verifyPwd() {
 }
 
 function differentToInitUser() {
-    return !($j('.updatePseudo').val() == $j('.updatePseudo').attr('data') && $j('.updateMail').val() == $j('.updateMail').attr('data') && $j('.updateFirstname').val() == $j('.updateFirstname').attr('data') && $j('.updateLastname').val() == $j('.updateLastname').attr('data') && $j('.updateMobile').val() == $j('.updateMobile').attr('data') );
+    return !($j('.genderRadio').attr('value-selected') == $j('.genderRadio').attr('data') && $j('.updatePseudo').val() == $j('.updatePseudo').attr('data') && $j('.updateMail').val() == $j('.updateMail').attr('data') && $j('.updateFirstname').val() == $j('.updateFirstname').attr('data') && $j('.updateLastname').val() == $j('.updateLastname').attr('data') && $j('.updateMobile').val() == $j('.updateMobile').attr('data') );
 }

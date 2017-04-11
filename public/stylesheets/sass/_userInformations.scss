@@ -41,10 +41,18 @@
                 display: inline-block;
                 vertical-align: top;
                 text-align: center;
+
+                .radioF {
+                    margin-left: 20px;
+                }
             }
 
             .userInformationsLeft {
                 margin-right: 10%;
+
+                .userInformations {
+                    margin-top: -12%;
+                }
             }
 
             span {

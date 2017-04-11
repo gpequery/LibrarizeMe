@@ -13,10 +13,9 @@
             <div class='userInformations'>
 
                 <div class='userInformationsLeft'>
-                    <span>
-
+                    <span class='userInformations'>
+                        <img src='../images/userAvatar/noAvatarM.png' />
                     </span>
-
 
                     <span>
                         <label>Pseudo</label>
@@ -42,6 +41,16 @@
                     <span>
                         <label>Mobile</label>
                         <input type='text'  name='numberphone' maxlength='14' pattern='^[0-9]{10}|[0-9 ]{14}$' title='Format de téléphone à 10 chiffres'  value='{{ user.numberphone }}' data='{{ user.numberphone }}' placeholder='Mobile' class='updateMobile updateInfos' />
+                    </span>
+
+                    <span class='genderRadio' value-selected='{{ user.isMale }}' data='{{ user.isMale }}'>
+                        {% if user.isMale  == 'true' %}
+                            <input type="radio" name="gender" value='true' checked='true' class='radioH' />Homme
+                            <input type="radio" name="gender" value='false' class='radioF' />Femme
+                        {% else %}
+                            <input type="radio" name="gender" value='true' class='radioH' />Homme
+                            <input type="radio" name="gender" value='false' checked='true' class='radioF' />Femme
+                        {% endif %}
                     </span>
 
                     <span>

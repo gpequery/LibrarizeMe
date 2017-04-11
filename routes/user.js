@@ -317,11 +317,13 @@ router.post('/updateInformations', function(req, res, next) {
 
     User.find(options).then(function(usr) {
        if(usr) {
+           console.log('isMale : ' + req.body.isMale);
             let newInfos = {
                 'pseudo' : req.body.pseudo,
                 'firstname' :req.body.firstname ,
                 'lastname' : req.body.lastname,
                 'mail' : req.body.mail,
+                'isMale' : req.body.isMale,
                 'numberphone' : req.body.numberphone
             };
 
