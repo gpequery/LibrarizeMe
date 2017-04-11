@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-//var compass = require('compass');
+var fileUpload = require('express-fileupload');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('public'));
+app.use(fileUpload());
 
 app.use('/', index);
 app.use('/user', user);

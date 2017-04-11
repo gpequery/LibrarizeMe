@@ -5,7 +5,15 @@ const models = require('../models');
 const User = models.User;
 const router = express.Router();
 const nodemailer = require('nodemailer');
-var cookieParser = require('cookie-parser');
+const fs = require('fs');
+
+
+const fileUpload = require('express-fileupload');
+const app = express();
+
+// default options
+app.use(fileUpload());
+
 
 //Page de login
 router.post('/login', function(req, res, next) {
@@ -192,10 +200,19 @@ router.post('/informations', function(req, res, next) {
 
     User.find(options).then(function(usr) {
         if (usr) {
-            send = {
-                pseudoUser: req.body.userName,
-                userInfo: usr
-            };
+            if (fs.existsSync('./public/images/userAvatar/avatar_' + usr.id + '.png')) {
+                send = {
+                    pseudoUser: req.body.userName,
+                    userInfo: usr,
+                    haveAvatar: true
+                };
+            } else {
+                send = {
+                    pseudoUser: req.body.userName,
+                    userInfo: usr,
+                    haveAvatar: false
+                };
+            }
 
             res.render('UserViews/informations.html.twig', {result: send});
         } else {
@@ -354,6 +371,64 @@ router.post('/updateInformations', function(req, res, next) {
 router.post('/logout', function(req, res, next) {
     res.cookie('idUser', '');
     res.redirect('/');
+});
+
+router.post('/updateAvatar', function(req, res, next) {
+    //Upload New Avatar
+    if (req.files) {
+        let newAvatar = req.files.newAvatar;
+
+        newAvatar.mv('public/images/userAvatar/avatar_' + req.cookies.idUser + '.png' , function(err) {
+            if (err) {
+                console.log('ERROR : ' + err);
+            } else {
+                console.log('File uploaded!');
+            }
+        });
+    }
+
+    //Renvoie la page d'information
+    let send;
+    let options = {
+        where: {
+            id: req.cookies.idUser
+        }
+    };
+
+    User.find(options).then(function(usr) {
+        if (usr) {
+            if (fs.existsSync('./public/images/userAvatar/avatar_2.png')) {
+                send = {
+                    pseudoUser: req.body.userName,
+                    userInfo: usr,
+                    haveAvatar: true
+                };
+            } else {
+                send = {
+                    pseudoUser: req.body.userName,
+                    userInfo: usr,
+                    haveAvatar: false
+                };
+            }
+
+            res.render('UserViews/informations.html.twig', {result: send});
+        } else {
+            send = {
+                msg:'ERROR : Compte introuvable, recommencez.',
+                etat:'0',
+                etatMenu: 'hide'
+            };
+            res.render('UserViews/login.html.twig', {result: send});
+        }
+
+    }).catch(function(err) {
+        send = {
+            msg:'ERROR SEQUELIZE 4',
+            etat:'0',
+            etatMenu: 'hide'
+        };
+        res.render('UserViews/login.html.twig', {result: send});
+    });
 });
 
 module.exports = router;

@@ -58,10 +58,12 @@ body .generalContent h1:first-child { text-align: center; }
 .generalContent .formUpdateUserInformations .userInformations .userInformationsLeft, .generalContent .formUpdateUserInformations .userInformations .userInformationsRight { width: 35%; display: inline-block; vertical-align: top; text-align: center; }
 .generalContent .formUpdateUserInformations .userInformations .userInformationsLeft .radioF, .generalContent .formUpdateUserInformations .userInformations .userInformationsRight .radioF { margin-left: 20px; }
 .generalContent .formUpdateUserInformations .userInformations .userInformationsLeft { margin-right: 10%; }
-.generalContent .formUpdateUserInformations .userInformations .userInformationsLeft .userInformations { margin-top: -12%; }
+.generalContent .formUpdateUserInformations .userInformations .userInformationsLeft .userAvatar { margin-top: -12%; }
+.generalContent .formUpdateUserInformations .userInformations .userInformationsLeft .userAvatar img { cursor: pointer; width: 110px; }
 .generalContent .formUpdateUserInformations .userInformations span { display: block; margin-bottom: 30px; }
 .generalContent .formUpdateUserInformations .userInformations span label { display: inline-block; width: 60px; font-weight: bold; text-align: left; }
 .generalContent .formUpdateUserInformations .userInformations span input[type='text'], .generalContent .formUpdateUserInformations .userInformations span input[type='email'] { display: inline-block; width: 50%; }
+.generalContent .formUploadAvatar .inputFileAvatar { display: none; }
 
 .contentChangePwd .formForgotPwd input[type='password'] { width: 230px; }
 .contentChangePwd .formForgotPwd .changePwdStep2 { display: none; }

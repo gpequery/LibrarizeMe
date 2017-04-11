@@ -8,13 +8,18 @@
     <div class='generalContent'>
         <h1>Informations du compte</h1>
         <div class=msgUpdateUser></div>
-        {#<form method='POST' class='formUpdateUserInformations'>#}
         <div class='formUpdateUserInformations'>
             <div class='userInformations'>
 
                 <div class='userInformationsLeft'>
-                    <span class='userInformations'>
-                        <img src='../images/userAvatar/noAvatarM.png' />
+                    <span class='userAvatar'>
+                        {% if result.haveAvatar %}
+                            <img src='../images/userAvatar/avatar_{{ user.id }}.png'  title='Modifier' />
+                        {% elseif user.isMale%}
+                            <img src='../images/userAvatar/noAvatarM.png' title='Modifier' />
+                        {%  else %}
+                            <img src='../images/userAvatar/noAvatarF.png' title='Modifier' />
+                        {% endif %}
                     </span>
 
                     <span>
@@ -60,10 +65,12 @@
             </div>
             <input type='reset' value='Annuler' />
             <input type='submit' value='Enregistrer' disabled='true' class='submitUpdateUser'/>
-
         </div>
 
-        {#</form>#}
+        <form method='POST' class='formUploadAvatar' action='updateAvatar' encType='multipart/form-data'>
+            <input type='file' class='inputFileAvatar' name='newAvatar'/>
+            <input type='hidden' name='userName' value='{{ result.pseudoUser }}'>
+        </form>
     </div>
 
 {% endblock %}

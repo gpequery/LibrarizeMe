@@ -11,7 +11,6 @@
         font-size: 20px;
         padding: 3px;
         border-radius: 5px;
-        //visibility: hidden;
         height: 24px;
     }
 
@@ -50,8 +49,13 @@
             .userInformationsLeft {
                 margin-right: 10%;
 
-                .userInformations {
+                .userAvatar {
                     margin-top: -12%;
+
+                    img {
+                        cursor: pointer;
+                        width: 110px;
+                    }
                 }
             }
 
@@ -74,6 +78,12 @@
             }
         }
     }
+
+    .formUploadAvatar {
+        .inputFileAvatar {
+            display: none;
+        }
+    }
 }
 
 .contentChangePwd {
@@ -81,10 +91,6 @@
         input[type='password'] {
             width: 230px;
         }
-
-        //input[type='submit'] {
-        //    width: 230px;
-        //}
 
         .changePwdStep2 {
             display: none;

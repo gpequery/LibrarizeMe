@@ -190,6 +190,15 @@ $j(function() {
             $j('.submitUpdateUser').prop('disabled', true);
         }
     });
+
+    $j('.userAvatar img').on('click', function() {
+        $j('.inputFileAvatar').click();
+    });
+
+    $j('.inputFileAvatar').on('change', function() {
+        $j('.formUploadAvatar').submit();
+    });
+
 });
 
 function verifyPwd() {

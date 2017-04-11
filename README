@@ -29,7 +29,8 @@
 
 
 IMPORTANT !! : Créer base "librarizeme"
-npm install nodemailer
+"npm install nodemailer"  Pour permettre au serveur d'envoyer
+"npm install --save express-fileupload" Pour permettre au serveur de recevoir des fichiers
 
 ----------------------------------------------------------------------------------------------------------------------
 
