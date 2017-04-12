@@ -368,11 +368,13 @@ router.post('/updateInformations', function(req, res, next) {
     });
 });
 
+//Déconnecte l'utilisateur en cours
 router.post('/logout', function(req, res, next) {
     res.cookie('idUser', '');
     res.redirect('/');
 });
 
+//Modifie l'avatar de l'utilisateur
 router.post('/updateAvatar', function(req, res, next) {
     //Upload New Avatar
     if (req.files) {
@@ -434,10 +436,8 @@ router.post('/updateAvatar', function(req, res, next) {
 module.exports = router;
 
 
-
 //FONCTIONS RELATIVES AUX MAILS
 function sendMail(infos) {
-    console.log('SEND MAIL DEBUT');
     let transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -464,6 +464,7 @@ function sendMail(infos) {
     transporter.close();
 }
 
+//Cherche l'action du mail pour avoir le bon body
 function getGoodMail(infos) {
     switch (infos.reason) {
         case 'sendPwd':
@@ -484,6 +485,7 @@ function getGoodMail(infos) {
     }
 }
 
+//Body lors d'un changement d'information
 function getBodyMailUpdateInfos(usr) {
     let html = '';
 
@@ -520,6 +522,7 @@ function getBodyMailUpdateInfos(usr) {
     return html;
 }
 
+//Body pour l'oublie d'un mdp
 function getBodyMailForgotPwd(pseudo, pwd) {
     let html = '';
 
@@ -532,6 +535,7 @@ function getBodyMailForgotPwd(pseudo, pwd) {
     return html;
 }
 
+//Body pour un nouveau compte
 function getBodyMailNewAcount(usr) {
     let html = '';
 
@@ -568,6 +572,7 @@ function getBodyMailNewAcount(usr) {
     return html;
 }
 
+//Body pour un changement de mdp
 function getBodyMailNewPwd(usr) {
     let html = '';
 
@@ -579,6 +584,7 @@ function getBodyMailNewPwd(usr) {
     return html;
 }
 
+//En tête de tous les mails
 function getHeaderMail(pseudo) {
     let html = '';
 
@@ -596,6 +602,7 @@ function getHeaderMail(pseudo) {
     return html;
 }
 
+//Pied de page de tous les mails
 function getFooterMail() {
     let html = '';
 
