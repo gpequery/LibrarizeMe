@@ -11,7 +11,7 @@ var user = require('./routes/user');
 var product = require('./routes/product');
 
 var models = require('./models');
-models.sequelize.sync();
+models.sequelize.sync({'force':'true'});
 
 var app = express();
 
