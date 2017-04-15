@@ -1,0 +1,42 @@
+@import 'base';
+
+.generalContentSearchUsers {
+    text-align: center;
+    min-height: 300px;
+
+    .searchFriendsInputDiv {
+        margin-bottom: 40px;
+    }
+
+    .resultSearchNoUser {
+        font-size: 35px;
+        height: 100px;
+        margin-top: 50px;
+    }
+
+    .resultSearchUser {
+        width: 70%;
+        margin: 0px auto;
+
+        .oneUser {
+            width: 20%;
+            display: inline-block;
+            padding-bottom: 50px;
+            img {
+                display: block;
+                margin: 0px auto;
+            }
+            span {
+                font-size: 24px;
+                font-weight: bold;
+                img {
+                    cursor: pointer;
+                    display: inline-block;
+                    vertical-align: middle;
+                    padding-bottom: 7px;
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+}

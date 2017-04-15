@@ -7,10 +7,12 @@
         <link rel='icon' href='../images/favicon.ico' />
         <link rel='stylesheet' type='text/css' href='../stylesheets/style.css' />
         <script src="../javascripts/jQuery.js"></script>
+        <script src="../javascripts/jquery-ui.min.js"></script>
         <script> $j = jQuery.noConflict() </script>
         <script src="../javascripts/template.js"></script>
         <script src="../javascripts/login.js"></script>
         <script src="../javascripts/userInformations.js"></script>
+        <script src="../javascripts/friends.js"></script>
     </head>
 
     <body>
@@ -28,8 +30,8 @@
                 <li class='titleMenu'>
                     Amis
                     <ul>
-                        <li class='menuNav' data='/Friends/searchFriends'><div>Rechercher un ami</div></li>
-                        <li class='menuNav' data='/Friends/myFriends'><div>Mes amis</div></li>
+                        <li class='menuNav' data='/friends/searchUsers'><div>Rechercher un ami</div></li>
+                        <li class='menuNav' data='/friends/myFriends'><div>Mes amis</div></li>
                     </ul>
                 </li>
                 <li class='titleMenu'>
@@ -73,5 +75,7 @@
 <form method='POST' class='formNavigateMenu' action='#'>
     <input type='hidden' name='userName' value='{{ result.pseudoUser }}'>
 </form>
+
+<div class='msgInfo'>Test</div>
 
 </html>

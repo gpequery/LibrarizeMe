@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 
 module.exports = function(sequelize, DataTypes) {
     var User = sequelize.define('User', {
@@ -53,7 +54,35 @@ module.exports = function(sequelize, DataTypes) {
                     lastname: this.lastname,
                     firstname: this.firstname,
                     mail: this.mail,
+                    isMale: this.isMale,
                     numberphone: this.numberphone
+                }
+            },
+            toJsonWithAvatar: function() {
+                if (fs.existsSync('./public/images/userAvatar/avatar_' + this.id + '.png')) {
+                    return {
+                        id: this.id,
+                        pseudo: this.pseudo,
+                        password: this.password,
+                        lastname: this.lastname,
+                        firstname: this.firstname,
+                        mail: this.mail,
+                        isMale: this.isMale,
+                        numberphone: this.numberphone,
+                        haveAvatar: true
+                    }
+                } else {
+                    return {
+                        id: this.id,
+                        pseudo: this.pseudo,
+                        password: this.password,
+                        lastname: this.lastname,
+                        firstname: this.firstname,
+                        mail: this.mail,
+                        isMale: this.isMale,
+                        numberphone: this.numberphone,
+                        haveAvatar: false
+                    }
                 }
             }
         }

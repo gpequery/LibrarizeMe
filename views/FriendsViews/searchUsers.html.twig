@@ -1,0 +1,19 @@
+{% extends 'template.html.twig' %}
+{% set user = result.userInfo %}
+{
+
+{%  block title %} Rechercher un utiisateur {% endblock %}
+
+{%  block content %}
+    <div class='generalContentSearchUsers'>
+        <h1>Rechercher un utilisateur</h1>
+
+        <div class='searchFriendsInputDiv'>
+            <input type='text' placeholder='Pseudo' class='searchFriendsInput'/>
+        </div>
+
+        <div class='resultSearchNoUser'> Aucun utilisateur trouvé !</div>
+        <div class='resultSearchUser'></div>
+    </div>
+
+{% endblock %}
