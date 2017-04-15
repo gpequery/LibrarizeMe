@@ -44,7 +44,7 @@ Pour pouvoir compiler le scss (Compass):
 
 
 Schema de la bdd :
-user
+User
     id
     pseudo
     password
@@ -52,6 +52,12 @@ user
     firstname
     mail
     numberphone
+
+Friends
+    id
+    user_id
+    friend_id
+    accepted
 
 ----------------------------------------------------------------------------------------------------------------------
 

@@ -9,9 +9,11 @@ var fileUpload = require('express-fileupload');
 var index = require('./routes/index');
 var user = require('./routes/user');
 var product = require('./routes/product');
+var friends = require('./routes/friends');
 
 var models = require('./models');
-models.sequelize.sync({'force':'true'});
+models.sequelize.sync();
+// models.sequelize.sync({'force':'true'});
 
 var app = express();
 
@@ -31,6 +33,7 @@ app.use(fileUpload());
 app.use('/', index);
 app.use('/user', user);
 app.use('/product', product);
+app.use('/friends', friends);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
