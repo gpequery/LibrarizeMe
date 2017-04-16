@@ -40,3 +40,18 @@
         }
     }
 }
+
+.generalContentSeeInvitation {
+    .content {
+        width: 80%;
+        margin: 0px auto;
+
+        .invitationType {
+            div {
+                font-weight: bold;
+                font-size: 20px;
+                color: $color-subTitle;
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{% extends 'template.html.twig' %}
+
+{% set sendInvitation = result.invitation.send %}
+{% set waitInvitation = result.invitation.wait %}
+
+
+{%  block title %} Voir mes invitations {% endblock %}
+
+{%  block content %}
+    <div class='generalContentSeeInvitation'>
+        <h1>Mes invitations</h1>
+
+        <div class='content'>
+
+            {% if sendInvitation|length > 0 %}
+                <div class='invitationType'>
+                    <div>Mes invitations reçue à accepter</div>
+                    {% for oneInvitation in sendInvitation %}
+                        {{ oneInvitation.pseudo }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if waitInvitation|length > 0 %}
+                <div class='invitationType'>
+                    <div>Mes invitations envoyées en attentes</div>
+                    {% for oneInvitation in waitInvitation %}
+                        {{ oneInvitation.pseudo }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+
+            <div>
+               Test {{ sendInvitation|length }} {{ waitInvitation|length }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
