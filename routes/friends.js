@@ -107,11 +107,11 @@ router.post('/seeInvitation', function(req, res, next) {
 
         //Cherche les invitations envoyé en attente de réponse
         User.findAll(options['wait']).then(function(usersWait) {
-            data['wait'] = usersWait;
+            data['wait'] = clearUsers(usersWait);
 
             //Cherche les invitations reçue en attente de réponse
             User.findAll(options['send']).then(function(userSend) {
-                data['send'] = userSend;
+                data['send'] = clearUsers(userSend);
 
                 let result = {
                     pseudoUser: req.body.userName,
@@ -138,7 +138,8 @@ router.post('/seeInvitation', function(req, res, next) {
             res.render('FriendsViews/seeInvitation.html.twig', {result: result});
             User.findAll(optionsSend).then(function(userSend) {
                 data['wait'] = null;
-                data['send'] = userSend;
+                data['send'] = clearUsers(userSend);
+
                 let result = {
                     pseudoUser: req.body.userName,
                     invitation: data
@@ -165,4 +166,75 @@ router.post('/seeInvitation', function(req, res, next) {
     });
 });
 
+//Refuse une invitation reçue (Supprime la row)
+router.post('/refuseInvitation', function(req, res, next) {
+    let options = {
+        where: {
+            user_id: req.body.id,
+            friend_id: req.cookies.idUser
+        }
+    };
+
+    Friends.destroy(options).then(function(friend) {
+        res.send('Invitation refusé !');
+    }).catch(function(err) {
+        res.send('Nok');
+
+        console.log('ERROR 14 : ' + err);
+    });
+
+
+});
+
+//Accepte une invitation reçue (modifie accepetd en 1)
+router.post('/accepteInvitation', function(req, res, next) {
+    let options = {
+        where: {
+            user_id: req.body.id,
+            friend_id: req.cookies.idUser
+        }
+    };
+
+    Friends.find(options).then(function(friend) {
+
+        let newInfos = {
+            'accepted' : 1
+        };
+        friend.updateAttributes(newInfos);
+
+        res.send('Invitation accepté !');
+    }).catch(function(err) {
+        res.send('Nok');
+        console.log('ERROR 15 : ' + err);
+    });
+
+});
+
+//Supprime une invitation en attente de réponse (Del row)
+router.post('/delInvitation', function(req, res, next) {
+    let options = {
+        where: {
+            user_id: req.cookies.idUser,
+            friend_id: req.body.id
+        }
+    };
+
+    Friends.destroy(options).then(function(friend) {
+        res.send('Invitation supprimé !');
+    }).catch(function(err) {
+        res.send('Nok');
+        console.log('ERROR 16 : ' + err);
+    });
+
+});
+
 module.exports = router;
+
+function clearUsers(users) {
+    var result = [];
+
+    for (var one of users) {
+        result.push(one.toJsonWithAvatar());
+    }
+    return result
+}

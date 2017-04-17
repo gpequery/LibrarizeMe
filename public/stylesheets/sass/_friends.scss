@@ -42,15 +42,40 @@
 }
 
 .generalContentSeeInvitation {
+    min-height: 300px;
+
     .content {
         width: 80%;
         margin: 0px auto;
 
         .invitationType {
-            div {
+            div:first-child {
                 font-weight: bold;
                 font-size: 20px;
                 color: $color-subTitle;
+                padding: 20px 0px;
+            }
+
+            .oneUser {
+                width: 19%;
+                display: inline-block;
+                padding-bottom: 30px;
+                img {
+                    display: block;
+                    margin: 0px auto;
+                }
+                span {
+                    font-size: 24px;
+                    font-weight: bold;
+                    text-align: center;
+                    display: block;
+                    img {
+                        cursor: pointer;
+                        display: inline-block;
+                        vertical-align: middle;
+                        width: 18px;
+                    }
+                }
             }
         }
     }

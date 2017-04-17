@@ -11,29 +11,57 @@
         <h1>Mes invitations</h1>
 
         <div class='content'>
-
-            {% if sendInvitation|length > 0 %}
-                <div class='invitationType'>
-                    <div>Mes invitations reçue à accepter</div>
+            <div class='invitationType sendType' count='{{ sendInvitation|length }}'>
+                <div>Mes invitations reçue à accepter</div>
+                {% if sendInvitation|length > 0 %}
                     {% for oneInvitation in sendInvitation %}
-                        {{ oneInvitation.pseudo }}
+                        <div class='oneUser' id='{{ oneInvitation.id }}'>
+                            {% if oneInvitation.haveAvatar %}
+                                <img src='../images/userAvatar/avatar_{{ oneInvitation.id }}.png'/>
+                            {% elseif oneInvitation.isMale %}
+                                <img src='../images/userAvatar/noAvatarM.png' />
+                            {% else %}
+                                <img src='../images/userAvatar/noAvatarF.png' />
+                            {% endif %}
+
+                            <span>
+                                {{ oneInvitation.pseudo }}
+                                <img src='../images/refuse.png' title="Refuser l'invitation de {{ oneInvitation.pseudo }}" class='imgInvitationRefuse' />
+                                <img src='../images/accepte.png' title="Accepter l'invitation de {{ oneInvitation.pseudo }}" class='imgInvitationAccepte' />
+                            </span>
+                        </div>
                     {% endfor %}
-                </div>
-            {% endif %}
-
-            {% if waitInvitation|length > 0 %}
-                <div class='invitationType'>
-                    <div>Mes invitations envoyées en attentes</div>
-                    {% for oneInvitation in waitInvitation %}
-                        {{ oneInvitation.pseudo }}
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-
-            <div>
-               Test {{ sendInvitation|length }} {{ waitInvitation|length }}
+                {%  else %}
+                    <div style="margin-top: -20px">Aucune invitation reçue</div>
+                {% endif %}
             </div>
+
+
+
+            <div class='invitationType waitType' count='{{ waitInvitation|length }}'>
+                <div>Mes invitations envoyées en attentes</div>
+                {% if waitInvitation|length > 0 %}
+                    {% for oneInvitation in waitInvitation %}
+                        <div class='oneUser' id='{{ oneInvitation.id }}'>
+                            {% if oneInvitation.haveAvatar %}
+                                <img src='../images/userAvatar/avatar_{{ oneInvitation.id }}.png'/>
+                            {% elseif oneInvitation.isMale %}
+                                <img src='../images/userAvatar/noAvatarM.png' />
+                            {% else %}
+                                <img src='../images/userAvatar/noAvatarF.png' />
+                            {% endif %}
+
+                            <span>
+                                {{ oneInvitation.pseudo }}
+                                <img src='../images/del.png' title="Supprimer l'invitation à {{ oneInvitation.pseudo }}" class='imgInvitationDel' />
+                            </span>
+                        </div>
+                    {% endfor %}
+                {%  else %}
+                    <div style="margin-top: -20px">Aucune invitation en attente</div>
+                {% endif %}
+            </div>
+
         </div>
     </div>
 {% endblock %}
