@@ -41,6 +41,11 @@
     }
 }
 
+.generalContentMyFriends {
+    text-align: center;
+}
+
+.generalContentMyFriends,
 .generalContentSeeInvitation {
     min-height: 300px;
 
@@ -49,6 +54,7 @@
         margin: 0px auto;
 
         .invitationType {
+            color: black;
             div:first-child {
                 font-weight: bold;
                 font-size: 20px;
@@ -56,10 +62,18 @@
                 padding: 20px 0px;
             }
 
+            .noBodyFriend {
+                color: $color-subTitle;
+                padding: 20px 0px;
+                font-size: 22px !important;
+                font-weight: bold;
+            }
+
             .oneUser {
                 width: 19%;
                 display: inline-block;
                 padding-bottom: 30px;
+
                 img {
                     display: block;
                     margin: 0px auto;
@@ -69,6 +83,8 @@
                     font-weight: bold;
                     text-align: center;
                     display: block;
+                    color: black;
+
                     img {
                         cursor: pointer;
                         display: inline-block;

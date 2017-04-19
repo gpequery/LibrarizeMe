@@ -214,8 +214,15 @@ router.post('/accepteInvitation', function(req, res, next) {
 router.post('/delInvitation', function(req, res, next) {
     let options = {
         where: {
-            user_id: req.cookies.idUser,
-            friend_id: req.body.id
+            $or: [{
+                user_id: req.body.id,
+                friend_id: req.cookies.idUser
+            },
+            {
+
+                user_id: req.cookies.idUser,
+                friend_id: req.body.id
+            }]
         }
     };
 
@@ -225,6 +232,73 @@ router.post('/delInvitation', function(req, res, next) {
         res.send('Nok');
         console.log('ERROR 16 : ' + err);
     });
+
+});
+
+//Affiche tout les amis de l'utilisateur courrant
+router.post('/myFriends', function(req, res, next) {
+    let userId = [];
+    let options = {
+        where: {
+            accepted: 1,
+            $or : {
+                friend_id: req.cookies.idUser,
+                user_id: req.cookies.idUser
+            }
+
+        }, order: '"pseudo" ASC'
+    };
+
+    //Cherche les invitations relatives à l'utilisateur courant
+    Friends.findAll(options).then(function(invitations) {
+        for (var one of invitations) {
+            if (one.friend_id != req.cookies.idUser) {
+                userId.push(one.friend_id);
+            } else {
+                userId.push(one.user_id);
+            }
+
+        }
+
+        let options = {
+            where: {
+                id: {
+                    $in: userId
+                }
+            }, order: '"pseudo" ASC'
+        };
+
+        //Cherche les Users
+        User.findAll(options).then(function(users) {
+            let data = clearUsers(users);
+
+            let result = {
+                pseudoUser: req.body.userName,
+                users: data
+            };
+
+            res.render('FriendsViews/myFriends.html.twig', {result: result});
+        }).catch(function(err) {
+            console.log('ERROR 17 : ' + err);
+
+            let result = {
+                pseudoUser: req.body.userName,
+                users: 'nok'
+            };
+
+            res.render('FriendsViews/myFriends.html.twig', {result: result});
+        });
+    }).catch(function(err) {
+        console.log('ERROR 16 : ' + err);
+
+        let result = {
+            pseudoUser: req.body.userName,
+            users: 'nok'
+        };
+
+        res.render('FriendsViews/myFriends.html.twig', {result: result});
+    });
+
 
 });
 

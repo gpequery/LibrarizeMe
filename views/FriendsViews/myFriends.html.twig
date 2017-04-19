@@ -1,0 +1,37 @@
+{% extends 'template.html.twig' %}
+
+{% set oneUser = result.users %}
+
+{%  block title %} Mes amis {% endblock %}
+
+{%  block content %}
+    <div class='generalContentMyFriends'>
+        <h1>Mes amis</h1>
+
+        <div class='content'>
+            <div class='invitationType' count='{{ oneUser|length }}'>
+                {% if oneUser|length > 0 %}
+                    {% for oneInvitation in oneUser %}
+                        <div class='oneUser' id='{{ oneInvitation.id }}'>
+                            {% if oneInvitation.haveAvatar %}
+                                <img src='../images/userAvatar/avatar_{{ oneInvitation.id }}.png'/>
+                            {% elseif oneInvitation.isMale %}
+                                <img src='../images/userAvatar/noAvatarM.png' />
+                            {% else %}
+                                <img src='../images/userAvatar/noAvatarF.png' />
+                            {% endif %}
+
+                            <span>
+                                {{ oneInvitation.pseudo }}
+                                <img src='../images/del.png' title="Supprimer {{ oneInvitation.pseudo }} de votre liste d'amis" class='imgDelFriend' />
+                            </span>
+                        </div>
+                    {% endfor %}
+                {%  else %}
+                    <div class='noBodyFriend' style="margin-top: -20px">Vous avez aucun ami dans votre liste</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

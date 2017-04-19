@@ -88,7 +88,7 @@ $j(function() {
 
                     $j('.waitType').attr('count',  $j('.waitType').attr('count') - 1);
                     if($j('.waitType').attr('count') == 0) {
-                        $j('.waitType').append('<div style="margin-top: -20px"> Aucune invitation en attente</div>');
+                        $j('.waitType').append('<div style="margin-top: -20px"> Aucune invitation en attente ! </div>');
                     }
 
                     $j('.msgInfo').css({'opacity' : '1'});
@@ -102,6 +102,31 @@ $j(function() {
             });
     });
 
+    $j('.imgDelFriend').on('click', function() {
+        var id = $j(this).parent().parent().attr('id');
+
+        $j.post(
+            '/friends/delInvitation', {
+                'id': id
+            }, function(data) {
+                if (data != 'Nok') {
+                    $j('#' + id).hide();
+
+                    $j('.invitationType').attr('count',  $j('.invitationType').attr('count') - 1);
+                    if($j('.invitationType').attr('count') == 0) {
+                        $j('.invitationType').append('<div class=\'noBodyFriend\' style="margin-top: -20px">Vous avez aucun ami dans votre liste</div>');
+                    }
+
+                    $j('.msgInfo').css({'opacity' : '1'});
+                    $j('.msgInfo').animate({opacity:0}, 4000);
+                    $j('.msgInfo').html('Retiré de la liste d\'ami !');
+                    $j('.msgInfo').removeClass('msgInfoNok');
+                    $j('.msgInfo').addClass('msgInfoOk');
+                } else {
+                    console.log('Nok');
+                }
+            });
+    });
 });
 
 //Affiche la liste des utilisateurs dynamiquement
