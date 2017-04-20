@@ -21,6 +21,112 @@ $j(function() {
             $j('.resultSearchUser').html('');
         }
     });
+
+    $j('.imgInvitationRefuse').on('click', function() {
+        var id = $j(this).parent().parent().attr('id');
+
+        $j.post(
+            '/friends/refuseInvitation', {
+                'id': id
+            }, function(data) {
+                if(data != 'Nok') {
+                    $j('#' + id).hide();
+
+                    $j('.sendType').attr('count',  $j('.sendType').attr('count') - 1);
+                    if($j('.sendType').attr('count') == 0) {
+                        $j('.sendType').append('<div style="margin-top: -20px"> Aucune invitation reçue</div>');
+                    }
+
+                    $j('.msgInfo').css({'opacity' : '1'});
+                    $j('.msgInfo').animate({opacity:0}, 4000);
+                    $j('.msgInfo').html(data);
+                    $j('.msgInfo').removeClass('msgInfoNok');
+                    $j('.msgInfo').addClass('msgInfoOk');
+
+                } else {
+                    console.log('Nok');
+                }
+            });
+    });
+
+    $j('.imgInvitationAccepte').on('click', function() {
+        var id = $j(this).parent().parent().attr('id');
+
+        $j.post(
+            '/friends/accepteInvitation', {
+                'id': id
+            }, function(data) {
+                if (data != 'Nok') {
+                    $j('#' + id).hide();
+
+                    $j('.sendType').attr('count',  $j('.sendType').attr('count') - 1);
+                    if($j('.sendType').attr('count') == 0) {
+                        $j('.sendType').append('<div style="margin-top: -20px"> Aucune invitation reçue</div>');
+                    }
+
+
+                    $j('.msgInfo').css({'opacity' : '1'});
+                    $j('.msgInfo').animate({opacity:0}, 4000);
+                    $j('.msgInfo').html(data);
+                    $j('.msgInfo').removeClass('msgInfoNok');
+                    $j('.msgInfo').addClass('msgInfoOk');
+                } else {
+                    console.log('Nok');
+                }
+            });
+    });
+
+    $j('.imgInvitationDel').on('click', function() {
+        var id = $j(this).parent().parent().attr('id');
+
+        $j.post(
+            '/friends/delInvitation', {
+                'id': id
+            }, function(data) {
+                if (data != 'Nok') {
+                    $j('#' + id).hide();
+
+                    $j('.waitType').attr('count',  $j('.waitType').attr('count') - 1);
+                    if($j('.waitType').attr('count') == 0) {
+                        $j('.waitType').append('<div style="margin-top: -20px"> Aucune invitation en attente ! </div>');
+                    }
+
+                    $j('.msgInfo').css({'opacity' : '1'});
+                    $j('.msgInfo').animate({opacity:0}, 4000);
+                    $j('.msgInfo').html(data);
+                    $j('.msgInfo').removeClass('msgInfoNok');
+                    $j('.msgInfo').addClass('msgInfoOk');
+                } else {
+                    console.log('Nok');
+                }
+            });
+    });
+
+    $j('.imgDelFriend').on('click', function() {
+        var id = $j(this).parent().parent().attr('id');
+
+        $j.post(
+            '/friends/delInvitation', {
+                'id': id
+            }, function(data) {
+                if (data != 'Nok') {
+                    $j('#' + id).hide();
+
+                    $j('.invitationType').attr('count',  $j('.invitationType').attr('count') - 1);
+                    if($j('.invitationType').attr('count') == 0) {
+                        $j('.invitationType').append('<div class=\'noBodyFriend\' style="margin-top: -20px">Vous avez aucun ami dans votre liste</div>');
+                    }
+
+                    $j('.msgInfo').css({'opacity' : '1'});
+                    $j('.msgInfo').animate({opacity:0}, 4000);
+                    $j('.msgInfo').html('Retiré de la liste d\'ami !');
+                    $j('.msgInfo').removeClass('msgInfoNok');
+                    $j('.msgInfo').addClass('msgInfoOk');
+                } else {
+                    console.log('Nok');
+                }
+            });
+    });
 });
 
 //Affiche la liste des utilisateurs dynamiquement
@@ -59,11 +165,11 @@ function askToBeFriend(usrId, pseudo) {
                 $j('.msgInfo').animate({opacity:0}, 4000);
                 if (data != 'Nok') {
                     $j('.msgInfo').html(data);
-                    $j('.msgUpdateUser').removeClass('msgInfoNok');
+                    $j('.msgInfo').removeClass('msgInfoNok');
                     $j('.msgInfo').addClass('msgInfoOk');
                 } else {
                     $j('.msgInfo').html('Error : demande pas envoyé');
-                    $j('.msgUpdateUser').removeClass('msgInfoOk');
+                    $j('.msgInfo').removeClass('msgInfoOk');
                     $j('.msgInfo').addClass('msgInfoNok');
                 }
             })

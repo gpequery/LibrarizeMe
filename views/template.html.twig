@@ -31,6 +31,7 @@
                     Amis
                     <ul>
                         <li class='menuNav' data='/friends/searchUsers'><div>Rechercher un ami</div></li>
+                        <li class='menuNav' data='/friends/seeInvitation'><div>Mes invitations</div></li>
                         <li class='menuNav' data='/friends/myFriends'><div>Mes amis</div></li>
                     </ul>
                 </li>
@@ -56,7 +57,7 @@
         </div>
 
         <footer>
-            <div id='footer'>&#64;2017 LibrarizeMe  {{ result.etatMenu }} {{ result['etatMenu'] }} {{ result.getEtatMenu }}</div>
+            <div id='footer'>&copy; LibrarizeMe 2017  {{ result.etatMenu }} {{ result['etatMenu'] }} {{ result.getEtatMenu }}</div>
         </footer>
     </body>
 
@@ -76,6 +77,6 @@
     <input type='hidden' name='userName' value='{{ result.pseudoUser }}'>
 </form>
 
-<div class='msgInfo'>Test</div>
+<div class='msgInfo'></div>
 
 </html>
