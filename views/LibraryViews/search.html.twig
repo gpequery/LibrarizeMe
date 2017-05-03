@@ -1,0 +1,18 @@
+{% extends 'template.html.twig' %}
+{% set user = result.userInfo %}
+{
+
+{%  block title %} Informations {% endblock %}
+
+{%  block content %}
+    <div class='generalContentProductSearch'>
+        <h1>Rechercher un produit</h1>
+
+        <div>
+            <input type='text' placeholder='Nom ou code EAN' class='inputSearch'/>
+        </div>
+
+        <div class='resultSearch'>Aucun produit trouvé !</div>
+    </div>
+
+{% endblock %}
