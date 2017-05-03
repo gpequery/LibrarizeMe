@@ -32,7 +32,6 @@ IMPORTANT !! : Créer base "librarizeme"
 "npm install nodemailer"  Pour permettre au serveur d'envoyer
 "npm install --save express-fileupload" Pour permettre au serveur de recevoir des fichiers
 "npm install amazon-product-api" Pour l'API Amazon
-"npm install xml2json" Pour parser xml en json (ou inverse)
 
 ----------------------------------------------------------------------------------------------------------------------
 
