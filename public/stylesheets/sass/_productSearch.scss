@@ -1,6 +1,12 @@
 .generalContentProductSearch {
     text-align: center;
 
+    .formSearchProduct {
+        input,
+        select {
+            display: inline-block;
+        }
+    }
 
     .resultSearch {
         margin-top: 50px;

@@ -53,6 +53,17 @@ button {
   border: 1px solid transparent;
   border-radius: 4px; }
 
+select {
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc; }
+
 .content .contentLogin {
   background-color: #CCCCCC;
   width: 33%;
@@ -172,6 +183,17 @@ button {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 4px; }
+
+select {
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc; }
 
 body {
   background-color: #092D3D; }
@@ -335,6 +357,17 @@ button {
   border: 1px solid transparent;
   border-radius: 4px; }
 
+select {
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc; }
+
 .generalContent {
   text-align: center; }
   .generalContent .msgUpdateUser {
@@ -448,6 +481,17 @@ button {
   border: 1px solid transparent;
   border-radius: 4px; }
 
+select {
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc; }
+
 .generalContentSearchUsers {
   text-align: center;
   min-height: 300px; }
@@ -527,6 +571,9 @@ button {
 
 .generalContentProductSearch {
   text-align: center; }
+  .generalContentProductSearch .formSearchProduct input,
+  .generalContentProductSearch .formSearchProduct select {
+    display: inline-block; }
   .generalContentProductSearch .resultSearch {
     margin-top: 50px;
     font-size: 24px;

@@ -22,14 +22,18 @@ router.post('/searchCode', function(req, res, next) {
     let client = amazon.createClient({
         awsId: "AKIAI5YSR3G6ZLTSRIIQ",
         awsSecret: "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",
-        awsTag: "librarize0e-21"
+        awsTag: "librarize077-21"
     });
+
+    console.log('SearchIndex : ' + req.body.searchIndex);
 
     client.itemSearch({
         Operation: 'ItemSearch',
-        searchIndex: 'All',
+        searchIndex: req.body.searchIndex,
         Keywords: req.body.code,
-        responseGroup: 'ItemAttributes, Images'
+        responseGroup: 'ItemAttributes, Images',
+        ItemPage: req.body.page,
+        domain: 'webservices.amazon.fr'
     }, function(err, results, response) {
         if (!err) {
             res.send(results);
@@ -44,18 +48,24 @@ router.get('/searchCode', function(req, res, next) {
     let client = amazon.createClient({
         awsId: "AKIAI5YSR3G6ZLTSRIIQ",
         awsSecret: "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",
-        awsTag: "librarize0e-21"
+        awsTag: "librarize077-21"
     });
+
 
     client.itemSearch({
         Operation: 'ItemSearch',
         searchIndex: 'All',
-        Keywords: 'The Surge - PlayStation 4',
-        responseGroup: 'ItemAttributes,Offers,Images'
-    }).then(function(results){
-        res.send(results);
-    }).catch(function(err){
-        res.send('ERROR ' + err);
+        Keywords: 'Star Wars',
+        responseGroup: 'ItemAttributes, Images',
+        ItemPage: 1,
+        domain: 'webservices.amazon.fr'
+    }, function(err, results, response) {
+        if (!err) {
+            res.send(results);
+        } else {
+            console.log('ERROR 18 : ');
+            res.send('Nok' + JSON.stringify(err));
+        }
     });
 });
 

@@ -11,6 +11,8 @@ input[type='reset'] { background-color: #d9534f; }
 
 button { color: #fff; background-color: #5cb85c; border-color: #4cae4c; display: inline-block; padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: bold; line-height: 1.5; text-align: center; vertical-align: middle; cursor: pointer; border: 1px solid transparent; border-radius: 4px; }
 
+select { display: block; height: 34px; padding: 6px 12px; font-size: 14px; line-height: 1.42857143; color: #555; background-color: #fff; background-image: none; border: 1px solid #ccc; }
+
 .content .contentLogin { background-color: #CCCCCC; width: 33%; margin-left: auto; margin-right: auto; padding-bottom: 20px; border-radius: 15px; margin-top: 10%; }
 .content .contentLogin h1 { text-align: center; }
 .content .contentLogin form { text-align: center; }
@@ -96,6 +98,7 @@ body .generalContent h1:first-child, body .generalContentSearchUsers h1:first-ch
 .generalContentMyFriends .content .invitationType .oneUser span img, .generalContentSeeInvitation .content .invitationType .oneUser span img { cursor: pointer; display: inline-block; vertical-align: middle; width: 18px; }
 
 .generalContentProductSearch { text-align: center; }
+.generalContentProductSearch .formSearchProduct input, .generalContentProductSearch .formSearchProduct select { display: inline-block; }
 .generalContentProductSearch .resultSearch { margin-top: 50px; font-size: 24px; font-weight: bold; }
 .generalContentProductSearch .resultSearch .oneProduct { width: 20%; display: inline-block; padding-bottom: 50px; }
 .generalContentProductSearch .resultSearch .oneProduct img { display: block; margin: 0px auto; cursor: pointer; }

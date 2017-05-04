@@ -27,7 +27,7 @@ $color-border-danger: #EBCCD1;
 //FORM
 input[type='text'],
 input[type='password'],
-input[type='email']{
+input[type='email'] {
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -83,4 +83,16 @@ button {
     cursor: pointer;
     border: 1px solid transparent;
     border-radius: 4px;
+}
+
+select {
+    display: block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
 }
