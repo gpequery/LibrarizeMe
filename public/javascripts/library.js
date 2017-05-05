@@ -1,80 +1,95 @@
 $j(function() {
+    sendRequest();
 
     $j('.inputSearch').on('keyup', function() {
-        if ($j(this).val().length >= 3) {
-            $j.post(
-                'searchCode', {
-                    'code': $j(this).val(),
-                    'searchIndex': $j('.searchIndex').val(),
-                    'page': '1'
-                }, function(data) {
-                    if (data != 'Nok' && data.lenth != 0) {
-                        $j('.resultSearch').html(toHtmlProductList(data));
-                    } else {
-                        $j('.resultSearch').html('Aucun produit trouvé !');
-                    }
-                });
-        }
+        sendRequest();
     });
 
     $j('.searchIndex').on('click', function() {
-        if ($j('.inputSearch').val().length >= 3) {
-            $j.post(
-                'searchCode', {
-                    'code': $j('.inputSearch').val(),
-                    'searchIndex': $j(this).val(),
-                    'page': '1'
-                }, function(data) {
-                    if (data != 'Nok' && data.lenth != 0) {
-                        $j('.resultSearch').html(toHtmlProductList(data));
-                    } else {
-                        $j('.resultSearch').html('Aucun produit trouvé !');
-                    }
-                });
-        }
+        sendRequest();
     });
 
-    $j('.paginationProduct').on('click', function() {
+    $j('.popin').on('click', function() {
+        $j('.popin').css('display', 'none');
+        $j('.contentPopin').css('display', 'none');
+    })
+
+});
+
+function sendRequest() {
+    if ($j('.inputSearch').val().length >= 3) {
         $j.post(
             'searchCode', {
                 'code': $j('.inputSearch').val(),
-                'page': '2'
+                'searchIndex': $j('.searchIndex').val(),
+                'page': '1'
             }, function(data) {
                 if (data != 'Nok' && data.lenth != 0) {
                     $j('.resultSearch').html(toHtmlProductList(data));
                 } else {
-                    $j('.resultSearch').html('Aucun produit trouvé !')
+                    $j('.resultSearch').html('Aucun produit trouvé !');
                 }
             });
-    });
-});
+    }
+}
 
 function toHtmlProductList(allProducts) {
-    var imgLink;
-    var productTitle;
-
+    var infos;
     var html = '';
 
     for (var product of allProducts) {
-        imgLink = product['MediumImage'] != undefined ? JSON.stringify(product['MediumImage'][0]['URL'][0]) : null;
-        productTitle = product['ItemAttributes'][0]['Title'][0].toString();
+        infos = getInfoSmall(product);
 
         html += '<div class=\'oneProduct\'>';
 
-            if (imgLink != null) {
-                html += '<img src=' + imgLink + '/>';
+            if (infos['imgLink'] != null) {
+                html += '<img src=' + infos['imgLink'] + ' onclick=\'getInfoProduct("' + infos['ASIN'] + '")\'/>';
             } else {
-               html += '<img src=\'/images/product_no_image.png\' style="width: 160px" />';
+               html += '<img src=\'/images/product_no_image.png\' style=\'width: 160px\' onclick=\'getInfoProduct(\'' + infos['ASIN'] + '\')\'\/>';
             }
 
-            html +=         '<span class=\'spanProductTitle\' title="' + productTitle + '">';
-            html +=             getLittleTitle(productTitle);
+            html +=         '<span class=\'spanProductTitle\' title="' + infos['title'] + '">';
+            html +=             getLittleTitle(infos['title']);
             html +=         '</span>';
+
+            html +=         '<div class=\'' + infos['ASIN'] + '\'>';
+            html +=             JSON.stringify(product);
+            html +=         '</div>';
 
         html += '</div>';
     }
 
     return html;
+}
+
+function getInfoSmall(product) {
+    var infos = [];
+
+    infos['imgLink'] = product['MediumImage'] != undefined ? product['MediumImage'][0]['URL'][0] : null;
+    infos['title'] = product['ItemAttributes'][0]['Title'][0].toString();
+    infos['ASIN'] = product['ASIN'][0].toString();
+
+    return infos;
+}
+
+function getInfoDetail(product) {
+    var infos = [];
+
+    infos['imgLink'] = product['LargeImage'] != undefined ? product['LargeImage'][0]['URL'][0] : null;
+    infos['title'] = product['ItemAttributes'][0]['Title'][0].toString();
+    infos['ASIN'] = product['ASIN'][0].toString();
+
+    infos['imagesLink'] = [];
+    for (var image of product['ImageSets'][0]['ImageSet']) {
+        if (image['$']['Category'] != 'primary') {
+            infos['imagesLink'].push({
+                'large': image['LargeImage'][0]['URL'][0],
+                'small': image['TinyImage'][0]['URL'][0]
+            });
+        }
+    }
+
+    return infos;
 }
 
 function getLittleTitle(title) {
@@ -83,4 +98,20 @@ function getLittleTitle(title) {
     } else {
         return title;
     }
+}
+
+function getInfoProduct(productId) {
+    $j('.popin').css('display', 'block');
+    $j('.contentPopin').css('display', 'block');
+
+    var infos = getInfoDetail(JSON.parse($j('.'+productId).html()));
+
+    $j('.imgProductDetail').attr('src', infos['imgLink'].toString());
+
+    var html = '';
+    for(var image of infos['imagesLink']){
+
+        html += '<img src=\'' + image['small'] + '\' />';
+    }
+    $j('.imagesProduct').html(html);
 }

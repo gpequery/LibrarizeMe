@@ -25,8 +25,6 @@ router.post('/searchCode', function(req, res, next) {
         awsTag: "librarize077-21"
     });
 
-    console.log('SearchIndex : ' + req.body.searchIndex);
-
     client.itemSearch({
         Operation: 'ItemSearch',
         searchIndex: req.body.searchIndex,
@@ -42,6 +40,10 @@ router.post('/searchCode', function(req, res, next) {
             res.send('Nok');
         }
     });
+});
+
+router.get('/getInfoProduct', function(req, res, next) {
+   res.send('PARAMS : ' + JSON.parse(req.query.infoProduct));
 });
 
 router.get('/searchCode', function(req, res, next) {

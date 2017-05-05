@@ -3,6 +3,11 @@
 body {
     background-color: #092D3D;
 
+    .popin,
+    .contentPopin {
+        display: none;
+    }
+
     header {
         font-family: 'librarize';
         margin-left: auto;

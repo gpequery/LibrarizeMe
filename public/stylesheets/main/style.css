@@ -197,6 +197,9 @@ select {
 
 body {
   background-color: #092D3D; }
+  body .popin,
+  body .contentPopin {
+    display: none; }
   body header {
     font-family: 'librarize';
     margin-left: auto;
@@ -592,6 +595,8 @@ select {
         vertical-align: middle;
         padding-bottom: 7px;
         padding-left: 10px; }
+      .generalContentProductSearch .resultSearch .oneProduct div {
+        display: none; }
       .generalContentProductSearch .resultSearch .oneProduct span[title]:hover:before {
         cursor: default;
         content: attr(title);
@@ -612,5 +617,34 @@ select {
         background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
         background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
         background-image: -o-linear-gradient(top, #eeeeee, #cccccc); }
+  .generalContentProductSearch .popin {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(9, 45, 61, 0.9);
+    top: 0;
+    left: 0;
+    z-index: 1; }
+  .generalContentProductSearch .contentPopin {
+    width: 60%;
+    height: 60%;
+    background-color: #CCCCCC;
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    z-index: 2; }
+    .generalContentProductSearch .contentPopin .left {
+      border: 1px solid black;
+      width: 30%;
+      display: inline-block; }
+      .generalContentProductSearch .contentPopin .left .imgProductDetail {
+        width: 60%; }
+      .generalContentProductSearch .contentPopin .left .imagesProduct {
+        border: 1px solid black; }
+    .generalContentProductSearch .contentPopin .right {
+      border: 1px solid black;
+      width: 69%;
+      display: inline-block;
+      vertical-align: top; }
 
 /*# sourceMappingURL=style.css.map */
