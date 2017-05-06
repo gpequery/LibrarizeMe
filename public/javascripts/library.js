@@ -12,6 +12,10 @@ $j(function() {
     $j('.popin').on('click', function() {
         $j('.popin').css('display', 'none');
         $j('.contentPopin').css('display', 'none');
+    });
+
+    $j('.left').on('mouseleave', function() {
+        $j('.imgProductDetail').attr('src', $j('.imgProductDetail').attr('default-img'));
     })
 
 });
@@ -121,11 +125,15 @@ function getInfoProduct(productId) {
     var infos = getInfoDetail(JSON.parse($j('.'+productId).html()));
 
     $j('.imgProductDetail').attr('src', infos['imgLink'].toString());
+    $j('.imgProductDetail').attr('default-img', infos['imgLink'].toString());
 
     var html = '';
     for(var image of infos['imagesLink']){
-
-        html += '<img src=\'' + image['small'] + '\' />';
+        html += '<img src=\'' + image['small'] + '\' onclick="changeImg(\'' + image['large'] + '\')"/>';
     }
     $j('.imagesProduct').html(html);
+}
+
+function changeImg(url) {
+    $j('.imgProductDetail').attr('src', url);
 }
