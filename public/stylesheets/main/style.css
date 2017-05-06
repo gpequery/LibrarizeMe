@@ -632,18 +632,25 @@ select {
     position: fixed;
     top: 20%;
     left: 20%;
-    z-index: 2; }
+    z-index: 2;
+    padding: 20px; }
     .generalContentProductSearch .contentPopin .left {
       border: 1px solid black;
-      width: 30%;
-      display: inline-block; }
+      display: inline-block;
+      width: 35%;
+      height: 100%; }
       .generalContentProductSearch .contentPopin .left .imgProductDetail {
-        width: 60%; }
+        height: 80%;
+        max-width: 100%; }
       .generalContentProductSearch .contentPopin .left .imagesProduct {
-        border: 1px solid black; }
+        margin-top: 20px; }
+        .generalContentProductSearch .contentPopin .left .imagesProduct img {
+          padding: 2px 5px;
+          max-width: 22%;
+          max-height: 55px; }
     .generalContentProductSearch .contentPopin .right {
       border: 1px solid black;
-      width: 69%;
+      width: 64%;
       display: inline-block;
       vertical-align: top; }
 

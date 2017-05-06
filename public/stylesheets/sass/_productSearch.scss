@@ -78,23 +78,31 @@
         top: 20%;
         left: 20%;
         z-index: 2;
+        padding: 20px;
 
         .left {
             border: 1px solid black;
-            width: 30%;
             display: inline-block;
+            width: 35%;
+            height: 100%;
 
             .imgProductDetail {
-                width: 60%;
+                height: 80%;
+                max-width: 100%;
             }
 
             .imagesProduct {
-                border: 1px solid black;
+                margin-top: 20px;
+                img {
+                    padding: 2px 5px;
+                    max-width: 22%;
+                    max-height: 55px;
+                }
             }
         }
         .right {
             border: 1px solid black;
-            width: 69%;
+            width: 64%;
             display: inline-block;
             vertical-align: top;
         }

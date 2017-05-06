@@ -16,6 +16,8 @@ $j(function() {
 
 });
 
+
+//mets a jour la liste des produits
 function sendRequest() {
     if ($j('.inputSearch').val().length >= 3) {
         $j.post(
@@ -33,6 +35,7 @@ function sendRequest() {
     }
 }
 
+//Met au format html les produits sous forme de liste
 function toHtmlProductList(allProducts) {
     var infos;
     var html = '';
@@ -62,6 +65,7 @@ function toHtmlProductList(allProducts) {
     return html;
 }
 
+//Retourn un tableau avec le lien de l'img, le titre et le code ASIN
 function getInfoSmall(product) {
     var infos = [];
 
@@ -80,18 +84,27 @@ function getInfoDetail(product) {
     infos['ASIN'] = product['ASIN'][0].toString();
 
     infos['imagesLink'] = [];
+    var count = 0
+
+    //Stock les differentes images != de la principale (max 4)
     for (var image of product['ImageSets'][0]['ImageSet']) {
+        if (count == 4) {
+            break;
+        }
+
         if (image['$']['Category'] != 'primary') {
             infos['imagesLink'].push({
                 'large': image['LargeImage'][0]['URL'][0],
                 'small': image['TinyImage'][0]['URL'][0]
             });
         }
+        count ++;
     }
 
     return infos;
 }
 
+//Retourne le titre à la bonne taille avec '...' + le titre complet pour le survole
 function getLittleTitle(title) {
     if (title.length >= 10 ) {
         return title.substr(0, 10) + ' ...';
@@ -100,6 +113,7 @@ function getLittleTitle(title) {
     }
 }
 
+//Prend les informations du produit selectionné et les mets dans la popin.
 function getInfoProduct(productId) {
     $j('.popin').css('display', 'block');
     $j('.contentPopin').css('display', 'block');
