@@ -2,7 +2,6 @@
 
 const express = require('express');
 const models = require('../models');
-const Product = models.Product;
 const router = express.Router();
 const amazon = require('amazon-product-api');
 

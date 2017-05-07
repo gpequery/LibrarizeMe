@@ -14,10 +14,8 @@ $j(function() {
 
     //modifie le formulaire pour ajouter/retirer les inputs si connexion ou enregistrement
     loginRegister.on('click', function() {
-        console.log('DEBUT');
         pwd.css({'border': 'none'});
         pwd2.css({'border': 'none'});
-        console.log('FIN');
 
         pwd.val('');
         pwd2.val('');

@@ -17,5 +17,4 @@ $j(function() {
             $j('.formNavigateMenu').submit();
         }
     });
-
 });

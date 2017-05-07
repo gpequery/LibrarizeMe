@@ -1,5 +1,7 @@
 $j(function() {
-    sendRequest();
+    if (window.location.pathname == '/product/search') {
+        sendRequest();
+    }
 
     $j('.inputSearch').on('keyup', function() {
         sendRequest();
@@ -44,7 +46,6 @@ function closePopin() {
 
 //mets a jour la liste des produits
 function sendRequest() {
-
     if ($j('.inputSearch').val().length >= 3) {
         $j.post(
             'searchCode', {
