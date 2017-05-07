@@ -60,66 +60,123 @@
             }
         }
     }
+}
 
-    .popin {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        background-color: rgba(9, 45, 61,0.9);
+.popin {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(9, 45, 61,0.9);
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+.contentPopin {
+    width: 60%;
+    height: 60%;
+    background-color: $color-font-content-gray;
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    z-index: 2;
+    padding: 20px;
+
+    .closePopin {
+        position: absolute;
+        right: 0;
         top: 0;
-        left: 0;
-        z-index: 1;
+        cursor: pointer;
     }
-    .contentPopin {
-        width: 60%;
-        height: 60%;
-        background-color: $color-font-content-gray;
-        position: fixed;
-        top: 20%;
-        left: 20%;
-        z-index: 2;
-        padding: 20px;
 
-        .left {
-            border: 1px solid black;
-            display: inline-block;
-            width: 35%;
-            height: 100%;
+    .left {
+        display: inline-block;
+        width: 31%;
+        height: 100%;
+        text-align: center;
 
-            .principalImg {
-                height: 85%;
-                width: 100%;
-                margin-bottom: 5%;
+        .principalImg {
+            height: 85%;
+            width: 100%;
+            margin-bottom: 5%;
 
-                .vAlign {
-                    display: inline-block;
-                    height: 50%;
-                }
-
-                img {
-                    max-width: 100%;
-                    max-height: 100%;
-                    display: inline-block;
-                    vertical-align: middle;
-                    margin-left: -5px;
-                }
+            .vAlign {
+                display: inline-block;
+                height: 50%;
             }
 
-            .imagesProduct {
-                img {
-                    padding: 2px 5px;
-                    max-width: 22%;
-                    max-height: 50px;
-                    cursor: pointer;
-                }
+            img {
+                max-width: 100%;
+                max-height: 100%;
+                display: inline-block;
+                vertical-align: middle;
+                margin-left: -5px;
             }
         }
 
-        .right {
-            border: 1px solid black;
-            width: 63%;
-            display: inline-block;
-            vertical-align: top;
+        .imagesProduct {
+            img {
+                padding: 2px 5px;
+                max-width: 21%;
+                max-height: 50px;
+                cursor: pointer;
+                vertical-align: middle;
+                border: 1px solid black;
+                border-radius: 10px;
+                background-color: white;
+            }
+        }
+    }
+
+    .right {
+        width: 63%;
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 5%;
+
+        h1 {
+            text-align: center;
+            margin-top: 0px;
+            margin-bottom: 30px;
+            border-top: 2px solid white;
+            border-radius: 20px;
+            border-bottom: 2px solid white;
+        }
+
+        .detailPage {
+            div {
+                font-weight: bold;
+                width: 100%;
+                text-align: left;
+                padding-bottom: 5px;
+
+                div {
+                    display: inline-block;
+                    width: 90px;
+                }
+
+                span {
+                    font-weight: normal;
+                    padding-left: 5px;
+                    vertical-align: top;
+                    height: 100%;
+
+                    ul {
+                        width: 81%;
+                        display: inline-block;
+                        list-style: none;
+                        margin-top: 2px;
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+            }
+
+            .actionPopin {
+                text-align: center;
+                a {
+                    margin-right: 25%;
+                }
+            }
         }
     }
 }

@@ -617,50 +617,92 @@ select {
         background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
         background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
         background-image: -o-linear-gradient(top, #eeeeee, #cccccc); }
-  .generalContentProductSearch .popin {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: rgba(9, 45, 61, 0.9);
+
+.popin {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(9, 45, 61, 0.9);
+  top: 0;
+  left: 0;
+  z-index: 1; }
+
+.contentPopin {
+  width: 60%;
+  height: 60%;
+  background-color: #CCCCCC;
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  z-index: 2;
+  padding: 20px; }
+  .contentPopin .closePopin {
+    position: absolute;
+    right: 0;
     top: 0;
-    left: 0;
-    z-index: 1; }
-  .generalContentProductSearch .contentPopin {
-    width: 60%;
-    height: 60%;
-    background-color: #CCCCCC;
-    position: fixed;
-    top: 20%;
-    left: 20%;
-    z-index: 2;
-    padding: 20px; }
-    .generalContentProductSearch .contentPopin .left {
+    cursor: pointer; }
+  .contentPopin .left {
+    display: inline-block;
+    width: 31%;
+    height: 100%;
+    text-align: center; }
+    .contentPopin .left .principalImg {
+      height: 85%;
+      width: 100%;
+      margin-bottom: 5%; }
+      .contentPopin .left .principalImg .vAlign {
+        display: inline-block;
+        height: 50%; }
+      .contentPopin .left .principalImg img {
+        max-width: 100%;
+        max-height: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: -5px; }
+    .contentPopin .left .imagesProduct img {
+      padding: 2px 5px;
+      max-width: 21%;
+      max-height: 50px;
+      cursor: pointer;
+      vertical-align: middle;
       border: 1px solid black;
-      display: inline-block;
-      width: 35%;
-      height: 100%; }
-      .generalContentProductSearch .contentPopin .left .principalImg {
-        height: 85%;
-        width: 100%;
-        margin-bottom: 5%; }
-        .generalContentProductSearch .contentPopin .left .principalImg .vAlign {
+      border-radius: 10px;
+      background-color: white; }
+  .contentPopin .right {
+    width: 63%;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 5%; }
+    .contentPopin .right h1 {
+      text-align: center;
+      margin-top: 0px;
+      margin-bottom: 30px;
+      border-top: 2px solid white;
+      border-radius: 20px;
+      border-bottom: 2px solid white; }
+    .contentPopin .right .detailPage div {
+      font-weight: bold;
+      width: 100%;
+      text-align: left;
+      padding-bottom: 5px; }
+      .contentPopin .right .detailPage div div {
+        display: inline-block;
+        width: 90px; }
+      .contentPopin .right .detailPage div span {
+        font-weight: normal;
+        padding-left: 5px;
+        vertical-align: top;
+        height: 100%; }
+        .contentPopin .right .detailPage div span ul {
+          width: 81%;
           display: inline-block;
-          height: 50%; }
-        .generalContentProductSearch .contentPopin .left .principalImg img {
-          max-width: 100%;
-          max-height: 100%;
-          display: inline-block;
-          vertical-align: middle;
-          margin-left: -5px; }
-      .generalContentProductSearch .contentPopin .left .imagesProduct img {
-        padding: 2px 5px;
-        max-width: 22%;
-        max-height: 50px;
-        cursor: pointer; }
-    .generalContentProductSearch .contentPopin .right {
-      border: 1px solid black;
-      width: 63%;
-      display: inline-block;
-      vertical-align: top; }
+          list-style: none;
+          margin-top: 2px;
+          margin: 0;
+          padding: 0; }
+    .contentPopin .right .detailPage .actionPopin {
+      text-align: center; }
+      .contentPopin .right .detailPage .actionPopin a {
+        margin-right: 25%; }
 
 /*# sourceMappingURL=style.css.map */

@@ -42,8 +42,8 @@ router.post('/searchCode', function(req, res, next) {
     });
 });
 
-router.get('/getInfoProduct', function(req, res, next) {
-   res.send('PARAMS : ' + JSON.parse(req.query.infoProduct));
+router.post('/addProduct', function(req, res, next) {
+   res.send('PARAMS : ');
 });
 
 router.get('/searchCode', function(req, res, next) {
