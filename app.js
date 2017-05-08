@@ -1,3 +1,8 @@
+//Initialise Mongoose
+var mongoose = require('mongoose');
+mongoose.connect(getURL());
+require('./models/Product');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -10,11 +15,13 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 var product = require('./routes/product');
 var friends = require('./routes/friends');
-var mongoose = require('./routes/mongoose');
+var database = require('./routes/database');
 
 var models = require('./models');
 models.sequelize.sync();
 // models.sequelize.sync({'force':'true'});
+
+
 
 var app = express();
 
@@ -35,7 +42,7 @@ app.use('/', index);
 app.use('/user', user);
 app.use('/product', product);
 app.use('/friends', friends);
-app.use('/mongoose', mongoose);
+app.use('/database', database);
 
 
 // catch 404 and forward to error handler
@@ -57,3 +64,7 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+function getURL() {
+    return "mongodb://Librarize:Librarize3@librarize-shard-00-00-axp2s.mongodb.net:27017,librarize-shard-00-01-axp2s.mongodb.net:27017,librarize-shard-00-02-axp2s.mongodb.net:27017/Librarize?ssl=true&replicaSet=Librarize-shard-0&authSource=admin";
+}
