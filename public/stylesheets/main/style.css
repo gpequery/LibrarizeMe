@@ -588,7 +588,9 @@ select {
       .generalContentProductSearch .resultSearch .oneProduct img {
         display: block;
         margin: 0px auto;
-        cursor: pointer; }
+        cursor: pointer;
+        width: 50%;
+        max-height: 190px; }
       .generalContentProductSearch .resultSearch .oneProduct span img {
         cursor: pointer;
         display: inline-block;

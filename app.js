@@ -10,6 +10,7 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 var product = require('./routes/product');
 var friends = require('./routes/friends');
+var mongoose = require('./routes/mongoose');
 
 var models = require('./models');
 models.sequelize.sync();
@@ -34,6 +35,8 @@ app.use('/', index);
 app.use('/user', user);
 app.use('/product', product);
 app.use('/friends', friends);
+app.use('/mongoose', mongoose);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

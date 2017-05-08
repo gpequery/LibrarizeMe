@@ -24,16 +24,20 @@ $j(function() {
     });
 
     $j('.actionPopin input').on('click', function() {
-        var infos = getInfoDetail(JSON.parse($j('.'+$j(this).attr('data')).html()));
+        var infos = getInfoDetail(JSON.parse($j('.' + $j(this).attr('data')).html()));
+
+        info = arrayToJSON(infos);
+        console.log(infos.length + ' ' + JSON.stringify(infos) + ' ' + infos['ASIN']);
+
 
         $j.post(
             'addProduct', {
-
+                'asin' : JSON.stringify(infos)
             }, function(data) {
                 console.log('DATA : ' + data);
             });
 
-        console.log('FIN : ' + JSON.stringify(infos));
+        console.log('FIsN : ' + infos['ASIN']);
     });
 
 });
@@ -68,44 +72,25 @@ function toHtmlProductList(allProducts) {
     var html = '';
 
     for (var product of allProducts) {
-        infos = getInfoSmall(product);
+        infos = getInfoDetail(product);
 
         html += '<div class=\'oneProduct\'>';
+        html +=     '<img src=' + infos['imgLink'] + ' onclick=\'getInfoProduct("' + infos['ASIN'] + '")\'/>';
+        html +=     '<span class=\'spanProductTitle\' title="' + infos['title'] + '">';
+        html +=         getLittleTitle(infos['title']);
+        html +=     '</span>';
 
-            if (infos['imgLink'] != null) {
-                html += '<img src=' + infos['imgLink'] + ' onclick=\'getInfoProduct("' + infos['ASIN'] + '")\'/>';
-            } else {
-               html += '<img src=\'/images/product_no_image.png\' style=\'width: 160px\' onclick=\'getInfoProduct("' + infos['ASIN'] + '")\'\/>';
-            }
-
-            html +=         '<span class=\'spanProductTitle\' title="' + infos['title'] + '">';
-            html +=             getLittleTitle(infos['title']);
-            html +=         '</span>';
-
-            html +=         '<div class=\'' + infos['ASIN'] + '\'>';
-            html +=             JSON.stringify(product);
-            html +=         '</div>';
-
+        html +=      '<div class=\'' + infos['ASIN'] + '\'>';
+        html +=          JSON.stringify(infos);
+        html +=      '</div>';
         html += '</div>';
     }
 
     return html;
 }
 
-//Retourn un tableau avec le lien de l'img, le titre et le code ASIN
-function getInfoSmall(product) {
-    var infos = [];
-
-    infos['imgLink'] = product['MediumImage'] != undefined ? product['MediumImage'][0]['URL'][0] : null;
-    infos['title'] = product['ItemAttributes'][0]['Title'][0].toString();
-    infos['ASIN'] = product['ASIN'][0].toString();
-
-    return infos;
-}
-
 function getInfoDetail(product) {
-    console.log('ID : ' + product);
-    var infos = [];
+    var infos = {};
 
     infos['imgLink'] = product['LargeImage'] != undefined ? product['LargeImage'][0]['URL'][0] : '/images/product_no_image.png';
     infos['title'] = product['ItemAttributes'][0]['Title'][0].toString();
@@ -172,7 +157,6 @@ function getInfoDetail(product) {
         }
     }
 
-
     return infos;
 }
 
@@ -185,13 +169,22 @@ function getLittleTitle(title) {
     }
 }
 
+//Retourne le titre à la bonne taille avec '...' + le titre complet pour le survole
+function getMediumTitle(title) {
+    if (title.length >= 150 ) {
+        return title.substr(0, 150) + ' ...';
+    } else {
+        return title;
+    }
+}
+
 //Prend les informations du produit selectionné et les mets dans la popin.
 function getInfoProduct(productId) {
     //Affiche la popin par dessus
     $j('.popin').css('display', 'block');
     $j('.contentPopin').css('display', 'block');
 
-    var infos = getInfoDetail(JSON.parse($j('.'+productId).html()));
+    var infos = JSON.parse($j('.'+productId).html());
 
     //Les images du dessous
     var htmlImg = '';
@@ -219,7 +212,7 @@ function getInfoProduct(productId) {
     $j('.imgProductDetail').attr('src', infos['imgLink'].toString());
     $j('.imgProductDetail').attr('default-img', infos['imgLink'].toString());
     $j('.imagesProduct').html(htmlImg);
-    $j('.right h1').html(infos['title']);
+    $j('.right h1').html(getMediumTitle(infos['title']));
     $j('.detailPage a').attr('href', infos['DetailPageURL']);
     $j('.amount').html(infos['price']);
     $j('.codeEAN').html(infos['codeEAN']);
@@ -266,4 +259,14 @@ function getInfoProduct(productId) {
 
 function changeImg(url) {
     $j('.imgProductDetail').attr('src', url);
+}
+
+function arrayToJSON(array) {
+    var json = {};
+
+    for (var element of array) {
+        json.push(element);
+    }
+
+    return json;
 }

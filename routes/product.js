@@ -4,6 +4,7 @@ const express = require('express');
 const models = require('../models');
 const router = express.Router();
 const amazon = require('amazon-product-api');
+const mongoose = require('mongoose');
 
 router.get('/', function(req, res, next) {
     res.send('PRODUCT');
@@ -42,7 +43,10 @@ router.post('/searchCode', function(req, res, next) {
 });
 
 router.post('/addProduct', function(req, res, next) {
-   res.send('PARAMS : ');
+    let infos = req.body.asin;
+
+
+    res.send(infos);
 });
 
 router.get('/searchCode', function(req, res, next) {
@@ -71,8 +75,3 @@ router.get('/searchCode', function(req, res, next) {
 });
 
 module.exports = router;
-
-function getResultAmazon() {
-
-
-}
