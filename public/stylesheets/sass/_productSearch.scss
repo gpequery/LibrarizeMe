@@ -183,3 +183,13 @@
     }
 }
 
+.popinResult {
+    position: fixed;
+    top: 40%;
+    left: 35%;
+    z-index: 3;
+    font-size: 230%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px 30px;
+}

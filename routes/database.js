@@ -97,7 +97,7 @@ router.post('/addProduct', function(req, res, next) {
                 }
             });
         } else {
-            res.send('Ok2');
+            res.send('Ok2')
         }
     });
 });

@@ -334,7 +334,6 @@ router.post('/updateInformations', function(req, res, next) {
 
     User.find(options).then(function(usr) {
        if(usr) {
-           console.log('isMale : ' + req.body.isMale);
             let newInfos = {
                 'pseudo' : req.body.pseudo,
                 'firstname' :req.body.firstname ,
@@ -430,6 +429,46 @@ router.post('/updateAvatar', function(req, res, next) {
             etatMenu: 'hide'
         };
         res.render('UserViews/login.html.twig', {result: send});
+    });
+});
+
+//Ajout un produit à l'utilisateur courrant
+router.post('/addProduct', function(req, res, next) {
+    let options = {
+        where: {
+            id: req.cookies.idUser
+        }
+    };
+
+    User.find(options).then(function(usr) {
+        let newListProducts ;
+
+        if (usr.products == null) {
+            newListProducts = [req.body.asin]
+        } else {
+            if (usr.products.indexOf('"' + req.body.asin + '"') == -1) {
+                newListProducts = JSON.parse(usr.products);
+                newListProducts.push(req.body.asin);
+            } else {
+                newListProducts = null;
+            }
+        }
+
+        if (newListProducts != null) {
+            let newInfos = {
+                'products' : JSON.stringify(newListProducts)
+            };
+
+            usr.updateAttributes(newInfos);
+
+            res.send({etat: 'ok', msg: 'Produit ajouté dans votre bibliothèque !'});
+        } else {
+            res.send({etat: 'ok', msg: 'Déjà dans votre bibliothèque !'});
+        }
+
+    }).catch(function(err){
+        console.log('ERROR findUser : ' + err);
+        res.send({etat: 'nok', msg: 'Error : reconnectez vous'});
     });
 });
 

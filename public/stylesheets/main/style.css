@@ -198,7 +198,8 @@ select {
 body {
   background-color: #092D3D; }
   body .popin,
-  body .contentPopin {
+  body .contentPopin,
+  body .popinResult {
     display: none; }
   body header {
     font-family: 'librarize';
@@ -706,5 +707,15 @@ select {
       text-align: center; }
       .contentPopin .right .detailPage .actionPopin a {
         margin-right: 25%; }
+
+.popinResult {
+  position: fixed;
+  top: 40%;
+  left: 35%;
+  z-index: 3;
+  font-size: 230%;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px 30px; }
 
 /*# sourceMappingURL=style.css.map */

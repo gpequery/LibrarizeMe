@@ -40,8 +40,26 @@ $j(function() {
                 imagesLink: JSON.stringify(infos['imagesLink']),
                 actors: JSON.stringify(infos['actors']),
                 features: JSON.stringify(infos['features'])
-            }, function(data) {
-                console.log(data);
+            }, function(dataNoSQL) {
+                if (dataNoSQL == 'Ok' || dataNoSQL == 'Ok2') {
+                    $j.post('/user/addProduct', {
+                        asin: infos['ASIN']
+                    }, function(dataUser) {
+                        if (dataUser.etat == 'ok') {
+                            $j('.popinResult').removeClass('msgInfoNok');
+                            $j('.popinResult').addClass('msgInfoOk');
+
+                        } else {
+                            $j('.popinResult').addClass('msgInfoNok');
+                            $j('.popinResult').removeClass('msgInfoOk');
+                        }
+
+                        $j('.popinResult').fadeIn(600).delay(1000).fadeOut(800);
+                        $j('.popinResult').html(dataUser.msg);
+                    });
+                } else {
+                    console.log('ERROR NoSQL');
+                }
             });
     });
 
@@ -51,6 +69,7 @@ $j(function() {
 function closePopin() {
     $j('.popin').css('display', 'none');
     $j('.contentPopin').css('display', 'none');
+    $j('.popinResult').css('display', 'none');
 }
 
 //mets a jour la liste des produits
