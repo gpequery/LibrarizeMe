@@ -15,38 +15,43 @@ $j(function() {
         closePopin();
     });
 
-    $j('.left').on('mouseleave', function() {
-        $j('.imgProductDetail').attr('src', $j('.imgProductDetail').attr('default-img'));
-    });
-
     $j('.closePopin').on('click', function() {
         closePopin();
     });
 
+    $j('.left').on('mouseleave', function() {
+        $j('.imgProductDetail').attr('src', $j('.imgProductDetail').attr('default-img'));
+    });
+
     $j('.actionPopin input').on('click', function() {
-        var infos = getInfoDetail(JSON.parse($j('.' + $j(this).attr('data')).html()));
-
-        info = arrayToJSON(infos);
-        console.log(infos.length + ' ' + JSON.stringify(infos) + ' ' + infos['ASIN']);
-
+        var infos = JSON.parse($j('.'+$j('.actionPopin input').attr('data')).html());
 
         $j.post(
-            'addProduct', {
-                'asin' : JSON.stringify(infos)
+            '/database/addProduct', {
+                asin: infos['ASIN'],
+                title: infos['title'],
+                imgLink: infos['imgLink'],
+                detailPageURL: infos['DetailPageURL'],
+                ean: infos['codeEAN'],
+                public: infos['public'],
+                brand: infos['brand'],
+                group: infos['group'],
+                release: infos['release'],
+                imagesLink: JSON.stringify(infos['imagesLink']),
+                actors: JSON.stringify(infos['actors']),
+                features: JSON.stringify(infos['features'])
             }, function(data) {
-                console.log('DATA : ' + data);
+                console.log(data);
             });
-
-        console.log('FIsN : ' + infos['ASIN']);
     });
 
 });
 
+//Ferme la popin
 function closePopin() {
     $j('.popin').css('display', 'none');
     $j('.contentPopin').css('display', 'none');
 }
-
 
 //mets a jour la liste des produits
 function sendRequest() {
@@ -102,16 +107,6 @@ function getInfoDetail(product) {
     infos['group'] = typeof product['ItemAttributes'][0]['ProductGroup'] !== 'undefined' ? product['ItemAttributes'][0]['ProductGroup'][0] : '&empty;';
     infos['release'] = typeof product['ItemAttributes'][0]['ReleaseDate'] !== 'undefined' ? product['ItemAttributes'][0]['ReleaseDate'][0] : null;
 
-
-    //Formated price :
-    if (typeof product['ItemAttributes'][0]['ListPrice'] !== 'undefined') {
-        var amout = product['ItemAttributes'][0]['ListPrice'][0]['Amount'].toString();
-        var code = product['ItemAttributes'][0]['ListPrice'][0]['CurrencyCode'].toString() == 'EUR' ? '&euro;' : ' ' + product['ItemAttributes'][0]['ListPrice'][0]['CurrencyCode'].toString();
-        infos['price'] = amout.substr(0, amout.length - 2) + ',' +  amout.substr(-2) + code;
-    } else { infos['price'] = '&empty;' }
-
-
-
     //Stock les differentes images != de la principale (max 4)
     infos['imagesLink'] = [];
     if (typeof product['ImageSets'] !== 'undefined') {
@@ -160,7 +155,7 @@ function getInfoDetail(product) {
     return infos;
 }
 
-//Retourne le titre à la bonne taille avec '...' + le titre complet pour le survole
+//Retourne le titre à la bonne taille avec '...' pour la liste de produit
 function getLittleTitle(title) {
     if (title.length >= 10 ) {
         return title.substr(0, 10) + ' ...';
@@ -169,7 +164,7 @@ function getLittleTitle(title) {
     }
 }
 
-//Retourne le titre à la bonne taille avec '...' + le titre complet pour le survole
+//Retourne le titre à la bonne taille avec '...' pour la popin
 function getMediumTitle(title) {
     if (title.length >= 150 ) {
         return title.substr(0, 150) + ' ...';
@@ -207,16 +202,16 @@ function getInfoProduct(productId) {
         }
     }
 
-
     //Ajoutes toutes les infos dans le html
+    $j('.actionPopin input').attr('data', infos['ASIN']);
     $j('.imgProductDetail').attr('src', infos['imgLink'].toString());
     $j('.imgProductDetail').attr('default-img', infos['imgLink'].toString());
     $j('.imagesProduct').html(htmlImg);
     $j('.right h1').html(getMediumTitle(infos['title']));
     $j('.detailPage a').attr('href', infos['DetailPageURL']);
-    $j('.amount').html(infos['price']);
     $j('.codeEAN').html(infos['codeEAN']);
     $j('.group').html(infos['group']);
+    $j('.actionPopin input').attr('data', infos['ASIN']);
 
     if (htmlActor != '') {
         $j('.actors').html(htmlActor);
@@ -253,20 +248,9 @@ function getInfoProduct(productId) {
     } else {
         $j('.divRelease').css('display', 'none');
     }
-
-    $j('.actionPopin input').attr('data', infos['ASIN'])
 }
 
+//Change l'img principal de la popin
 function changeImg(url) {
     $j('.imgProductDetail').attr('src', url);
-}
-
-function arrayToJSON(array) {
-    var json = {};
-
-    for (var element of array) {
-        json.push(element);
-    }
-
-    return json;
 }

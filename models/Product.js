@@ -10,10 +10,9 @@ let productSchema = new mongoose.Schema({
     brand: String,
     group: String,
     release: String,
-    price: String,
     imagesLink: String,
-    actors: [String],
-    features: [String]
+    actors: String,
+    features: String
 });
 
 module.exports = mongoose.model('Product', productSchema);

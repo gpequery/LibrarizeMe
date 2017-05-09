@@ -23,7 +23,7 @@ router.get('/addProduct', function(req, res, next) {
     let Product = mongoose.model('Product');
 
     let newProduct = new Product({
-            asin: 36,
+            asin: '36',
             title: 'String',
             imgLink: 'String',
             detailPageURL: 'String',
@@ -32,10 +32,9 @@ router.get('/addProduct', function(req, res, next) {
             brand: 'String',
             group: 'String',
             release: 'String',
-            price: 'String',
             imagesLink: 'String',
-            actors: '[String]',
-            features: '[String]'
+            actors: 'String',
+            features: 'String'
     });
 
     newProduct.save(function (err) {
@@ -56,8 +55,51 @@ router.get('/printProduct', function(req, res, next) {
         }
         res.send(products.toString());
     });
+});
 
 
+//////////////////////////////////////////////////////////
+/*******************************************************/
+/******************************************************/
+/*****************************************************/
+//////////////////////////////////////////////////////
+router.post('/addProduct', function(req, res, next) {
+    let Product = mongoose.model('Product');
+
+    Product.find({'asin': req.body.asin}, function (err, products) {
+        if (err) {
+            console.log('ERROR --> search product : ' + err);
+            res.send('Nok');
+        }
+
+        if (products.length == 0) {
+            let newProduct = new Product({
+                asin: req.body.asin,
+                title: req.body.title,
+                imgLink: req.body.imgLink,
+                detailPageURL: req.body.detailPageURL,
+                ean: req.body.ean,
+                public: req.body.public,
+                brand: req.body.brand,
+                group: req.body.group,
+                release: req.body.release,
+                imagesLink: req.body.imagesLink,
+                actors: req.body.actors,
+                features: req.body.features
+            });
+
+            newProduct.save(function (err) {
+                if (err) {
+                    console.log('ERROR --> Add product : ' + err);
+                    res.send('Nok');
+                } else {
+                    res.send('Ok');
+                }
+            });
+        } else {
+            res.send('Ok2');
+        }
+    });
 });
 
 module.exports = router;
