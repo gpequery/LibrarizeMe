@@ -61,6 +61,15 @@ Friends
     friend_id
     accepted
 
+Swap :
+    id
+    idUser
+    asinProduct
+    etat
+    startDate
+    enDate
+    idUserTo
+
 ----------------------------------------------------------------------------------------------------------------------
 
 
