@@ -29,9 +29,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         isMale: {
             type: DataTypes.BOOLEAN
-        },
-        products: {
-            type: DataTypes.STRING
         }
     }, {
         paranoid: true,
@@ -58,8 +55,7 @@ module.exports = function(sequelize, DataTypes) {
                     firstname: this.firstname,
                     mail: this.mail,
                     isMale: this.isMale,
-                    numberphone: this.numberphone,
-                    products: this.products
+                    numberphone: this.numberphone
                 }
             },
             toJsonWithAvatar: function() {

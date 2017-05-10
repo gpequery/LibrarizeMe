@@ -42,10 +42,10 @@ $j(function() {
                 features: JSON.stringify(infos['features'])
             }, function(dataNoSQL) {
                 if (dataNoSQL == 'Ok' || dataNoSQL == 'Ok2') {
-                    $j.post('/user/addProduct', {
+                    $j.post('/swap/addProduct', {
                         asin: infos['ASIN']
-                    }, function(dataUser) {
-                        if (dataUser.etat == 'ok') {
+                    }, function(dataSwap) {
+                        if (dataSwap.etat == 'ok') {
                             $j('.popinResult').removeClass('msgInfoNok');
                             $j('.popinResult').addClass('msgInfoOk');
 
@@ -55,7 +55,7 @@ $j(function() {
                         }
 
                         $j('.popinResult').fadeIn(600).delay(1000).fadeOut(800);
-                        $j('.popinResult').html(dataUser.msg);
+                        $j('.popinResult').html(dataSwap.msg);
                     });
                 } else {
                     console.log('ERROR NoSQL');

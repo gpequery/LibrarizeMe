@@ -16,11 +16,11 @@ var user = require('./routes/user');
 var product = require('./routes/product');
 var friends = require('./routes/friends');
 var database = require('./routes/database');
+var swap = require('./routes/swap');
 
 var models = require('./models');
 models.sequelize.sync();
 // models.sequelize.sync({'force':'true'});
-
 
 
 var app = express();
@@ -43,6 +43,7 @@ app.use('/user', user);
 app.use('/product', product);
 app.use('/friends', friends);
 app.use('/database', database);
+app.use('/swap', swap);
 
 
 // catch 404 and forward to error handler
