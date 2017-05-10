@@ -4,17 +4,13 @@ const express = require('express');
 const router = express.Router();
 const models = require('../models');
 const Swap = models.Swap;
-
-router.get('/', function(req, res, next) {
-    res.send('COUCOU SWAP !!');
-});
+const mongoose = require('mongoose');
 
 //Ajout un produit à l'utilisateur courrant
 router.post('/addProduct', function(req, res, next) {
     let idUser = req.cookies.idUser;
     let asin = req.body.asin;
 
-    console.log('idUSER : ' + idUser + ' ASIN : ' + asin);
     let searchSwap = {
         where: {
             idUser: idUser,
@@ -22,8 +18,7 @@ router.post('/addProduct', function(req, res, next) {
         }
     };
 
-    Swap.find(searchSwap).then(function(swap) {
-        console.log('SWAP : ' + swap);
+    Swap.findAll(searchSwap).then(function(swap) {
         if(swap == null) {
             Swap.create({
                 idUser: idUser,
@@ -40,6 +35,33 @@ router.post('/addProduct', function(req, res, next) {
 
     }).catch(function(err) {
         res.send({etat: 'nok', msg: 'ERREUR pour chercher'});
+    });
+});
+
+//Retourne les produits de l'utilisateurs courant
+router.post('/getMyProducts', function(req, res, next) {
+    let Product = mongoose.model('Product');
+
+    let optionSearch = {
+        where: {
+            idUser: req.cookies.idUser
+        }
+    };
+
+    Swap.findAll(optionSearch).then(function(swaps){
+        let allAsin = [];
+        for(var product of swaps) {
+            allAsin.push(product.asinProduct);
+        }
+
+        Product.find({ asin : { $in : allAsin } }).then(function(products) {
+            res.send(JSON.stringify(products));
+        }).catch(function(err) {
+            console.log('Error : ' + err);
+        });
+
+    }).catch(function(err) {
+        console.log('ERROR : ' + err)
     });
 });
 

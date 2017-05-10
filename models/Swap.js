@@ -38,9 +38,6 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         instanceMethods: {
-            getId: function() {
-                return this.id;
-            },
             toJson: function() {
                 return {
                     id: this.id,

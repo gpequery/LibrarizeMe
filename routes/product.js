@@ -6,10 +6,6 @@ const router = express.Router();
 const amazon = require('amazon-product-api');
 const mongoose = require('mongoose');
 
-router.get('/', function(req, res, next) {
-    res.send('PRODUCT');
-});
-
 router.post('/search', function(req, res, next) {
     let send = {
         pseudoUser: req.body.userName
@@ -72,6 +68,14 @@ router.get('/searchCode', function(req, res, next) {
             res.send('Nok' + JSON.stringify(err));
         }
     });
+});
+
+router.post('/myProducts', function(req, res, next) {
+    let send = {
+        pseudoUser: req.body.userName
+    };
+
+    res.render('LibraryViews/myProducts.html.twig', {result: send});
 });
 
 module.exports = router;

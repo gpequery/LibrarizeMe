@@ -272,7 +272,8 @@ body {
   body .generalContentSearchUsers,
   body .generalContentSeeInvitation,
   body .generalContentMyFriends,
-  body .generalContentProductSearch {
+  body .generalContentProductSearch,
+  body .generalContentMyProducts {
     background-color: #CCCCCC;
     width: 80%;
     margin: 0px auto;
@@ -282,7 +283,8 @@ body {
     body .generalContentSearchUsers h1:first-child,
     body .generalContentSeeInvitation h1:first-child,
     body .generalContentMyFriends h1:first-child,
-    body .generalContentProductSearch h1:first-child {
+    body .generalContentProductSearch h1:first-child,
+    body .generalContentMyProducts h1:first-child {
       text-align: center; }
 
 .msgInfo {
@@ -717,5 +719,53 @@ select {
   text-align: center;
   border-radius: 10px;
   padding: 5px 30px; }
+
+.generalContentMyProducts {
+  text-align: center; }
+  .generalContentMyProducts .formSearchProduct input,
+  .generalContentMyProducts .formSearchProduct select {
+    display: inline-block; }
+  .generalContentMyProducts .resultSearch {
+    margin-top: 50px;
+    font-size: 24px;
+    font-weight: bold; }
+    .generalContentMyProducts .resultSearch .oneProduct {
+      width: 20%;
+      display: inline-block;
+      padding-bottom: 50px; }
+      .generalContentMyProducts .resultSearch .oneProduct img {
+        display: block;
+        margin: 0px auto;
+        cursor: pointer;
+        width: 50%;
+        max-height: 190px; }
+      .generalContentMyProducts .resultSearch .oneProduct span img {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: middle;
+        padding-bottom: 7px;
+        padding-left: 10px; }
+      .generalContentMyProducts .resultSearch .oneProduct div {
+        display: none; }
+      .generalContentMyProducts .resultSearch .oneProduct span[title]:hover:before {
+        cursor: default;
+        content: attr(title);
+        margin-left: 0px;
+        margin-top: 0px;
+        position: absolute;
+        z-index: 20;
+        white-space: nowrap;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -moz-box-shadow: 0px 0px 4px #222;
+        -webkit-box-shadow: 0px 0px 4px #222;
+        box-shadow: 0px 0px 4px #222;
+        background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eeeeee), color-stop(1, #cccccc));
+        background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+        background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+        background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
+        background-image: -o-linear-gradient(top, #eeeeee, #cccccc); }
 
 /*# sourceMappingURL=style.css.map */

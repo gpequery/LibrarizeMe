@@ -28,8 +28,6 @@ router.post('/login', function(req, res, next) {
     let action = req.body.actionForm;
     let send = null;
 
-    console.log('GENDER : ' + isMale);
-
     if (action == 'login') {
         let options = {
             where: {
