@@ -594,12 +594,6 @@ select {
         cursor: pointer;
         width: 50%;
         max-height: 190px; }
-      .generalContentProductSearch .resultSearch .oneProduct span img {
-        cursor: pointer;
-        display: inline-block;
-        vertical-align: middle;
-        padding-bottom: 7px;
-        padding-left: 10px; }
       .generalContentProductSearch .resultSearch .oneProduct div {
         display: none; }
       .generalContentProductSearch .resultSearch .oneProduct span[title]:hover:before {
@@ -733,18 +727,19 @@ select {
       width: 20%;
       display: inline-block;
       padding-bottom: 50px; }
-      .generalContentMyProducts .resultSearch .oneProduct img {
+      .generalContentMyProducts .resultSearch .oneProduct img.principal {
         display: block;
         margin: 0px auto;
         cursor: pointer;
         width: 50%;
         max-height: 190px; }
-      .generalContentMyProducts .resultSearch .oneProduct span img {
+      .generalContentMyProducts .resultSearch .oneProduct img.del {
         cursor: pointer;
         display: inline-block;
         vertical-align: middle;
-        padding-bottom: 7px;
-        padding-left: 10px; }
+        padding-bottom: 2px;
+        padding-left: 10px;
+        width: 17px; }
       .generalContentMyProducts .resultSearch .oneProduct div {
         display: none; }
       .generalContentMyProducts .resultSearch .oneProduct span[title]:hover:before {
@@ -767,5 +762,15 @@ select {
         background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
         background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
         background-image: -o-linear-gradient(top, #eeeeee, #cccccc); }
+
+.popinResult {
+  position: fixed;
+  top: 40%;
+  left: 35%;
+  z-index: 3;
+  font-size: 230%;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px 30px; }
 
 /*# sourceMappingURL=style.css.map */

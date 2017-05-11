@@ -18,22 +18,27 @@ router.post('/addProduct', function(req, res, next) {
         }
     };
 
-    Swap.findAll(searchSwap).then(function(swap) {
+    console.log('REQUETE ADD : ');
+    Swap.findOne(searchSwap).then(function(swap) {
         if(swap == null) {
             Swap.create({
                 idUser: idUser,
                 asinProduct: asin,
                 etat: 0
             }).then(function(newSwap) {
+                console.log('THEN');
                 res.send({etat: 'ok', msg: 'Produit ajouté dans votre bibliothèque !'});
             }).catch(function(err) {
+                console.log('CATCH');
                 res.send({etat: 'nok', msg: 'ERREUR pour ajouter'});
             });
         } else {
+            console.log('ELSE : ');
             res.send({etat: 'ok', msg: 'Produit déjà dans votre bibliothèque !'});
         }
 
     }).catch(function(err) {
+        console.log('ERR');
         res.send({etat: 'nok', msg: 'ERREUR pour chercher'});
     });
 });
@@ -48,6 +53,7 @@ router.post('/getMyProducts', function(req, res, next) {
         }
     };
 
+    console.log('REQUETE SEARCH : ');
     Swap.findAll(optionSearch).then(function(swaps){
         let allAsin = [];
         for(var product of swaps) {
@@ -62,6 +68,22 @@ router.post('/getMyProducts', function(req, res, next) {
 
     }).catch(function(err) {
         console.log('ERROR : ' + err)
+    });
+});
+
+router.post('/delProduct', function(req, res, next) {
+    let optionSearch = {
+        where: {
+            idUser: req.cookies.idUser,
+            asinProduct: req.body.asin
+        }
+    };
+
+    Swap.destroy(optionSearch).then(function(swap){
+        res.send('ok');
+    }).catch(function(err) {
+        console.log('ERROR : ' + err);
+        res.send('nok');
     });
 });
 
