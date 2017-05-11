@@ -30,12 +30,14 @@ function toHtmlProductListMyProduct(allProducts) {
     var html = '';
 
     for (var product of allProducts) {
+        console.log('PRODUCT : ' + JSON.stringify(product));
         html += '<div class=\'oneProduct div' + product['asin'] + '\'>';
         html +=     '<img src=' + product['imgLink'] + ' class=\'principal\' onclick=\'getInfoProduct("' + product['asin'] + '")\'/>';
         html +=     '<span class=\'spanProductTitle\' title="' + product['title'] + '">';
         html +=         getLittleTitle(product['title']);
         html +=     '</span>';
-        html +=      '<img src=\'/images/del.png\' class=\'del\' title=\'Supprimer le produit\' onclick=\'delProduct("' + product['asin'] + '")\'/>';
+
+        html +=     '<img src=\'/images/del.png\' class=\'del\' title=\'Supprimer le produit\' onclick=\'delProduct("' + product['asin'] + '")\'/>';
 
         html +=      '<div class=\'' + product['asin'] + '\'>';
         html +=          JSON.stringify(product);

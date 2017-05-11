@@ -51,11 +51,12 @@ router.post('/getMyProducts', function(req, res, next) {
         where: {
             idUser: req.cookies.idUser
         }
+        // order: 'asinProduct asc'
     };
 
-    console.log('REQUETE SEARCH : ');
     Swap.findAll(optionSearch).then(function(swaps){
         let allAsin = [];
+
         for(var product of swaps) {
             allAsin.push(product.asinProduct);
         }
@@ -86,6 +87,5 @@ router.post('/delProduct', function(req, res, next) {
         res.send('nok');
     });
 });
-
 
 module.exports = router;
