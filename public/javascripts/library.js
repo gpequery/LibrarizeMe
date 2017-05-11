@@ -23,7 +23,7 @@ $j(function() {
         $j('.imgProductDetail').attr('src', $j('.imgProductDetail').attr('default-img'));
     });
 
-    $j('.actionPopin input').on('click', function() {
+    $j('.addProdut').on('click', function() {
         var infos = JSON.parse($j('.'+$j('.actionPopin input').attr('data')).html());
 
         $j.post(
