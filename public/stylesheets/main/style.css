@@ -716,8 +716,8 @@ select {
 
 .generalContentMyProducts {
   text-align: center; }
-  .generalContentMyProducts .formSearchProduct input,
-  .generalContentMyProducts .formSearchProduct select {
+  .generalContentMyProducts .formSearchMyProduct input,
+  .generalContentMyProducts .formSearchMyProduct select {
     display: inline-block; }
   .generalContentMyProducts .resultSearch {
     margin-top: 50px;

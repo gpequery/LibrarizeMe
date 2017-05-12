@@ -6,12 +6,22 @@ $j(function() {
     $j('.removeProdut').on('click', function() {
         delProduct($j('.actionPopin input').attr('data'));
     });
+
+    $j('.inputSearchMyProduct').on('keyup', function() {
+        sendRequestMyProduct();
+    });
+
+    $j('.searchIndexMyProduct').on('click', function() {
+        sendRequestMyProduct();
+    });
 });
 
 //mets a jour la liste de mes produits
 function sendRequestMyProduct() {
     $j.post(
         '/swap/getMyProducts', {
+            title: $j('.inputSearchMyProduct').val(),
+            group: $j('.searchIndexMyProduct').val()
         }, function(allProducts) {
             var productsJSON = JSON.parse(allProducts);
 

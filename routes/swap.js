@@ -51,17 +51,42 @@ router.post('/getMyProducts', function(req, res, next) {
         where: {
             idUser: req.cookies.idUser
         }
-        // order: 'asinProduct asc'
     };
+
+
 
     Swap.findAll(optionSearch).then(function(swaps){
         let allAsin = [];
+        let searchRestrinction;
 
         for(var product of swaps) {
             allAsin.push(product.asinProduct);
         }
 
-        Product.find({ asin : { $in : allAsin } }).then(function(products) {
+        if (req.body.group == 'All') {
+            console.log('group null: ' + req.body.group);
+            searchRestrinction = {
+                $or: [
+                    {'title': new RegExp(req.body.title, "i")},
+                    {'ean': new RegExp(req.body.title, "i")}
+                ],
+                asin: { $in : allAsin }
+            };
+        } else {
+            console.log('group TOOO : ' + req.body.group);
+            searchRestrinction = {
+                $or: [
+                    {'title': new RegExp(req.body.title, "i")},
+                    {'ean': new RegExp(req.body.title, "i")}
+                ],
+                asin: { $in : allAsin },
+                group: req.body.group
+            };
+        }
+
+
+        console.log('FIN PRODUCT : ');
+        Product.find(searchRestrinction).then(function(products) {
             res.send(JSON.stringify(products));
         }).catch(function(err) {
             console.log('Error : ' + err);

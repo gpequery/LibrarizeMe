@@ -38,38 +38,6 @@ router.post('/searchCode', function(req, res, next) {
     });
 });
 
-router.post('/addProduct', function(req, res, next) {
-    let infos = req.body.asin;
-
-
-    res.send(infos);
-});
-
-router.get('/searchCode', function(req, res, next) {
-    let client = amazon.createClient({
-        awsId: "AKIAI5YSR3G6ZLTSRIIQ",
-        awsSecret: "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",
-        awsTag: "librarize077-21"
-    });
-
-
-    client.itemSearch({
-        Operation: 'ItemSearch',
-        searchIndex: 'All',
-        Keywords: 'Star Wars',
-        responseGroup: 'ItemAttributes, Images',
-        ItemPage: 1,
-        domain: 'webservices.amazon.fr'
-    }, function(err, results, response) {
-        if (!err) {
-            res.send(results);
-        } else {
-            console.log('ERROR 18 : ');
-            res.send('Nok' + JSON.stringify(err));
-        }
-    });
-});
-
 router.post('/myProducts', function(req, res, next) {
     let send = {
         pseudoUser: req.body.userName
