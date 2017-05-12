@@ -572,7 +572,12 @@ select {
           .generalContentSeeInvitation .content .invitationType .oneUser span img {
             cursor: pointer;
             display: inline-block;
-            vertical-align: middle;
+            vertical-align: middle; }
+          .generalContentMyFriends .content .invitationType .oneUser span img.libraryImg,
+          .generalContentSeeInvitation .content .invitationType .oneUser span img.libraryImg {
+            width: 25px; }
+          .generalContentMyFriends .content .invitationType .oneUser span img.imgDelFriend,
+          .generalContentSeeInvitation .content .invitationType .oneUser span img.imgDelFriend {
             width: 18px; }
 
 .generalContentProductSearch {

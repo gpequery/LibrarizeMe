@@ -96,7 +96,9 @@ body .generalContent h1:first-child, body .generalContentSearchUsers h1:first-ch
 .generalContentMyFriends .content .invitationType .oneUser, .generalContentSeeInvitation .content .invitationType .oneUser { width: 19%; display: inline-block; padding-bottom: 30px; }
 .generalContentMyFriends .content .invitationType .oneUser img, .generalContentSeeInvitation .content .invitationType .oneUser img { display: block; margin: 0px auto; }
 .generalContentMyFriends .content .invitationType .oneUser span, .generalContentSeeInvitation .content .invitationType .oneUser span { font-size: 24px; font-weight: bold; text-align: center; display: block; color: black; }
-.generalContentMyFriends .content .invitationType .oneUser span img, .generalContentSeeInvitation .content .invitationType .oneUser span img { cursor: pointer; display: inline-block; vertical-align: middle; width: 18px; }
+.generalContentMyFriends .content .invitationType .oneUser span img, .generalContentSeeInvitation .content .invitationType .oneUser span img { cursor: pointer; display: inline-block; vertical-align: middle; }
+.generalContentMyFriends .content .invitationType .oneUser span img.libraryImg, .generalContentSeeInvitation .content .invitationType .oneUser span img.libraryImg { width: 25px; }
+.generalContentMyFriends .content .invitationType .oneUser span img.imgDelFriend, .generalContentSeeInvitation .content .invitationType .oneUser span img.imgDelFriend { width: 18px; }
 
 .generalContentProductSearch { text-align: center; }
 .generalContentProductSearch .formSearchProduct input, .generalContentProductSearch .formSearchProduct select { display: inline-block; }
