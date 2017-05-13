@@ -65,7 +65,7 @@ Swap :
     id
     idUser
     asinProduct
-    etat        (0/enPret/rouge -- 1/dispo/vert -- 2/dispoMaisPasPourPreter/bleu)
+    etat        (0/enPret/rouge    -----------    1/dispo/vert     ---------   2/dispoMaisPasPourPreter/bleu)
     startDate
     enDate
     idUserTo

@@ -742,7 +742,8 @@ select {
         cursor: pointer;
         width: 50%;
         max-height: 190px; }
-      .generalContentMyProducts .resultSearch .oneProduct img.del {
+      .generalContentMyProducts .resultSearch .oneProduct img.del,
+      .generalContentMyProducts .resultSearch .oneProduct img.imgE {
         cursor: pointer;
         display: inline-block;
         vertical-align: middle;

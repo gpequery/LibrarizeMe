@@ -49,6 +49,14 @@ function toHtmlProductListMyProduct(allProducts) {
         html +=         getLittleTitle(product['title']);
         html +=     '</span>';
 
+        if (product.etat == 0) {
+            html +=     '<img src=\'/images/redCircle.png\' class=\'imgEtat img' + product.asin + '\' title=\'Produit en prêt\' data=\'' + product.etat + '\' onclick=\'changeEtatProduct("' + product.asin + '")\'/>';
+        } else if (product.etat == 1) {
+            html +=     '<img src=\'/images/greenCircle.png\' class=\'imgEtat img' + product.asin + '\' title=\'Produit disponible\' data=\'' + product.etat + '\' onclick=\'changeEtatProduct("' + product.asin + '")\'/>';
+        } else {
+            html +=     '<img src=\'/images/blueCircle.png\' class=\'imgEtat img' + product.asin + '\' title=\'Produit disponible mais pas en prêt\' data=\'' + product.etat + '\' onclick=\'changeEtatProduct("' + product.asin + '")\'/>';
+        }
+
         html +=     '<img src=\'/images/del.png\' class=\'del\' title=\'Supprimer le produit\' onclick=\'delProduct("' + product['asin'] + '")\'/>';
 
         html +=      '<div class=\'' + product['asin'] + '\'>';
@@ -174,4 +182,26 @@ function getInfoProductMyLibrariy(productId) {
     } else {
         $j('.divRelease').css('display', 'none');
     }
+}
+
+//Change l'etat du produit
+function changeEtatProduct(asin) {
+
+    $j.post(
+        '/swap/changeEtat', {
+            asin: asin,
+            actual: $j('.img'+asin).attr('data')
+        }, function(data) {
+            if (data == '0') {
+                $j('.img'+asin).attr('data', 0);
+                $j('.img'+asin).attr('src', '/images/redCircle.png');
+            } else if (data == '1') {
+                $j('.img'+asin).attr('data', 1);
+                $j('.img'+asin).attr('src', '/images/greenCircle.png');
+            } else if (data == '2') {
+                $j('.img'+asin).attr('data', 2);
+                $j('.img'+asin).attr('src', '/images/blueCircle.png');
+            }
+
+        });
 }

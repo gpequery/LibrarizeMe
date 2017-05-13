@@ -151,11 +151,41 @@ router.post('/getProductByUserId', function(req, res, next) {
     });
 });
 
+//change l'etat du produit
+router.post('/changeEtat', function(req, res, next) {
+    let actual = req.body.actual;
+
+    let options = {
+        where: {
+            idUser: req.cookies.idUser,
+            asinProduct : req.body.asin
+        }
+    };
+
+    Swap.findOne(options).then(function(swap) {
+        let newInfos = {};
+
+        if(actual == 0) {
+            newInfos.etat = 1;
+        } else if (actual == 1) {
+            newInfos.etat = 2;
+        } else {
+            newInfos.etat = 0;
+        }
+
+        swap.updateAttributes(newInfos);
+        res.send('' + newInfos.etat);
+    }).catch(function(err) {
+        console.log('SEQUELIZE 20 : ' + err);
+        res.send(null);
+    });
+
+});
+
 module.exports = router;
 
 //Ajoute l'etat des produits
 function getCleanProdutEtat(products, asinEtat) {
-    console.log('PRODUCTS : ' + products.length + ' ETAT : ' + asinEtat.length);
     let clean = [];
     for(let product of products) {
         let newProduct = {
