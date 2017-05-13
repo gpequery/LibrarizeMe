@@ -112,6 +112,8 @@ function getInfoProductMyLibrariy(productId) {
     $j('.contentPopin').css('display', 'block');
 
     var infos = JSON.parse($j('.'+productId).html());
+    console.log('INFOS : ');
+    console.log(infos);
 
     //Les images du dessous
     var htmlImg = '';

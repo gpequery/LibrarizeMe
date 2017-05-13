@@ -65,7 +65,6 @@ router.post('/getMyProducts', function(req, res, next) {
         }
 
         if (req.body.group == 'All') {
-            console.log('group null: ' + req.body.group);
             searchRestrinction = {
                 $or: [
                     {'title': new RegExp(req.body.title, "i")},
@@ -74,7 +73,6 @@ router.post('/getMyProducts', function(req, res, next) {
                 asin: { $in : allAsin }
             };
         } else {
-            console.log('group TOOO : ' + req.body.group);
             searchRestrinction = {
                 $or: [
                     {'title': new RegExp(req.body.title, "i")},
@@ -192,6 +190,7 @@ function getCleanProdutEtat(products, asinEtat) {
             asin: product.asin,
             title: product.title,
             imgLink: product.imgLink,
+            imagesLink: product.imagesLink,
             detailPageURL: product.detailPageURL,
             ean: product.ean,
             public: product.public,
