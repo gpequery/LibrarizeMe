@@ -100,6 +100,8 @@ body .generalContent h1:first-child, body .generalContentSearchUsers h1:first-ch
 .generalContentMyFriends .content .invitationType .oneUser span img.libraryImg, .generalContentSeeInvitation .content .invitationType .oneUser span img.libraryImg { width: 25px; }
 .generalContentMyFriends .content .invitationType .oneUser span img.imgDelFriend, .generalContentSeeInvitation .content .invitationType .oneUser span img.imgDelFriend { width: 18px; }
 
+.contentPopin .contentFriendLibrary h1 { text-align: center; margin: 0; }
+
 .generalContentProductSearch { text-align: center; }
 .generalContentProductSearch .formSearchProduct input, .generalContentProductSearch .formSearchProduct select { display: inline-block; }
 .generalContentProductSearch .resultSearch { margin-top: 50px; font-size: 24px; font-weight: bold; }

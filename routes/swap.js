@@ -53,8 +53,6 @@ router.post('/getMyProducts', function(req, res, next) {
         }
     };
 
-
-
     Swap.findAll(optionSearch).then(function(swaps){
         let allAsin = [];
         let searchRestrinction;
@@ -84,8 +82,6 @@ router.post('/getMyProducts', function(req, res, next) {
             };
         }
 
-
-        console.log('FIN PRODUCT : ');
         Product.find(searchRestrinction).then(function(products) {
             res.send(JSON.stringify(products));
         }).catch(function(err) {
@@ -97,6 +93,7 @@ router.post('/getMyProducts', function(req, res, next) {
     });
 });
 
+//supprime le produit pour l'user
 router.post('/delProduct', function(req, res, next) {
     let optionSearch = {
         where: {
@@ -113,4 +110,86 @@ router.post('/delProduct', function(req, res, next) {
     });
 });
 
+//retourne les produit de l'usersId
+router.post('/getProductByUserId', function(req, res, next) {
+    let Product = mongoose.model('Product');
+
+    let optionSearch = {
+        where: {
+            idUser: req.body.userId
+        },
+        order: 'asinProduct asc'
+    };
+
+    Swap.findAll(optionSearch).then(function(swaps){
+        let allAsin = [];
+        let asinEtat = [];
+        let searchRestrinction = {
+            asin: { $in : allAsin }
+        };
+
+        for(var product of swaps) {
+            allAsin.push(product.asinProduct);
+            asinEtat.push({asin: product.asinProduct, etat: product.etat})
+        }
+
+        Product.find(searchRestrinction).then(function(products) {
+            let productsEtats = getCleanProdutEtat(products, asinEtat);
+
+            console.log('JSON : ' + JSON.stringify(productsEtats));
+            res.send(JSON.stringify(productsEtats));
+        }).catch(function(err) {
+            console.log('Error : ' + err);
+        });
+
+    }).catch(function(err) {
+        console.log('ERROR : ' + err)
+    });
+});
+
 module.exports = router;
+
+//Ajoute l'etat des produits
+function getCleanProdutEtat(products, asinEtat) {
+    let clean = [];
+    for(let product of products) {
+        let newProduct = {
+            asin: product.asin,
+            title: product.title,
+            imgLink: product.imgLink,
+            detailPageURL: product.detailPageURL,
+            ean: product.ean,
+            public: product.public,
+            brand: product.brand,
+            group: product.group,
+            release: product.release,
+            actors: product.actors,
+            features: product.features,
+            etat: getEtatByAsin(asinEtat, product.asin)
+        };
+
+        clean.push(newProduct);
+    }
+
+    return clean;
+}
+
+
+//Retourne l'etat de l'asin (Recherche dichotomique)
+function getEtatByAsin(asinEtat, codeAsin) {
+    let start = 0;
+    let end = asinEtat.length;
+    let middle = asinEtat.length + 1;
+
+    while(middle != start || middle != end) {
+        middle = parseInt((start + end) / 2);
+        if (codeAsin == asinEtat[middle].asin) {
+            return asinEtat[middle].etat;
+        } else if (codeAsin > asinEtat[middle].asin){
+            start = middle;
+        } else {
+            end = middle;
+        }
+    }
+}
+

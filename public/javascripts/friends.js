@@ -127,7 +127,19 @@ $j(function() {
                 }
             });
     });
+
+    $j('.libraryImg').on('click', function() {
+        printLibraryByUserId($j(this).parent().parent().attr('id'), $j(this).parent().attr('data'));
+    });
+
 });
+
+//Ferme la popin
+function closePopin() {
+    $j('.popin').css('display', 'none');
+    $j('.contentPopin').css('display', 'none');
+    $j('.popinResult').css('display', 'none');
+}
 
 //Affiche la liste des utilisateurs dynamiquement
 function getHtmlResult(data) {
@@ -156,7 +168,6 @@ function getHtmlResult(data) {
 //Demande confirmation avant d'envoyer la demande
 function askToBeFriend(usrId, pseudo) {
     if (confirm('Envoyer une demande d\'ami à ' + pseudo + ' ?')) {
-        //$j('.resultSearchNoUser').show();
         $j.post(
             '/friends/sendInvite', {
                 'usrId': usrId
@@ -174,4 +185,30 @@ function askToBeFriend(usrId, pseudo) {
                 }
             })
     }
+}
+
+//Affiche la librairie de l'ami selectioné
+function printLibraryByUserId(userId, pseudoUser) {
+    //Affiche la popin par dessus
+    $j('.popin').css('display', 'block');
+    $j('.contentPopin').css('display', 'block');
+
+    $j('.popinPseudo').html(pseudoUser);
+
+    $j.post(
+        '/swap/getProductByUserId', {
+            'userId': userId
+        }, function(products) {
+            //console.log('INFO : ' + products);
+            if (products != 'Nok' && products.lenth != 0) {
+                for (var product of JSON.parse(products)) {
+
+                    console.log('Product : ' + JSON.stringify(product));
+                    console.log(' ');
+                }
+            } else {
+                $j('.resultSearch').html('Aucun produit trouvé !');
+            }
+        });
+
 }

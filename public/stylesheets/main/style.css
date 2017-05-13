@@ -580,6 +580,10 @@ select {
           .generalContentSeeInvitation .content .invitationType .oneUser span img.imgDelFriend {
             width: 18px; }
 
+.contentPopin .contentFriendLibrary h1 {
+  text-align: center;
+  margin: 0; }
+
 .generalContentProductSearch {
   text-align: center; }
   .generalContentProductSearch .formSearchProduct input,
