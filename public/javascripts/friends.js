@@ -199,7 +199,6 @@ function printLibraryByUserId(userId, pseudoUser) {
         '/swap/getProductByUserId', {
             'userId': userId
         }, function(products) {
-            //console.log('INFO : ' + products);
             if (products != 'Nok' && products.lenth != 0) {
                 for (var product of JSON.parse(products)) {
 

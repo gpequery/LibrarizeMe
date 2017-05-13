@@ -50,15 +50,18 @@ router.post('/getMyProducts', function(req, res, next) {
     let optionSearch = {
         where: {
             idUser: req.cookies.idUser
-        }
+        },
+        order: 'asinProduct asc'
     };
 
     Swap.findAll(optionSearch).then(function(swaps){
         let allAsin = [];
+        let asinEtat = [];
         let searchRestrinction;
 
         for(var product of swaps) {
             allAsin.push(product.asinProduct);
+            asinEtat.push({asin: product.asinProduct, etat: product.etat});
         }
 
         if (req.body.group == 'All') {
@@ -83,7 +86,8 @@ router.post('/getMyProducts', function(req, res, next) {
         }
 
         Product.find(searchRestrinction).then(function(products) {
-            res.send(JSON.stringify(products));
+            let productsEtats = getCleanProdutEtat(products, asinEtat);
+            res.send(JSON.stringify(productsEtats));
         }).catch(function(err) {
             console.log('Error : ' + err);
         });
@@ -130,7 +134,7 @@ router.post('/getProductByUserId', function(req, res, next) {
 
         for(var product of swaps) {
             allAsin.push(product.asinProduct);
-            asinEtat.push({asin: product.asinProduct, etat: product.etat})
+            asinEtat.push({asin: product.asinProduct, etat: product.etat});
         }
 
         Product.find(searchRestrinction).then(function(products) {
@@ -151,6 +155,7 @@ module.exports = router;
 
 //Ajoute l'etat des produits
 function getCleanProdutEtat(products, asinEtat) {
+    console.log('PRODUCTS : ' + products.length + ' ETAT : ' + asinEtat.length);
     let clean = [];
     for(let product of products) {
         let newProduct = {
@@ -183,6 +188,7 @@ function getEtatByAsin(asinEtat, codeAsin) {
 
     while(middle != start || middle != end) {
         middle = parseInt((start + end) / 2);
+
         if (codeAsin == asinEtat[middle].asin) {
             return asinEtat[middle].etat;
         } else if (codeAsin > asinEtat[middle].asin){
