@@ -5,7 +5,8 @@ body {
 
     .popin,
     .contentPopin,
-    .popinResult {
+    .popinResult,
+    .contentPopinFriendLibrary {
         display: none;
     }
 
@@ -21,8 +22,6 @@ body {
             color: $color-corporate-three;
             &:before {
                 content: $logo-brand-header;
-
-
             }
         }
 

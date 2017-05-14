@@ -104,11 +104,35 @@
     }
 }
 
-.contentPopin {
-    .contentFriendLibrary {
-        h1 {
-            text-align: center;
-            margin: 0;
+.contentPopinFriendLibrary {
+    width: 60%;
+    background-color: $color-font-content-gray;
+    position: fixed;
+    top: 20%;
+    left: 20%;
+    z-index: 2;
+    padding: 20px;
+
+    img.closePopin {
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+    }
+
+    h1 {
+        text-align: center;
+        margin: 0;
+    }
+
+    .resultSearchFriendProduct {
+        .oneProduct {
+            width: 18%;
+            display: inline-block;
+            margin: 25px 10px;
+            img {
+                width: 100%;
+            }
         }
     }
 }

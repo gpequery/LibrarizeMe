@@ -138,7 +138,7 @@ router.post('/getProductByUserId', function(req, res, next) {
         Product.find(searchRestrinction).then(function(products) {
             let productsEtats = getCleanProdutEtat(products, asinEtat);
 
-            console.log('JSON : ' + JSON.stringify(productsEtats));
+
             res.send(JSON.stringify(productsEtats));
         }).catch(function(err) {
             console.log('Error : ' + err);

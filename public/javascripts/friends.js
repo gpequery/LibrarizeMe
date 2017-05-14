@@ -135,9 +135,9 @@ $j(function() {
 });
 
 //Ferme la popin
-function closePopin() {
+function closePopinFriends() {
     $j('.popin').css('display', 'none');
-    $j('.contentPopin').css('display', 'none');
+    $j('.contentPopinFriendLibrary').css('display', 'none');
     $j('.popinResult').css('display', 'none');
 }
 
@@ -191,7 +191,7 @@ function askToBeFriend(usrId, pseudo) {
 function printLibraryByUserId(userId, pseudoUser) {
     //Affiche la popin par dessus
     $j('.popin').css('display', 'block');
-    $j('.contentPopin').css('display', 'block');
+    $j('.contentPopinFriendLibrary').css('display', 'block');
 
     $j('.popinPseudo').html(pseudoUser);
 
@@ -200,14 +200,24 @@ function printLibraryByUserId(userId, pseudoUser) {
             'userId': userId
         }, function(products) {
             if (products != 'Nok' && products.lenth != 0) {
-                for (var product of JSON.parse(products)) {
-
-                    console.log('Product : ' + JSON.stringify(product));
-                    console.log(' ');
-                }
+                $j('.resultSearchFriendProduct').html(productsFriendToHtml(products));
             } else {
-                $j('.resultSearch').html('Aucun produit trouvé !');
+                $j('.resultSearchFriendProduct').html('Aucun produit trouvé !');
             }
         });
+}
 
+function productsFriendToHtml(products) {
+    var html = '';
+
+    for (product of JSON.parse(products)) {
+        html += '<div class=\'oneProduct div' + product['asin'] + '\'>';
+        html +=     '<img src=' + product['imgLink'] + ' class=\'principal\' onclick=\'getInfoProductMyLibrariy("' + product['asin'] + '")\'/>';
+        html +=     '<span class=\'spanProductTitle\' title="' + product['title'] + '">';
+        html +=         getLittleTitle(product['title']);
+        html +=     '</span>';
+        html += '</div>';
+    }
+
+    return html;
 }

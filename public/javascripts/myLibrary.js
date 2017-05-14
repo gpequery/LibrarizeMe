@@ -73,6 +73,7 @@ function closePopin() {
     $j('.popin').css('display', 'none');
     $j('.contentPopin').css('display', 'none');
     $j('.popinResult').css('display', 'none');
+    $j('.contentPopinFriendLibrary').css('display', 'none');
 }
 
 function delProduct(asin) {

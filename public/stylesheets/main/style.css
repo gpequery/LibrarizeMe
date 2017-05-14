@@ -199,7 +199,8 @@ body {
   background-color: #092D3D; }
   body .popin,
   body .contentPopin,
-  body .popinResult {
+  body .popinResult,
+  body .contentPopinFriendLibrary {
     display: none; }
   body header {
     font-family: 'librarize';
@@ -580,9 +581,28 @@ select {
           .generalContentSeeInvitation .content .invitationType .oneUser span img.imgDelFriend {
             width: 18px; }
 
-.contentPopin .contentFriendLibrary h1 {
-  text-align: center;
-  margin: 0; }
+.contentPopinFriendLibrary {
+  width: 60%;
+  background-color: #CCCCCC;
+  position: fixed;
+  top: 20%;
+  left: 20%;
+  z-index: 2;
+  padding: 20px; }
+  .contentPopinFriendLibrary img.closePopin {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer; }
+  .contentPopinFriendLibrary h1 {
+    text-align: center;
+    margin: 0; }
+  .contentPopinFriendLibrary .resultSearchFriendProduct .oneProduct {
+    width: 18%;
+    display: inline-block;
+    margin: 25px 10px; }
+    .contentPopinFriendLibrary .resultSearchFriendProduct .oneProduct img {
+      width: 100%; }
 
 .generalContentProductSearch {
   text-align: center; }
@@ -743,7 +763,7 @@ select {
         width: 50%;
         max-height: 190px; }
       .generalContentMyProducts .resultSearch .oneProduct img.del,
-      .generalContentMyProducts .resultSearch .oneProduct img.imgE {
+      .generalContentMyProducts .resultSearch .oneProduct img.imgEtat {
         cursor: pointer;
         display: inline-block;
         vertical-align: middle;
