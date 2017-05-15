@@ -134,13 +134,6 @@ $j(function() {
 
 });
 
-//Ferme la popin
-function closePopinFriends() {
-    $j('.popin').css('display', 'none');
-    $j('.contentPopinFriendLibrary').css('display', 'none');
-    $j('.popinResult').css('display', 'none');
-}
-
 //Affiche la liste des utilisateurs dynamiquement
 function getHtmlResult(data) {
     var users = JSON.parse(data);
@@ -199,15 +192,15 @@ function printLibraryByUserId(userId, pseudoUser) {
         '/swap/getProductByUserId', {
             'userId': userId
         }, function(products) {
-            if (products != 'Nok' && products.lenth != 0) {
-                $j('.resultSearchFriendProduct').html(productsFriendToHtml(products));
+            if (products != '[]' && products.lenth != 0) {
+                $j('.resultSearchFriendProduct').html(productsFriendToHtml(products, userId));
             } else {
                 $j('.resultSearchFriendProduct').html('Aucun produit trouvé !');
             }
         });
 }
 
-function productsFriendToHtml(products) {
+function productsFriendToHtml(products, userId) {
     var html = '';
 
     for (product of JSON.parse(products)) {
@@ -216,8 +209,42 @@ function productsFriendToHtml(products) {
         html +=     '<span class=\'spanProductTitle\' title="' + product['title'] + '">';
         html +=         getLittleTitle(product['title']);
         html +=     '</span>';
+
+        if (product.etat == 0) {
+            html +=     '<img src=\'/images/redCircle.png\' class=\'imgEtat img' + product.asin + '\' title=\'Produit en prêt\' />';
+        } else if (product.etat == 1) {
+            html +=     '<img src=\'/images/greenCircle.png\' class=\'imgEtat img' + product.asin + '\' title=\'Produit disponible\' />';
+            html +=     '<img src=\'/images/askProduct.png\' class=\'imgAdd\' title=\'Demander le produit\' onclick=\'askProduct("' + product.asin + '", ' + userId + ')\'/>';
+        } else {
+            html +=     '<img src=\'/images/blueCircle.png\' class=\'imgEtat img' + product.asin + '\' title=\'Produit disponible mais pas en prêt\' />';
+        }
+
         html += '</div>';
     }
 
     return html;
+}
+
+function askProduct(asin, idUser) {
+    $j.post(
+        '/swap/askProduct', {
+            idUser: idUser,
+            asin: asin
+        }, function(data) {
+            $j('.msgInfo').css({'opacity' : '1'});
+            $j('.msgInfo').animate({opacity:0}, 4000);
+
+            if (data == 'ok') {
+                $j('.img' + asin).attr('src', '/images/redCircle.png');
+
+                $j('.msgInfo').html('Demande envoyé');
+                $j('.msgInfo').removeClass('msgInfoNok');
+                $j('.msgInfo').addClass('msgInfoOk');
+                console.log('OK');
+            } else {
+                $j('.msgInfo').html('Error : demande pas envoyé');
+                $j('.msgInfo').removeClass('msgInfoOk');
+                $j('.msgInfo').addClass('msgInfoNok');
+            }
+        });
 }

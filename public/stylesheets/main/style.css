@@ -298,7 +298,8 @@ body {
   font-size: 20px;
   padding: 3px;
   border-radius: 5px;
-  opacity: 0; }
+  opacity: 0;
+  z-index: 5; }
 
 .msgInfoOk {
   color: #3C763D;
@@ -588,7 +589,8 @@ select {
   top: 20%;
   left: 20%;
   z-index: 2;
-  padding: 20px; }
+  padding: 20px;
+  text-align: center; }
   .contentPopinFriendLibrary img.closePopin {
     position: absolute;
     right: 0;
@@ -601,8 +603,20 @@ select {
     width: 18%;
     display: inline-block;
     margin: 25px 10px; }
-    .contentPopinFriendLibrary .resultSearchFriendProduct .oneProduct img {
+    .contentPopinFriendLibrary .resultSearchFriendProduct .oneProduct img.principal {
       width: 100%; }
+    .contentPopinFriendLibrary .resultSearchFriendProduct .oneProduct img.imgEtat {
+      display: inline-block;
+      vertical-align: middle;
+      padding-bottom: 2px;
+      padding-left: 10px;
+      width: 17px; }
+    .contentPopinFriendLibrary .resultSearchFriendProduct .oneProduct img.imgAdd {
+      display: inline-block;
+      vertical-align: middle;
+      width: 23px;
+      margin-top: -3px;
+      cursor: pointer; }
 
 .generalContentProductSearch {
   text-align: center; }

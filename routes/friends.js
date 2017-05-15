@@ -270,11 +270,9 @@ router.post('/myFriends', function(req, res, next) {
 
         //Cherche les Users
         User.findAll(options).then(function(users) {
-            let data = clearUsers(users);
-
             let result = {
                 pseudoUser: req.body.userName,
-                users: data
+                users: clearUsers(users)
             };
 
             res.render('FriendsViews/myFriends.html.twig', {result: result});
@@ -312,3 +310,4 @@ function clearUsers(users) {
     }
     return result
 }
+

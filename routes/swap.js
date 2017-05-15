@@ -180,6 +180,29 @@ router.post('/changeEtat', function(req, res, next) {
 
 });
 
+router.post('/askProduct', function(req, res, next) {
+    let options = {
+        where: {
+            idUser: req.body.idUser,
+            asinProduct: req.body.asin
+        }
+    };
+
+    Swap.findOne(options).then(function(swap) {
+        let newInfos = {
+            etat: 0,
+            idUserTo: req.cookies.idUser
+        };
+        swap.updateAttributes(newInfos);
+
+        res.send('ok');
+    }).catch(function(err) {
+        console.log('ERREUR 23 : ' + err);
+        res.send(err);
+    });
+
+});
+
 module.exports = router;
 
 //Ajoute l'etat des produits

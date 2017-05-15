@@ -112,6 +112,7 @@
     left: 20%;
     z-index: 2;
     padding: 20px;
+    text-align: center;
 
     img.closePopin {
         position: absolute;
@@ -130,8 +131,25 @@
             width: 18%;
             display: inline-block;
             margin: 25px 10px;
-            img {
+
+            img.principal {
                 width: 100%;
+            }
+
+            img.imgEtat {
+                display: inline-block;
+                vertical-align: middle;
+                padding-bottom: 2px;
+                padding-left: 10px;
+                width: 17px;
+            }
+
+            img.imgAdd {
+                display: inline-block;
+                vertical-align: middle;
+                width: 23px;
+                margin-top: -3px;
+                cursor: pointer;
             }
         }
     }
