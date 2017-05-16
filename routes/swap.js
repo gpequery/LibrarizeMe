@@ -348,6 +348,7 @@ router.post('/getInProgress', function(req, res, next) {
     let optionsSearch = {
         where :{
             idUser: req.cookies.idUser,
+            enDate: null,
             startDate: {
                 ne: null
             }
@@ -397,7 +398,98 @@ router.post('/history', function (req, res, next) {
     res.render('SwapViews/history.html.twig', {result: send});
 });
 
+router.post('/getHistory', function(req, res, next) {
+    let optionsSearch = {
+        where :{
+            idUserTo: null,
+            startDate: {
+                ne: null
+            },
+            endate: {
+                ne: null
+            }
+        },
+        order: 'asinProduct asc'
+    };
+
+    Swap.findAll(optionsSearch).then(function(swaps) {
+        let allAsin = [];
+        let asinDate = [];
+        let searchRestrinction = {
+            asin: { $in : allAsin }
+        };
+
+        for(var product of swaps) {
+            allAsin.push(product.asinProduct);
+            asinDate.push({asin: product.asinProduct, startDate: product.startDate, enDate: product.enDate});
+        }
+
+
+        let Product = mongoose.model('Product');
+        Product.find(searchRestrinction).then(function(products) {
+            let productsUser = getCleanProdutWithDate(products, asinDate);
+
+            res.send(JSON.stringify(productsUser));
+        }).catch(function(err) {
+            console.log('Error25 : ' + err);
+            res.send('nok');
+        });
+    }).catch(function(err) {
+        console.log('Error24 : ' + err);
+        res.send('nok');
+    });
+});
+
 module.exports = router;
+
+function getDateByAsin(asinDate, codeAsin) {
+    let start = 0;
+    let end = asinDate.length;
+    let middle = asinDate.length + 1;
+
+    while(middle != start || middle != end) {
+        middle = parseInt((start + end) / 2);
+
+        if (codeAsin == asinDate[middle].asin) {
+            return {startDate: asinDate[middle].startDate, enDate: asinDate[middle].enDate};
+        } else if (codeAsin > asinDate[middle].asin){
+            start = middle;
+        } else {
+            end = middle;
+        }
+    }
+
+}
+
+//Ajoute l'etat des produits
+function getCleanProdutWithDate(products, asinDate) {
+    let clean = [];
+    for(let product of products) {
+        let data = getDateByAsin(asinDate, product.asin);
+
+        let newProduct = {
+            asin: product.asin,
+            title: product.title,
+            imgLink: product.imgLink,
+            imagesLink: product.imagesLink,
+            detailPageURL: product.detailPageURL,
+            ean: product.ean,
+            public: product.public,
+            brand: product.brand,
+            group: product.group,
+            release: product.release,
+            actors: product.actors,
+            features: product.features,
+            startDate: data.startDate,
+            enDate: data.enDate,
+            etat: getEtatByAsin(asinDate, product.asin)
+        };
+
+        clean.push(newProduct);
+    }
+
+    return clean;
+}
 
 //Ajoute l'etat des produits
 function getCleanProdutEtat(products, asinEtat) {

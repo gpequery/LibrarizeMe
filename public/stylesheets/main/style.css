@@ -868,4 +868,16 @@ select {
       cursor: pointer;
       margin-left: 10px; }
 
+.generalContentHistory {
+  text-align: center; }
+  .generalContentHistory .oneProduct {
+    width: 20%;
+    display: inline-block;
+    padding-bottom: 50px; }
+    .generalContentHistory .oneProduct img.principal {
+      display: block;
+      margin: 0px auto;
+      width: 50%;
+      max-height: 190px; }
+
 /*# sourceMappingURL=style.css.map */

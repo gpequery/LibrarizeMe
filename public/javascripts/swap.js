@@ -7,6 +7,10 @@ $j(function() {
         sendRequestSwapInProgress();
     }
 
+    if (window.location.pathname == '/swap/history') {
+        sendRequestSwapHistory();
+    }
+
 });
 
 function sendRequestSwap() {
@@ -29,6 +33,34 @@ function sendRequestSwapInProgress() {
                 $j('.resultSearch').attr('count', JSON.parse(allSwap).length);
             }
         });
+}
+
+function sendRequestSwapHistory() {
+    $j.post(
+        '/swap/getHistory', {
+        }, function(allSwap) {
+            //console.log(allSwap);
+            if (allSwap != '[]' && allSwap != 'nok') {
+                $j('.resultSearch').html(toHtmlProductListHistory(allSwap));
+                $j('.resultSearch').attr('count', JSON.parse(allSwap).length);
+            }
+        });
+}
+
+//Met au format html les produits sous forme de liste
+function toHtmlProductListHistory(allSwap) {
+    var html = '';
+
+    for (var swap of JSON.parse(allSwap)) {
+        html += '<div class=\'oneProduct div' + swap.asin + '\' >';
+        html +=     '<img src=' + swap.imgLink + ' class=\'principal\'>';
+        html +=     '<span class=\'spanProductTitle\' >';
+        html +=         swap.startDate.substr(0, 10).split('-').reverse().join('-') + ' / ' + swap.enDate.substr(0, 10).split('-').reverse().join('-') ;
+        html +=     '</span>';
+        html += '</div>';
+    }
+
+    return html;
 }
 
 //Met au format html les produits sous forme de liste
