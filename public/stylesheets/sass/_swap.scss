@@ -1,0 +1,34 @@
+.generalContentMyRequest {
+    text-align: center;
+
+    .oneProduct {
+        width: 20%;
+        display: inline-block;
+        padding-bottom: 50px;
+
+        img.principal{
+            display: block;
+            margin: 0px auto;
+            width: 50%;
+            max-height: 190px;
+        }
+
+        img.accepte {
+            display: inline-block;
+            vertical-align: middle;
+            width: 16px;
+            margin-top: -3px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        img.del {
+            display: inline-block;
+            vertical-align: middle;
+            width: 16px;
+            margin-top: -3px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+    }
+}

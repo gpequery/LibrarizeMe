@@ -1,0 +1,13 @@
+{% extends 'template.html.twig' %}
+{% set user = result.userInfo %}
+
+{%  block title %} Mes demandes {% endblock %}
+
+{%  block content %}
+    <div class='generalContentMyRequest'>
+        <h1>Mes demandes</h1>
+
+        <div class="resultSearch">Aucune demande en attende de validation</div>
+    </div>
+
+{% endblock %}

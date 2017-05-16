@@ -274,7 +274,10 @@ body {
   body .generalContentSeeInvitation,
   body .generalContentMyFriends,
   body .generalContentProductSearch,
-  body .generalContentMyProducts {
+  body .generalContentMyProducts,
+  body .generalContentMyRequest,
+  body .generalContentInProgress,
+  body .generalContentHistory {
     background-color: #CCCCCC;
     width: 80%;
     margin: 0px auto;
@@ -285,7 +288,10 @@ body {
     body .generalContentSeeInvitation h1:first-child,
     body .generalContentMyFriends h1:first-child,
     body .generalContentProductSearch h1:first-child,
-    body .generalContentMyProducts h1:first-child {
+    body .generalContentMyProducts h1:first-child,
+    body .generalContentMyRequest h1:first-child,
+    body .generalContentInProgress h1:first-child,
+    body .generalContentHistory h1:first-child {
       text-align: center; }
 
 .msgInfo {
@@ -816,5 +822,31 @@ select {
   text-align: center;
   border-radius: 10px;
   padding: 5px 30px; }
+
+.generalContentMyRequest {
+  text-align: center; }
+  .generalContentMyRequest .oneProduct {
+    width: 20%;
+    display: inline-block;
+    padding-bottom: 50px; }
+    .generalContentMyRequest .oneProduct img.principal {
+      display: block;
+      margin: 0px auto;
+      width: 50%;
+      max-height: 190px; }
+    .generalContentMyRequest .oneProduct img.accepte {
+      display: inline-block;
+      vertical-align: middle;
+      width: 16px;
+      margin-top: -3px;
+      cursor: pointer;
+      margin-left: 10px; }
+    .generalContentMyRequest .oneProduct img.del {
+      display: inline-block;
+      vertical-align: middle;
+      width: 16px;
+      margin-top: -3px;
+      cursor: pointer;
+      margin-left: 5px; }
 
 /*# sourceMappingURL=style.css.map */
