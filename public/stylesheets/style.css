@@ -44,7 +44,7 @@ body header .libraryRightIcon:before { content: ""; }
 body footer { position: fixed; bottom: 0px; width: 80%; text-align: center; color: #FF6664; font-size: 14px; right: 10%; background-color: #092D3D; padding: 5px 0px; }
 body .menuDiv { background-color: #CCCCCC; width: 80%; margin: 0px auto; height: 35px; line-height: 35px; border-radius: 7px; text-align: center; font-weight: bold; }
 body .menuDiv ul { padding: 0px; }
-body .menuDiv ul .titleMenu { display: inline-block; list-style-type: none; width: 24%; cursor: pointer; vertical-align: top; position: relative; }
+body .menuDiv ul .titleMenu { display: inline-block; list-style-type: none; width: 19%; cursor: pointer; vertical-align: top; position: relative; }
 body .menuDiv ul .titleMenu ul { display: none; text-align: left; }
 body .menuDiv ul .titleMenu ul li { display: block; width: 100%; background-color: #FFFFFF; height: 40px; border-radius: 5px; margin-top: 5px; line-height: 35px; box-shadow: inset -6px -6px 5px 0px #656565; }
 body .menuDiv ul .titleMenu ul li div { width: auto; padding-left: 15px; }
