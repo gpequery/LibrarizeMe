@@ -3,6 +3,10 @@ $j(function() {
         sendRequestSwap();
     }
 
+    if (window.location.pathname == '/swap/inProgress') {
+        sendRequestSwapInProgress();
+    }
+
 });
 
 function sendRequestSwap() {
@@ -14,6 +18,34 @@ function sendRequestSwap() {
                 $j('.resultSearch').attr('count', JSON.parse(allSwap).length);
             }
         });
+}
+
+function sendRequestSwapInProgress() {
+    $j.post(
+        '/swap/getInProgress', {
+        }, function(allSwap) {
+            if (allSwap != '[]' && allSwap != 'nok') {
+                $j('.resultSearch').html(toHtmlProductListInProgress(allSwap));
+                $j('.resultSearch').attr('count', JSON.parse(allSwap).length);
+            }
+        });
+}
+
+//Met au format html les produits sous forme de liste
+function toHtmlProductListInProgress(allSwap) {
+    var html = '';
+
+    for (var swap of JSON.parse(allSwap)) {
+        html += '<div class=\'oneProduct div' + swap.asin + '\' >';
+        html +=     '<img src=' + swap.imgLink + ' class=\'principal\'>';
+        html +=     '<span class=\'spanProductTitle\' >';
+        html +=         swap.pseudoUser;
+        html +=     '</span>';
+        html +=     '<img src=\'../images/return.png\' class=\'return\' onclick=\'returnSwap("' + swap.asin + '")\'>';
+        html += '</div>';
+    }
+
+    return html;
 }
 
 //Met au format html les produits sous forme de liste
@@ -86,6 +118,35 @@ function refuseSwap(codeAsin) {
                 }
             } else {
                 $j('.msgInfo').html('Error : demande pas refusé');
+                $j('.msgInfo').removeClass('msgInfoOk');
+                $j('.msgInfo').addClass('msgInfoNok');
+            }
+        });
+}
+
+//Refuse la demande de produit
+function returnSwap(codeAsin) {
+    $j.post(
+        '/swap/returnSwap', {
+            asin: codeAsin
+        }, function(data) {
+            $j('.msgInfo').css({'opacity' : '1'});
+            $j('.msgInfo').animate({opacity:0}, 4000);
+
+            if (data == 'ok') {
+                $j('.msgInfo').html('Retour du produit enregistré');
+                $j('.msgInfo').removeClass('msgInfoNok');
+                $j('.msgInfo').addClass('msgInfoOk');
+
+                $j('.resultSearch').attr('count', $j('.resultSearch').attr('count') - 1 );
+                $j('.div' + codeAsin).hide();
+
+
+                if ($j('.resultSearch').attr('count') == 0) {
+                    $j('.resultSearch').html('Aucun échange en cours');
+                }
+            } else {
+                $j('.msgInfo').html('Error : Retour du produit non enregistré');
                 $j('.msgInfo').removeClass('msgInfoOk');
                 $j('.msgInfo').addClass('msgInfoNok');
             }

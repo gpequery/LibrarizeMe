@@ -297,8 +297,37 @@ router.post('/accepteSwap', function(req, res, next) {
 
     Swap.findOne(optionsSearch).then(function(swap) {
         let newInfos = {
-            startDate: Sequelize.fn('NOW')
+            startDate: Sequelize.fn('NOW'),
+            etat: 0
         };
+        swap.updateAttributes(newInfos);
+        res.send('ok');
+    }).catch(function(err){
+        console.log('Error 26 : ' + err);
+        res.send('nok')
+    });
+});
+
+router.post('/returnSwap', function(req, res, next) {
+    let optionsSearch = {
+        where :{
+            idUser: req.cookies.idUser,
+            asinProduct: req.body.asin
+        }
+    };
+
+    console.log('ID : ' + req.body.asin);
+
+
+    Swap.findOne(optionsSearch).then(function(swap) {
+        let newInfos = {
+            idUserTo: null,
+            enDate: Sequelize.fn('NOW'),
+            etat: 1
+        };
+
+        console.log('JSON : ' + JSON.stringify(newInfos));
+
         swap.updateAttributes(newInfos);
         res.send('ok');
     }).catch(function(err){
@@ -313,6 +342,51 @@ router.post('/inProgress', function (req, res, next) {
     };
 
     res.render('SwapViews/inProgress.html.twig', {result: send});
+});
+
+router.post('/getInProgress', function(req, res, next) {
+    let optionsSearch = {
+        where :{
+            idUser: req.cookies.idUser,
+            startDate: {
+                ne: null
+            }
+        },
+        order: 'asinProduct asc'
+    };
+
+    Swap.findAll(optionsSearch).then(function(swaps) {
+        let allAsin = [];
+        let asinUser = [];
+        let pseudoId = [];
+        let searchRestrinction = {
+            asin: { $in : allAsin }
+        };
+
+        for(var product of swaps) {
+            allAsin.push(product.asinProduct);
+            asinUser.push({asin: product.asinProduct, idUser: product.idUserTo});
+
+            User.findById(product.idUserTo).then(function(usr) {
+                pseudoId.push({id: usr.id, pseudo: usr.pseudo});
+            });
+        }
+
+
+
+        let Product = mongoose.model('Product');
+        Product.find(searchRestrinction).then(function(products) {
+            let productsUser = getCleanProdutUser(products, asinUser, pseudoId);
+
+            res.send(JSON.stringify(productsUser));
+        }).catch(function(err) {
+            console.log('Error25 : ' + err);
+            res.send('nok');
+        });
+    }).catch(function(err) {
+        console.log('Error24 : ' + err);
+        res.send('nok');
+    });
 });
 
 router.post('/history', function (req, res, next) {

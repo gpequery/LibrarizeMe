@@ -152,3 +152,8 @@ body .generalContent h1:first-child, body .generalContentSearchUsers h1:first-ch
 .generalContentMyRequest .oneProduct img.principal { display: block; margin: 0px auto; width: 50%; max-height: 190px; }
 .generalContentMyRequest .oneProduct img.accepte { display: inline-block; vertical-align: middle; width: 16px; margin-top: -3px; cursor: pointer; margin-left: 10px; }
 .generalContentMyRequest .oneProduct img.del { display: inline-block; vertical-align: middle; width: 16px; margin-top: -3px; cursor: pointer; margin-left: 5px; }
+
+.generalContentInProgress { text-align: center; }
+.generalContentInProgress .oneProduct { width: 20%; display: inline-block; padding-bottom: 50px; }
+.generalContentInProgress .oneProduct img.principal { display: block; margin: 0px auto; width: 50%; max-height: 190px; }
+.generalContentInProgress .oneProduct img.return { display: inline-block; vertical-align: middle; width: 16px; margin-top: -3px; cursor: pointer; margin-left: 10px; }
