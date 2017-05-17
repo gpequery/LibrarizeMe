@@ -2,6 +2,7 @@
 
 body {
     background-color: #092D3D;
+    background-image: url("/images/background.jpg");
 
     .popin,
     .contentPopin,
@@ -47,11 +48,12 @@ body {
         bottom: 0px;
         width: 80%;
         text-align: center;
-        color: $color-corporate-two;
+        color: $color-corporate-one;
         font-size: 14px;
         right: 10%;
-        background-color: $color-corporate-one;
+        background-color: $color-font-content-gray;
         padding: 5px 0px;
+        border-radius: 7px
     }
 
     .menuDiv {

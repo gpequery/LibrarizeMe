@@ -65,7 +65,7 @@ select {
   border: 1px solid #ccc; }
 
 .content .contentLogin {
-  background-color: #CCCCCC;
+  background-color: rgba(204, 204, 204, 0.9);
   width: 33%;
   margin-left: auto;
   margin-right: auto;
@@ -196,7 +196,8 @@ select {
   border: 1px solid #ccc; }
 
 body {
-  background-color: #092D3D; }
+  background-color: #092D3D;
+  background-image: url("/images/background.jpg"); }
   body .popin,
   body .contentPopin,
   body .popinResult,
@@ -228,13 +229,14 @@ body {
     bottom: 0px;
     width: 80%;
     text-align: center;
-    color: #FF6664;
+    color: #092D3D;
     font-size: 14px;
     right: 10%;
-    background-color: #092D3D;
-    padding: 5px 0px; }
+    background-color: rgba(204, 204, 204, 0.9);
+    padding: 5px 0px;
+    border-radius: 7px; }
   body .menuDiv {
-    background-color: #CCCCCC;
+    background-color: rgba(204, 204, 204, 0.9);
     width: 80%;
     margin: 0px auto;
     height: 35px;
@@ -278,7 +280,7 @@ body {
   body .generalContentMyRequest,
   body .generalContentInProgress,
   body .generalContentHistory {
-    background-color: #CCCCCC;
+    background-color: rgba(204, 204, 204, 0.9);
     width: 80%;
     margin: 0px auto;
     border-radius: 5px;
@@ -590,7 +592,7 @@ select {
 
 .contentPopinFriendLibrary {
   width: 60%;
-  background-color: #CCCCCC;
+  background-color: rgba(204, 204, 204, 0.9);
   position: fixed;
   top: 20%;
   left: 20%;
@@ -678,7 +680,7 @@ select {
 .contentPopin {
   width: 60%;
   height: 60%;
-  background-color: #CCCCCC;
+  background-color: rgba(204, 204, 204, 0.9);
   position: fixed;
   top: 20%;
   left: 20%;
