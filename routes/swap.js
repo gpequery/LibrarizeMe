@@ -17,7 +17,13 @@ router.post('/addProduct', function(req, res, next) {
     let searchSwap = {
         where: {
             idUser: idUser,
-            asinProduct: asin
+            asinProduct: asin,
+            startDate: {
+                ne: null
+            },
+            enDate: {
+                ne: null
+            }
         }
     };
 
@@ -316,12 +322,8 @@ router.post('/returnSwap', function(req, res, next) {
         }
     };
 
-    console.log('ID : ' + req.body.asin);
-
-
     Swap.findOne(optionsSearch).then(function(swap) {
         let newInfos = {
-            idUserTo: null,
             enDate: Sequelize.fn('NOW'),
             etat: 1
         };
@@ -401,7 +403,6 @@ router.post('/history', function (req, res, next) {
 router.post('/getHistory', function(req, res, next) {
     let optionsSearch = {
         where :{
-            idUserTo: null,
             startDate: {
                 ne: null
             },
@@ -415,6 +416,8 @@ router.post('/getHistory', function(req, res, next) {
     Swap.findAll(optionsSearch).then(function(swaps) {
         let allAsin = [];
         let asinDate = [];
+        let pseudoId = [];
+        let asinUser = [];
         let searchRestrinction = {
             asin: { $in : allAsin }
         };
@@ -422,12 +425,17 @@ router.post('/getHistory', function(req, res, next) {
         for(var product of swaps) {
             allAsin.push(product.asinProduct);
             asinDate.push({asin: product.asinProduct, startDate: product.startDate, enDate: product.enDate});
+            asinUser.push({asin: product.asinProduct, idUser: product.idUserTo});
+
+            User.findById(product.idUserTo).then(function(usr) {
+                pseudoId.push({id: usr.id, pseudo: usr.pseudo});
+            });
         }
 
 
         let Product = mongoose.model('Product');
         Product.find(searchRestrinction).then(function(products) {
-            let productsUser = getCleanProdutWithDate(products, asinDate);
+            let productsUser = getCleanProdutWithDate(products, asinDate, asinUser, pseudoId);
 
             res.send(JSON.stringify(productsUser));
         }).catch(function(err) {
@@ -462,7 +470,7 @@ function getDateByAsin(asinDate, codeAsin) {
 }
 
 //Ajoute l'etat des produits
-function getCleanProdutWithDate(products, asinDate) {
+function getCleanProdutWithDate(products, asinDate, asinUser, pseudoId) {
     let clean = [];
     for(let product of products) {
         let data = getDateByAsin(asinDate, product.asin);
@@ -482,7 +490,7 @@ function getCleanProdutWithDate(products, asinDate) {
             features: product.features,
             startDate: data.startDate,
             enDate: data.enDate,
-            etat: getEtatByAsin(asinDate, product.asin)
+            pseudo: getPseudoByIdInJSON(getidUsertByAsin(asinUser, product.asin), pseudoId)
         };
 
         clean.push(newProduct);

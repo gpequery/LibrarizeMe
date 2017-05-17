@@ -39,10 +39,11 @@ function sendRequestSwapHistory() {
     $j.post(
         '/swap/getHistory', {
         }, function(allSwap) {
-            //console.log(allSwap);
             if (allSwap != '[]' && allSwap != 'nok') {
                 $j('.resultSearch').html(toHtmlProductListHistory(allSwap));
                 $j('.resultSearch').attr('count', JSON.parse(allSwap).length);
+            } else {
+                $j('.resultSearch').html('Aucun échange encore fait');
             }
         });
 }
@@ -54,7 +55,10 @@ function toHtmlProductListHistory(allSwap) {
     for (var swap of JSON.parse(allSwap)) {
         html += '<div class=\'oneProduct div' + swap.asin + '\' >';
         html +=     '<img src=' + swap.imgLink + ' class=\'principal\'>';
-        html +=     '<span class=\'spanProductTitle\' >';
+        html +=     '<span class=\'spanPseudo\' >';
+        html +=         swap.pseudo;
+        html +=     '</span>';
+        html +=     '<span class=\'spanDate\' >';
         html +=         swap.startDate.substr(0, 10).split('-').reverse().join('-') + ' / ' + swap.enDate.substr(0, 10).split('-').reverse().join('-') ;
         html +=     '</span>';
         html += '</div>';

@@ -879,5 +879,8 @@ select {
       margin: 0px auto;
       width: 50%;
       max-height: 190px; }
+    .generalContentHistory .oneProduct span.spanPseudo {
+      display: block;
+      font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */
